@@ -5,4 +5,5 @@ public interface IConta {
 	public void removeItem(int index);
 	public double getTotal();
 	public StringBuilder listar();
+	public void addItem2(Item item, int qtde2);
 }
