@@ -5,7 +5,5 @@ public interface IConta {
 	public void removeItem(int index);
 	public double getTotal();
 	public StringBuilder listar();
-	public int teste();
-	public void addIten2();
 
-}
+}h
