@@ -1,8 +1,10 @@
 package Hotel;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 
-public class Categoria {
+public class Categoria implements Serializable{
+	private static final long serialVersionUID = -8033937422622471378L;
 	private final String nome;
 	private ArrayList<Item> itens = new ArrayList<Item>();
 
