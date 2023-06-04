@@ -8,7 +8,7 @@ public class ItemConta {
 	private final int qtde;
 	private final Item item;
 
-	public ItemConta(int qtde, Item item) {
+	public ItemConta(Item item, int qtde) {
 		this.dataHora = new Date();
 		this.preco = item.getPreco();
 		this.qtde = qtde;
@@ -29,5 +29,9 @@ public class ItemConta {
 
 	public Item getItem() {
 		return item;
+	}
+	
+	public String getDescricao() {
+		return item.getDescricao();
 	}
 }
