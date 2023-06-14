@@ -1,0 +1,36 @@
+Botão Checkin:
+    Listar acomodações()
+    campo checkin()
+        cpf cliente()
+        campo de hóspedes()
+        número do apartamento()
+        botão checkin()
+
+Cadastro Cliente()
+    Campo de cadastro de informações()
+
+Botão Checkout()
+    Número da acomodação()
+    Listagem marota()
+    Confirmar checkout()
+    Painel de pagamento()
+
+Serviços adicionais()
+    Catálogo de produtos()
+    Número da acomodação()
+    Quantidade de produtos()
+    Botão confirmar()
+
+Informações de hospedagem()
+    Listar informações()
+    Pagamento()
+
+Gerenciamento()
+    Trocar informações()
+        Cliente()
+        Acomodação()
+        Itens()
+    Adicionar novos itens()
+    Remover itens()
+    Criar Acomodação()
+    Concluir limpeza()
