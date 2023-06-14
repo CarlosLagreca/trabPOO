@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public class TipoAcomodacao {
 	private final String nome;

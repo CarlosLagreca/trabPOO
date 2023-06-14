@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public class Item {
 	private final long codigo;

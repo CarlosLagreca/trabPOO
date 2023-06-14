@@ -1,6 +1,6 @@
-package Hotel;
+package model;
 
-import Hotel.Acomodacao.EEstadoOcupacao;
+import model.Acomodacao.EEstadoOcupacao;
 
 public interface IAcomodacao {
 	public int getNumero();

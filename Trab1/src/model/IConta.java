@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public interface IConta{
 	public void addItem(Item item, int qtde);

@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public class Acomodacao implements IAcomodacao {
 	private final int numero;

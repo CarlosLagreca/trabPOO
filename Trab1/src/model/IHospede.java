@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public interface IHospede {
 	public long getCpf();

@@ -1,4 +1,4 @@
-package Hotel;
+package model;
 
 public class Hospede implements IHospede {
 
