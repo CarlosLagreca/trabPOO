@@ -1,5 +1,7 @@
 package view;
 
+import controller.MenuController;
+
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -15,6 +17,9 @@ import javax.swing.JButton;
 import com.jgoodies.forms.layout.FormLayout;
 import com.jgoodies.forms.layout.ColumnSpec;
 import com.jgoodies.forms.layout.RowSpec;
+
+import controller.MenuController;
+
 import com.jgoodies.forms.layout.FormSpecs;
 import net.miginfocom.swing.MigLayout;
 import javax.swing.GroupLayout;
@@ -30,7 +35,14 @@ import javax.swing.JTable;
 
 public class MenuView extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 517294119658988912L;
 	private JPanel contentPane;
+	
+	// Instanciando controller
+	private MenuController controller = new MenuController();
 
 	/**
 	 * Launch the application.
@@ -75,6 +87,7 @@ public class MenuView extends JFrame {
 		JButton btnClientes = new JButton("Cadastro clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				controller.openCadastroCliente();
 			}
 		});
 		
