@@ -162,17 +162,7 @@ public class CadastroClienteView extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					String nome = txtNome.getText();
-					Long cpf =  Long.parseLong(textCpf.getText());
-					Long telefone = Long.parseLong(textTelefone.getText());
-					String email = textEmail.getText();
-					controller.cadastrarCliente(nome, cpf, telefone, email);
-					JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-					dispose();
-				} catch(Exception exp) {
-					
-				}
+				Confirmar_cadastro();
 			}
 		});
 		btnCadastrar.setBackground(new Color(187, 255, 187));
@@ -187,5 +177,22 @@ public class CadastroClienteView extends JFrame {
 		});
 		btnCancelar.setBackground(new Color(255, 153, 153));
 		panel_4.add(btnCancelar);
+	}
+	
+	private void Confirmar_cadastro() {
+		try {
+			String nome = txtNome.getText();
+			Long cpf =  Long.parseLong(textCpf.getText());
+			Long telefone = Long.parseLong(textTelefone.getText());
+			String email = textEmail.getText();
+			controller.cadastrarCliente(nome, cpf, telefone, email);
+			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} catch(NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
+		
 	}
 }

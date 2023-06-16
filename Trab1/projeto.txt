@@ -6,8 +6,8 @@ Botão Checkin:
         número do apartamento()
         botão checkin()
 
-Cadastro Cliente(⚠️)
-    Campo de cadastro de informações(✔️)
+Cadastro Cliente()
+    Campo de cadastro de informações()
 
 Botão Checkout()
     Número da acomodação()

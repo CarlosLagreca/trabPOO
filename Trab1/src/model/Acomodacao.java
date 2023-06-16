@@ -6,10 +6,10 @@ public class Acomodacao implements IAcomodacao {
 	private EEstadoOcupacao estadoOcupacao;
 	private TipoAcomodacao tipo;
 
-	public Acomodacao(int numero, int ocupacaoMax, EEstadoOcupacao estadoOcupacao, TipoAcomodacao tipo) {
+	public Acomodacao(int numero, int ocupacaoMax, TipoAcomodacao tipo) {
 		this.numero = numero;
 		this.ocupacaoMax = ocupacaoMax;
-		this.estadoOcupacao = estadoOcupacao;
+		this.estadoOcupacao = EEstadoOcupacao.DISPONIVEL;
 		this.tipo = tipo;
 	}
 
