@@ -2,7 +2,7 @@ package view;
 
 import controller.MainController;
 import controller.MenuController;
-import main.Main;
+import view.CriarAptView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -104,6 +104,12 @@ public class MenuView extends JFrame {
 		panel_1_2.add(lblItens_2, gbc_lblItens_2);
 		
 		JButton btnApt = new JButton("Criar novo");
+		btnApt.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CriarAptView novajanela = new CriarAptView();
+				novajanela.setVisible(true);
+			}
+		});
 		btnApt.setFont(new Font("Verdana", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnApt = new GridBagConstraints();
 		gbc_btnApt.insets = new Insets(0, 0, 5, 0);

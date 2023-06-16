@@ -16,8 +16,8 @@ public class AptController implements Serializable{
 		apartamentos = new TreeMap<>();
 	}
 	
-	public void addApartamento(int numero, int ocupacaomax, TipoAcomodacao tipo) {
-		Acomodacao apartamento = new Acomodacao(numero, ocupacaomax, tipo);
+	public void addApartamento(int numero, int ocupacaomax, String tipo) {
+		Acomodacao apartamento = new Acomodacao(numero, ocupacaomax, new TipoAcomodacao(tipo, 10, 1));
 		apartamentos.put(apartamento.getNumero(), apartamento);
 		
 		MainController.save();
