@@ -1,6 +1,9 @@
 package model;
 
-public class Item {
+import java.io.Serializable;
+
+public class Item implements Serializable{
+	private static final long serialVersionUID = 1437011155733728216L;
 	private final long codigo;
 	private final String descricao;
 	private double preco;

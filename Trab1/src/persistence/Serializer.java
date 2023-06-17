@@ -28,6 +28,7 @@ public class Serializer {
 
 		} catch (IOException e) {
 			System.err.println(String.format("Erro na leitura do arquivo %s!", fileName));
+			e.printStackTrace();
 			
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -48,6 +49,7 @@ public class Serializer {
 
 		} catch (IOException e) {
 			System.err.println(String.format("Erro na gravação do arquivo %s!", fileName));
+			e.printStackTrace();
 			
 		} catch (Exception e) {
 			e.printStackTrace();

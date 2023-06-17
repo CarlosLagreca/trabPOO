@@ -1,7 +1,9 @@
 package model;
 
-public class Hospede implements IHospede {
+import java.io.Serializable;
 
+public class Hospede implements IHospede, Serializable {
+	private static final long serialVersionUID = 3193785960528259305L;
 	private final long cpf;
 	private String nome;
 	private String email;

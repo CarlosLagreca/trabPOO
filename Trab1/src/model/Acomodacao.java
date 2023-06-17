@@ -1,6 +1,9 @@
 package model;
 
-public class Acomodacao implements IAcomodacao {
+import java.io.Serializable;
+
+public class Acomodacao implements IAcomodacao, Serializable{
+	private static final long serialVersionUID = -4335473616730693277L;
 	private final int numero;
 	private final int ocupacaoMax;
 	private EEstadoOcupacao estadoOcupacao;

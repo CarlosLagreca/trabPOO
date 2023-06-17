@@ -1,8 +1,10 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Pagamento {
+public class Pagamento implements Serializable{
+	private static final long serialVersionUID = -1119751179085551545L;
 	private final ETipoPagamento tipo;
 	private final Date data;
 	private final double valor;

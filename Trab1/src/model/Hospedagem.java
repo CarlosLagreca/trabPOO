@@ -1,9 +1,11 @@
 package model;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Hospedagem {
+public class Hospedagem implements Serializable {
+	private static final long serialVersionUID = 7345409444938260273L;
 	private int inicioCheckin = 13;
 	private int limiteCheckout = 12;
 	private final String id;

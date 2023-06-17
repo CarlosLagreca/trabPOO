@@ -3,6 +3,7 @@ package view;
 import controller.MainController;
 import controller.AptController;
 
+import java.awt.Dimension;
 import java.awt.EventQueue;
 
 import javax.swing.JFrame;
@@ -35,8 +36,9 @@ public class CriarAptView extends JFrame {
 	 * Create the frame.
 	 */
 	public CriarAptView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 240);
+		setMinimumSize(new Dimension(300,190));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -112,6 +114,7 @@ public class CriarAptView extends JFrame {
 		JButton btnCriar = new JButton("Criar");
 		btnCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ActionCriar();
 			}
 		});
 		GridBagConstraints gbc_btnCriar = new GridBagConstraints();
