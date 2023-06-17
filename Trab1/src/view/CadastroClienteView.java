@@ -162,7 +162,7 @@ public class CadastroClienteView extends JFrame {
 		JButton btnCadastrar = new JButton("Cadastrar");
 		btnCadastrar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Confirmar_cadastro();
+				ConfirmarCadastro();
 			}
 		});
 		btnCadastrar.setBackground(new Color(187, 255, 187));
@@ -179,7 +179,7 @@ public class CadastroClienteView extends JFrame {
 		panel_4.add(btnCancelar);
 	}
 	
-	private void Confirmar_cadastro() {
+	private void ConfirmarCadastro() {
 		try {
 			String nome = txtNome.getText();
 			Long cpf =  Long.parseLong(textCpf.getText());
