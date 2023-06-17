@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import model.Acomodacao;
+import model.Acomodacao.EEstadoOcupacao;
 import model.TipoAcomodacao;
 
 public class AptController implements Serializable{
@@ -23,5 +24,30 @@ public class AptController implements Serializable{
 		MainController.save();
 		
 		System.out.println("feito!");
+	}
+	
+	public Acomodacao getApartamento(int numero) {
+		return apartamentos.get(numero);
+	}
+	
+	public void concluirLimpeza(int numero) {
+		apartamentos.get(numero).setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
+	}
+	
+	public int deleteApartamento(int numero) {
+		//Verificando estado para excluir apartamento
+		Acomodacao ac = apartamentos.get(numero);
+		
+		if (ac.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
+			return 2;
+		}
+		
+		try {
+			apartamentos.remove(numero);
+		} catch(Exception e) {
+			return 1;
+		}
+		
+		return 0;
 	}
 }

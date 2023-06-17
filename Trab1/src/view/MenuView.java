@@ -1,5 +1,6 @@
 package view;
 
+import controller.AptController;
 import controller.MainController;
 import controller.MenuController;
 import view.CriarAptView;
@@ -14,6 +15,7 @@ import java.awt.GridBagLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import javax.swing.JOptionPane;
 
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -30,7 +32,7 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 
 public class MenuView extends JFrame {
-
+	private static final long serialVersionUID = -4786237314541903229L;
 	private JTabbedPane tabbedPane;
 	
 
@@ -103,35 +105,66 @@ public class MenuView extends JFrame {
 		gbc_lblItens_2.gridy = 0;
 		panel_1_2.add(lblItens_2, gbc_lblItens_2);
 		
-		JButton btnApt = new JButton("Criar novo");
-		btnApt.addActionListener(new ActionListener() {
+		JButton btnAptCriar = new JButton("Criar novo");
+		btnAptCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CriarAptView novajanela = new CriarAptView();
+				CriarAptView novajanela = new CriarAptView(-1);
 				novajanela.setVisible(true);
 			}
 		});
-		btnApt.setFont(new Font("Verdana", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnApt = new GridBagConstraints();
-		gbc_btnApt.insets = new Insets(0, 0, 5, 0);
-		gbc_btnApt.gridx = 0;
-		gbc_btnApt.gridy = 3;
-		panel_1_2.add(btnApt, gbc_btnApt);
+		btnAptCriar.setFont(new Font("Verdana", Font.PLAIN, 14));
+		GridBagConstraints gbc_btnAptCriar = new GridBagConstraints();
+		gbc_btnAptCriar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnAptCriar.gridx = 0;
+		gbc_btnAptCriar.gridy = 3;
+		panel_1_2.add(btnAptCriar, gbc_btnAptCriar);
 		
-		JButton btnNewButton_1_2 = new JButton("Editar");
-		btnNewButton_1_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnNewButton_1_2 = new GridBagConstraints();
-		gbc_btnNewButton_1_2.gridheight = 3;
-		gbc_btnNewButton_1_2.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1_2.gridx = 0;
-		gbc_btnNewButton_1_2.gridy = 4;
-		panel_1_2.add(btnNewButton_1_2, gbc_btnNewButton_1_2);
+		JButton btnAptVisualizar = new JButton("Visualizar");
 		
-		JButton btnNewButton_3_2 = new JButton("Concluir limpeza");
-		btnNewButton_3_2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnNewButton_3_2 = new GridBagConstraints();
-		gbc_btnNewButton_3_2.gridx = 0;
-		gbc_btnNewButton_3_2.gridy = 7;
-		panel_1_2.add(btnNewButton_3_2, gbc_btnNewButton_3_2);
+		btnAptVisualizar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String input = JOptionPane.showInputDialog("Insira a Acomodação");
+					if (input == null || (input != null && ("".equals(input)))) {
+						return;
+					}
+					int numero = Integer.parseInt(input);
+					CriarAptView janela = new CriarAptView(numero);
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		
+		btnAptVisualizar.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GridBagConstraints gbc_btnAptVisualizar = new GridBagConstraints();
+		gbc_btnAptVisualizar.gridheight = 3;
+		gbc_btnAptVisualizar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnAptVisualizar.gridx = 0;
+		gbc_btnAptVisualizar.gridy = 4;
+		panel_1_2.add(btnAptVisualizar, gbc_btnAptVisualizar);
+		
+		JButton btnAptConcluir = new JButton("Concluir limpeza");
+		btnAptConcluir.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				AptController controller = MainController.getAptController();
+				try {
+					String input = JOptionPane.showInputDialog("Insira a Acomodação");
+					if (input == null || (input != null && ("".equals(input)))) {
+						return;
+					}
+					int numero = Integer.parseInt(input);
+					controller.concluirLimpeza(numero);
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
+		btnAptConcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GridBagConstraints gbc_btnAptConcluir = new GridBagConstraints();
+		gbc_btnAptConcluir.gridx = 0;
+		gbc_btnAptConcluir.gridy = 7;
+		panel_1_2.add(btnAptConcluir, gbc_btnAptConcluir);
 		
 		JPanel panel_1 = new JPanel();
 		panel_1.setBorder(new LineBorder(new Color(0, 0, 0)));
@@ -242,6 +275,8 @@ public class MenuView extends JFrame {
 		
 		
 		
+		
+		
 		///// CRIANDO PANEL MENU ///////
 		panelMenu.setBorder(new EmptyBorder(5, 5, 5, 5));
 		panelMenu.setLayout(new BorderLayout(0, 0));
@@ -284,22 +319,22 @@ public class MenuView extends JFrame {
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnCheckout, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-							.addComponent(btnServios, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnAcomodaes, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-							.addGap(148)
-							.addComponent(btnClientes, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(btnInfoHospedagens, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 148, Short.MAX_VALUE)
-							.addComponent(btnGerenciamento, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)))
+							.addPreferredGap(ComponentPlacement.RELATED, 391, Short.MAX_VALUE)
+							.addComponent(btnGerenciamento, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnAcomodaes, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+								.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE))
+							.addGap(391)
+							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addComponent(btnServios, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+								.addComponent(btnClientes, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE))))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
+			gl_panel.createParallelGroup(Alignment.TRAILING)
+				.addGroup(gl_panel.createSequentialGroup()
 					.addContainerGap()
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(btnAcomodaes, GroupLayout.DEFAULT_SIZE, 51, Short.MAX_VALUE)
