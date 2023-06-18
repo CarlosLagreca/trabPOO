@@ -190,6 +190,12 @@ public class MenuView extends JFrame {
 		panel_1.add(lblItens, gbc_lblItens);
 		
 		JButton btnItemCriar = new JButton("Criar novo");
+		btnItemCriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ItemView janela = new ItemView();
+				janela.setVisible(true);
+			}
+		});
 		btnItemCriar.setFont(new Font("Verdana", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnItemCriar = new GridBagConstraints();
 		gbc_btnItemCriar.insets = new Insets(0, 0, 5, 0);
@@ -344,4 +350,5 @@ public class MenuView extends JFrame {
 		);
 		panel.setLayout(gl_panel);
 	}
+	
 }

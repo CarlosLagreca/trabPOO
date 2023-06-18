@@ -27,6 +27,7 @@ public class ItemController implements Serializable {
 			Categoria categoria = categorias.get(nomeCategoria);
 			Item item = new Item(codigo, descricao, preco);
 			categoria.addItem(item);
+			MainController.save();
 		} catch(Exception e) {
 			e.printStackTrace();
 			return 1;
@@ -38,9 +39,10 @@ public class ItemController implements Serializable {
 	public int editPreco(String nomeCategoria, long codItem, double preco) {
 		
 		try {
-		Categoria categoria = categorias.get(nomeCategoria);
-		Item item = categoria.getItens().get(codItem);
-		item.setPreco(preco);
+			Categoria categoria = categorias.get(nomeCategoria);
+			Item item = categoria.getItens().get(codItem);
+			item.setPreco(preco);
+			MainController.save();
 		} catch(Exception e) {
 			e.printStackTrace();
 			return 1;

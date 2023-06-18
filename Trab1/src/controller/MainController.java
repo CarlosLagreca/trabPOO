@@ -10,6 +10,7 @@ public class MainController implements Serializable{
 	
 	private static MainController instance;
 	private AptController aptcontroller;
+	private ItemController itemcontroller;
 	 
 	private MainController() {
 		aptcontroller = new AptController();
@@ -21,6 +22,10 @@ public class MainController implements Serializable{
 	
 	public static AptController getAptController() {
 		return instance.aptcontroller;
+	}
+	
+	public static ItemController getItemController() {
+		return instance.itemcontroller;
 	}
 	
 	public static void load() {

@@ -4,12 +4,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import controller.MainController;
 import controller.ItemController;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
@@ -17,6 +19,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ItemView extends JFrame {
 
@@ -25,15 +29,15 @@ public class ItemView extends JFrame {
 	private JTextField txtDescricao;
 	private JTextField txtPreco;
 	private JComboBox comboBox;
-	private ItemController controller = new ItemController();
 
 	/**
 	 * Create the frame.
 	 */
 	public ItemView() {
 		setTitle("Adicionar Item");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 442, 359);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+		setBounds(100, 100, 440, 360);
+		setMinimumSize(new Dimension(300,200));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -125,6 +129,10 @@ public class ItemView extends JFrame {
 		panel.add(comboBox, gbc_comboBox);
 		
 		JButton btnNewButton = new JButton("Criar Categoria");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.anchor = GridBagConstraints.WEST;
@@ -133,6 +141,11 @@ public class ItemView extends JFrame {
 		panel.add(btnNewButton, gbc_btnNewButton);
 		
 		JButton btnNewButton_1 = new JButton("Cadastrar");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				confirmarAction();
+			}
+		});
 		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
 		gbc_btnNewButton_1.gridwidth = 3;
 		gbc_btnNewButton_1.insets = new Insets(0, 0, 0, 5);
@@ -143,14 +156,15 @@ public class ItemView extends JFrame {
 	
 	private void confirmarAction() {
 		try {
-		long codigo = Long.parseLong(txtCodigo.getText());
-		String descricao = txtDescricao.getText();
-		double preco = Double.parseDouble(txtPreco.getText());
-		String categoria = comboBox.getSelectedItem().toString();
-		controller.addItem(categoria, codigo, descricao, preco);
-		JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
-
-		dispose();
+			ItemController controller = MainController.getItemController();
+			long codigo = Long.parseLong(txtCodigo.getText());
+			String descricao = txtDescricao.getText();
+			double preco = Double.parseDouble(txtPreco.getText());
+			String categoria = comboBox.getSelectedItem().toString();
+			controller.addItem(categoria, codigo, descricao, preco);
+			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+	
+			dispose();
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch(Exception e) {
@@ -158,8 +172,11 @@ public class ItemView extends JFrame {
 		}
 	}
 	
+	
+	// TODO: Adicionar função do botão de criar categoria e fazer a combobox funcionar
 	private void criarCategoriaAction() {
 		try {
+			ItemController controller = MainController.getItemController();
 			String input = JOptionPane.showInputDialog("Insira o nome da Categoria");
 			if (input == null || (input != null && ("".equals(input)))) {
 				return;
