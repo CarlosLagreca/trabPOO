@@ -5,25 +5,17 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.CadastroClienteController;
-
-import java.awt.GridLayout;
-import javax.swing.BoxLayout;
-import java.awt.CardLayout;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
-import java.awt.FlowLayout;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
-import java.awt.Window.Type;
 import java.awt.Toolkit;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.DropMode;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.event.ActionListener;
@@ -40,6 +32,8 @@ public class CadastroClienteView extends JFrame {
 	private JTextField textCpf;
 	private JTextField textTelefone;
 	private JTextField textEmail;
+	private CadastroClienteController controller = new CadastroClienteController();
+	
 
 	/**
 	 * Create the frame.

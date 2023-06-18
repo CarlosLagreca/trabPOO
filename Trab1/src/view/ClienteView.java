@@ -1,8 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-import javax.swing.table.DefaultTableModel;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -10,12 +7,8 @@ import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
-import java.awt.Font;
 import javax.swing.JTable;
-import javax.swing.JComboBox;
 import javax.swing.JButton;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.SwingConstants;
 
 public class ClienteView extends JFrame {
 
