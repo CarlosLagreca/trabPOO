@@ -189,29 +189,22 @@ public class MenuView extends JFrame {
 		gbc_lblItens.gridy = 0;
 		panel_1.add(lblItens, gbc_lblItens);
 		
-		JButton btnNewButton = new JButton("New button");
-		btnNewButton.setFont(new Font("Verdana", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 0;
-		gbc_btnNewButton.gridy = 3;
-		panel_1.add(btnNewButton, gbc_btnNewButton);
+		JButton btnItemCriar = new JButton("Criar novo");
+		btnItemCriar.setFont(new Font("Verdana", Font.PLAIN, 14));
+		GridBagConstraints gbc_btnItemCriar = new GridBagConstraints();
+		gbc_btnItemCriar.insets = new Insets(0, 0, 5, 0);
+		gbc_btnItemCriar.gridx = 0;
+		gbc_btnItemCriar.gridy = 3;
+		panel_1.add(btnItemCriar, gbc_btnItemCriar);
 		
-		JButton btnNewButton_1 = new JButton("New button");
-		btnNewButton_1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnNewButton_1 = new GridBagConstraints();
-		gbc_btnNewButton_1.gridheight = 3;
-		gbc_btnNewButton_1.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_1.gridx = 0;
-		gbc_btnNewButton_1.gridy = 4;
-		panel_1.add(btnNewButton_1, gbc_btnNewButton_1);
-		
-		JButton btnNewButton_3 = new JButton("New button");
-		btnNewButton_3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-		GridBagConstraints gbc_btnNewButton_3 = new GridBagConstraints();
-		gbc_btnNewButton_3.gridx = 0;
-		gbc_btnNewButton_3.gridy = 7;
-		panel_1.add(btnNewButton_3, gbc_btnNewButton_3);
+		JButton btnItemEditPreco = new JButton("Editar Preço");
+		btnItemEditPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
+		GridBagConstraints gbc_btnItemEditPreco = new GridBagConstraints();
+		gbc_btnItemEditPreco.gridheight = 3;
+		gbc_btnItemEditPreco.insets = new Insets(0, 0, 5, 0);
+		gbc_btnItemEditPreco.gridx = 0;
+		gbc_btnItemEditPreco.gridy = 4;
+		panel_1.add(btnItemEditPreco, gbc_btnItemEditPreco);
 		
 		JPanel panel_1_1 = new JPanel();
 		panel_1_1.setBorder(new LineBorder(new Color(0, 0, 0)));
