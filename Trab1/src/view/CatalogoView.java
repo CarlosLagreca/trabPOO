@@ -49,8 +49,6 @@ public class CatalogoView extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Confirmar");
 		
-		JButton btnNewButton_2 = new JButton("Criar Categoria");
-		
 		JButton btnNewButton_2_1 = new JButton("Listar");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
@@ -64,32 +62,28 @@ public class CatalogoView extends JFrame {
 							.addComponent(comboBox, 0, 164, Short.MAX_VALUE))
 						.addComponent(table_1, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 286, Short.MAX_VALUE))
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 85, Short.MAX_VALUE)
-							.addComponent(btnNewButton_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(btnNewButton_2_1, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addComponent(btnNewButton_1, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(btnNewButton_2_1, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
 					.addContainerGap())
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(14)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addComponent(lblNewLabel, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(comboBox)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addComponent(btnNewButton_2_1)))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(btnNewButton_2)
-							.addPreferredGap(ComponentPlacement.RELATED, 149, Short.MAX_VALUE)
-							.addComponent(btnNewButton_1))
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addGroup(gl_panel.createSequentialGroup()
 							.addComponent(table_1, GroupLayout.DEFAULT_SIZE, 192, Short.MAX_VALUE)
-							.addGap(3)))
-					.addGap(8))
+							.addGap(11))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(btnNewButton_1)
+							.addGap(8))))
 		);
 		panel.setLayout(gl_panel);
 		
