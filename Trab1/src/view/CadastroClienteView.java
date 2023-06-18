@@ -4,7 +4,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.CadastroClienteController;
+import controller.MainController;
+import controller.ClienteController;
+
+
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
@@ -32,7 +35,6 @@ public class CadastroClienteView extends JFrame {
 	private JTextField textCpf;
 	private JTextField textTelefone;
 	private JTextField textEmail;
-	private CadastroClienteController controller = new CadastroClienteController();
 	
 
 	/**
@@ -174,6 +176,7 @@ public class CadastroClienteView extends JFrame {
 	
 	private void ConfirmarCadastro() {
 		try {
+			ClienteController controller = MainController.getClienteContoller();
 			String nome = txtNome.getText();
 			Long cpf =  Long.parseLong(textCpf.getText());
 			Long telefone = Long.parseLong(textTelefone.getText());
