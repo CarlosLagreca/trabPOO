@@ -40,7 +40,6 @@ public class CadastroClienteView extends JFrame {
 	private JTextField textCpf;
 	private JTextField textTelefone;
 	private JTextField textEmail;
-	private CadastroClienteController controller = new CadastroClienteController();
 
 	/**
 	 * Create the frame.
