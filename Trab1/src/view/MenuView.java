@@ -3,6 +3,9 @@ package view;
 import controller.AptController;
 import controller.MainController;
 import controller.MenuController;
+import main.Main;
+import controller.ItemController;
+
 import view.CriarAptView;
 
 import java.awt.BorderLayout;
@@ -51,6 +54,20 @@ public class MenuView extends JFrame {
 			}
 		});
 	}
+	
+	/**
+	 * ESPAÇO PARA TODOs gerais do projeto:
+	 * TODO: Remover botão de Gerenciamento da aba Menu
+	 * TODO: Fazer botão Editar e Criar Novo de Itens funcionar normalmente (ajusar categorias)
+	 * TODO: Implementar forma de excluir item do catalogo
+	 * TODO: Remover botões inutilizados de Clientes em Gerenciamento
+	 * 
+	 * TODO: Fazer botão (janela) Serviços adicionais
+	 * TODO: Fazer botão (janela) Checkin
+	 * TODO: Fazer botão (janela) Checkout
+	 * TODO: Fazer botão (janela) Info. Hospedagens
+	 */
+	
 
 	/**
 	 * Create the frame.
@@ -71,7 +88,6 @@ public class MenuView extends JFrame {
 		
 		tabbedPane.addTab("Menu", null, panelMenu, null);
 		tabbedPane.addTab("Gerenciamento", null, panelGerenciamento, null);
-		
 		
 		
 		////// CRANDO PANEL GERENCIAMENTO //////
@@ -204,6 +220,20 @@ public class MenuView extends JFrame {
 		panel_1.add(btnItemCriar, gbc_btnItemCriar);
 		
 		JButton btnItemEditPreco = new JButton("Editar Preço");
+		btnItemEditPreco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					ItemController controller = MainController.getItemController();
+					String input = JOptionPane.showInputDialog("Insira o código:");
+					if (input == null || (input != null && ("".equals(input)))) {
+						return;
+					}
+					long codigo = Long.parseLong(input);
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Insira um código válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+				}
+			}
+		});
 		btnItemEditPreco.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnItemEditPreco = new GridBagConstraints();
 		gbc_btnItemEditPreco.gridheight = 3;
@@ -227,7 +257,7 @@ public class MenuView extends JFrame {
 		gbl_panel_1_1.rowWeights = new double[]{0.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		panel_1_1.setLayout(gbl_panel_1_1);
 		
-		JLabel lblItens_1 = new JLabel("Itens");
+		JLabel lblItens_1 = new JLabel("Clientes");
 		lblItens_1.setFont(new Font("Verdana", Font.BOLD, 14));
 		GridBagConstraints gbc_lblItens_1 = new GridBagConstraints();
 		gbc_lblItens_1.insets = new Insets(0, 0, 5, 0);
@@ -235,7 +265,13 @@ public class MenuView extends JFrame {
 		gbc_lblItens_1.gridy = 0;
 		panel_1_1.add(lblItens_1, gbc_lblItens_1);
 		
-		JButton btnNewButton_2 = new JButton("New button");
+		JButton btnNewButton_2 = new JButton("Listar");
+		btnNewButton_2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				JFrame janela = new ClienteView();
+				janela.setVisible(true);
+			}
+		});
 		btnNewButton_2.setFont(new Font("Verdana", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);

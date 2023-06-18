@@ -2,6 +2,7 @@ package controller;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import model.Hospede;
@@ -21,5 +22,15 @@ public class ClienteController implements Serializable {
 			e.printStackTrace();
 			throw e;
 		}
+	}
+	
+	public String[][] getClientes() {
+		List<String[]> table = new ArrayList<String[]>();
+		for(Hospede cliente : listaHospedes) {
+			String[] linha = {cliente.getNome(), Long.toString(cliente.getCpf()), Long.toString(cliente.getTelefone()), cliente.getEmail()};
+			table.add(linha);
+		}
+		
+		return table.toArray(new String[0][0]);
 	}
 }
