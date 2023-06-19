@@ -20,6 +20,7 @@ public class ItemController implements Serializable {
 
 	public void addCategoria(String nome) {
 		categorias.put(nome, new Categoria(nome));
+		MainController.save();
 	}
 
 	public int addItem(String nomeCategoria, long codigo, String descricao, double preco) {
@@ -58,5 +59,16 @@ public class ItemController implements Serializable {
 			lista.add(nome);
 		}
 		return lista.toArray(new String[0]);
+	}
+	
+	public String[][] getItens(String nomeCategoria) {
+		List<String[]> table = new ArrayList<String[]>();
+		Categoria categoria = categorias.get(nomeCategoria);
+		for(Item item : categoria.getItens().values()) {
+			String[] linha = {Long.toString(item.getCodigo()), item.getDescricao(), Double.toString(item.getPreco())};
+			table.add(linha);
+		}
+		
+		return table.toArray(new String[0][0]);
 	}
 }

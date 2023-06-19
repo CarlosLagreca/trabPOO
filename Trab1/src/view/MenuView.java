@@ -64,6 +64,7 @@ public class MenuView extends JFrame {
 	 * TODO: Fazer botão (janela) Checkin
 	 * TODO: Fazer botão (janela) Checkout
 	 * TODO: Fazer botão (janela) Info. Hospedagens
+	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 */
 	
 
@@ -304,6 +305,12 @@ public class MenuView extends JFrame {
 		});
 		
 		JButton btnServios = new JButton("Serviços adicionais");
+		btnServios.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CatalogoView janela = new CatalogoView();
+				janela.setVisible(true);
+			}
+		});
 		
 		JButton btnInfoHospedagens = new JButton("Info. Hospedagens");
 		GroupLayout gl_panel = new GroupLayout(panel);
