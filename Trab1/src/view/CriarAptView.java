@@ -34,6 +34,7 @@ public class CriarAptView extends JFrame {
 	private JTextField textNumero;
 	private JTextField textOcupacaomax;
 	private JComboBox comboBox;
+	String[][] tiposAcomodacao;
 
 	/**
 	 * Create the frame.
@@ -79,7 +80,7 @@ public class CriarAptView extends JFrame {
 		contentPane.add(textNumero, gbc_textNumero);
 		textNumero.setColumns(10);
 		
-		JLabel lblNewLabel_2 = new JLabel("Ocupacaomax:");
+		JLabel lblNewLabel_2 = new JLabel("Ocupacão Máxima:");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 0;
@@ -104,10 +105,14 @@ public class CriarAptView extends JFrame {
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Suite", "naosei", "casa"}));
+		comboBox.setToolTipText("Selecione o tipo da acomodação. Informações do tipo mostradas abaixo.");
 		
-		//TODO: Resolver combobox de categoria
-		
+		try {
+			tiposAcomodacao = attCombobox();
+			comboBox.setModel(new DefaultComboBoxModel(tiposAcomodacao[0]));
+		} catch(Exception e) {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+		}
 		
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -117,6 +122,13 @@ public class CriarAptView extends JFrame {
 		contentPane.add(comboBox, gbc_comboBox);
 		
 		JButton btnCriarTipo = new JButton("Criar novo");
+		btnCriarTipo.setToolTipText("Criar novo tipo de acomodação.");
+		btnCriarTipo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				TipoAcomodacaoView janela = new TipoAcomodacaoView();
+				janela.setVisible(true);
+			}
+		});
 		GridBagConstraints gbc_btnCriarTipo = new GridBagConstraints();
 		gbc_btnCriarTipo.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCriarTipo.gridx = 2;
@@ -131,6 +143,7 @@ public class CriarAptView extends JFrame {
 		contentPane.add(lblEstado, gbc_lblEstado);
 		
 		JLabel lblInfos = new JLabel("aaaaaaaaaaaa");
+		lblInfos.setToolTipText("Informações do tipo selecionado.");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
 		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInfos.gridwidth = 3;
@@ -139,7 +152,16 @@ public class CriarAptView extends JFrame {
 		contentPane.add(lblInfos, gbc_lblInfos);
 		comboBox.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
-		        lblInfos.setText(comboBox.getSelectedItem().toString());
+		    	int index = comboBox.getSelectedIndex();
+		    	try {
+					tiposAcomodacao = attCombobox();
+					comboBox.setModel(new DefaultComboBoxModel(tiposAcomodacao[0]));
+				} catch(Exception exp) {
+					comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+				}
+		    	comboBox.setSelectedIndex(index);
+		    	String textLabel = "Tarifa Diária: " + tiposAcomodacao[index+1][0] + "   | Adicional acomp.: " + tiposAcomodacao[index+1][1];
+		    	lblInfos.setText(textLabel);
 		    }
 		});
 		
@@ -192,6 +214,17 @@ public class CriarAptView extends JFrame {
 		
 		setVisible(true);
 		
+	}
+	
+	private String[][] attCombobox() {
+		try {
+			AptController controller = MainController.getAptController();
+			return controller.getTipos();
+			
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado ao acessar categorias!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			return null;
+		}
 	}
 	
 	private void ActionCriar() {
