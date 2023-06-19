@@ -1,7 +1,8 @@
 package controller;
 
 import java.io.Serializable;
-
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -49,5 +50,13 @@ public class ItemController implements Serializable {
 		}
 		
 		return 0;
+	}
+	
+	public String[] getCategorias() {
+		List<String> lista = new ArrayList<String>();
+		for(String nome : categorias.keySet()) {
+			lista.add(nome);
+		}
+		return lista.toArray(new String[0]);
 	}
 }

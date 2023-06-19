@@ -18,6 +18,7 @@ import java.awt.GridBagLayout;
 import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -121,6 +122,7 @@ public class ItemView extends JFrame {
 		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
 		comboBox = new JComboBox();
+		attComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
@@ -155,6 +157,17 @@ public class ItemView extends JFrame {
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
 	}
 	
+	private void attComboBox() {
+		ItemController controller = MainController.getItemController();
+		String[] nomesCategorias;
+		try {
+			nomesCategorias = controller.getCategorias();
+			comboBox.setModel(new DefaultComboBoxModel(nomesCategorias));
+		} catch(Exception exp) {
+			comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+		}
+	}
+	
 	private void confirmarAction() {
 		try {
 			ItemController controller = MainController.getItemController();
@@ -173,8 +186,6 @@ public class ItemView extends JFrame {
 		}
 	}
 	
-	
-	// TODO: Adicionar função do botão de criar categoria e fazer a combobox funcionar
 	private void criarCategoriaAction() {
 		try {
 			ItemController controller = MainController.getItemController();
@@ -183,6 +194,7 @@ public class ItemView extends JFrame {
 				return;
 			}
 			controller.addCategoria(input);
+			attComboBox();
 		}catch(Exception e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}

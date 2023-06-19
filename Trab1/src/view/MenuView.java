@@ -57,10 +57,8 @@ public class MenuView extends JFrame {
 	
 	/**
 	 * ESPAÇO PARA TODOs gerais do projeto:
-	 * TODO: Remover botão de Gerenciamento da aba Menu
-	 * TODO: Fazer botão Editar e Criar Novo de Itens funcionar normalmente (ajusar categorias)
+	 * TODO: Fazer botão Editar de intens funcionar (ajustar geração de codigo)
 	 * TODO: Implementar forma de excluir item do catalogo
-	 * TODO: Remover botões inutilizados de Clientes em Gerenciamento
 	 * 
 	 * TODO: Fazer botão (janela) Serviços adicionais
 	 * TODO: Fazer botão (janela) Checkin
