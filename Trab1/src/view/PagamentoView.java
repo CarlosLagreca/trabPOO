@@ -44,7 +44,7 @@ public class PagamentoView extends JFrame {
 		
 		JLabel lblNewLabel_2 = new JLabel("Valor a ser pago:");
 		
-		JButton btnNewButton = new JButton("New button");
+		JButton btnNewButton = new JButton("Confirmar");
 		
 		textField = new JTextField();
 		textField.setColumns(10);

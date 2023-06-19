@@ -28,9 +28,9 @@ public class Pagamento implements Serializable{
 	}
 
 	public enum ETipoPagamento {
-		PIX("pagamento pix"), DEBITO("pagamento debito"), CREDITO("pagamento credito");
+		PIX("Pagamento Pix"), DEBITO("Dagamento Debito"), CREDITO("Pagamento Credito");
 
-		final String descricao;
+		private final String descricao;
 
 		ETipoPagamento(String descricao) {
 			this.descricao = descricao;

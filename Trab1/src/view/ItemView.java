@@ -131,6 +131,7 @@ public class ItemView extends JFrame {
 		JButton btnNewButton = new JButton("Criar Categoria");
 		btnNewButton.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				criarCategoriaAction();
 			}
 		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
