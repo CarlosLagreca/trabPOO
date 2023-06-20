@@ -37,9 +37,21 @@ public class ItemController implements Serializable {
 		
 		return 0;
 	}
+	
+	public int removeItem(String nomeCategoria, long codigo) {
+		try {
+			Categoria categoria = categorias.get(nomeCategoria);
+			categoria.getItens().remove(codigo);
+			MainController.save();
+		}catch(Exception e) {
+			e.printStackTrace();
+			return 1;
+		}
+		
+		return 0;
+	}
 
 	public int editPreco(String nomeCategoria, long codItem, double preco) {
-		
 		try {
 			Categoria categoria = categorias.get(nomeCategoria);
 			Item item = categoria.getItens().get(codItem);

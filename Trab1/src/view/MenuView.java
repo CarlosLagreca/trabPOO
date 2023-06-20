@@ -33,6 +33,7 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import javax.swing.JToggleButton;
 
 public class MenuView extends JFrame {
 	private static final long serialVersionUID = -4786237314541903229L;
@@ -57,14 +58,13 @@ public class MenuView extends JFrame {
 	
 	/**
 	 * ESPAÇO PARA TODOs gerais do projeto:
-	 * TODO: Fazer botão Editar de intens funcionar (ajustar geração de codigo)
-	 * TODO: Implementar forma de excluir item do catalogo
-	 * 
-	 * TODO: Fazer botão (janela) Serviços adicionais
-	 * TODO: Fazer botão (janela) Checkin
-	 * TODO: Fazer botão (janela) Checkout
-	 * TODO: Fazer botão (janela) Info. Hospedagens
+	 * TODO: Fazer botão (janela) Serviços adicionais.
+	 * TODO: Fazer botão (janela) Checkin.
+	 * TODO: Fazer botão (janela) Checkout.
+	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
+	 *  * TODO: Fazer busca geral de erros ao terminar o projeto.
+	 *             
 	 */
 	
 
@@ -112,19 +112,11 @@ public class MenuView extends JFrame {
 		gbl_panel_1_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		panel_1_2.setLayout(gbl_panel_1_2);
 		
-		JButton btnItemEditPreco = new JButton("Editar Preço");
+		JButton btnItemEditPreco = new JButton("Visualizar");
 		btnItemEditPreco.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				try {
-					ItemController controller = MainController.getItemController();
-					String input = JOptionPane.showInputDialog("Insira o código:");
-					if (input == null || (input != null && ("".equals(input)))) {
-						return;
-					}
-					long codigo = Long.parseLong(input);
-				} catch(NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Insira um código válido", "Erro!", JOptionPane.ERROR_MESSAGE);
-				}
+				GerenciarItemView janela = new GerenciarItemView();
+				janela.setVisible(true);
 			}
 		});
 		
@@ -251,6 +243,13 @@ public class MenuView extends JFrame {
 				}
 			}
 		});
+		
+		JButton btnNewButton = new JButton("New button");
+		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
+		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.gridy = 5;
+		panel_1_2.add(btnNewButton, gbc_btnNewButton);
 		btnAptConcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnAptConcluir = new GridBagConstraints();
 		gbc_btnAptConcluir.anchor = GridBagConstraints.NORTH;
@@ -288,15 +287,13 @@ public class MenuView extends JFrame {
 		JPanel panel = new JPanel();
 		panelMenu.add(panel, BorderLayout.CENTER);
 		
-		JButton btnCheckout = new JButton("Checkout");
+		JButton btnCheckout = new JButton("CheckOut");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 			}
 		});
 		
-		JButton btnAcomodaes = new JButton("Checkin");
-		
-		JButton btnClientes = new JButton("Cadastro clientes");
+		JButton btnClientes = new JButton("Cadastro Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				MenuController controller = new MenuController();
@@ -304,7 +301,7 @@ public class MenuView extends JFrame {
 			}
 		});
 		
-		JButton btnServios = new JButton("Serviços adicionais");
+		JButton btnServios = new JButton("Serviços Adicionais");
 		btnServios.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CatalogoView janela = new CatalogoView();
@@ -313,9 +310,17 @@ public class MenuView extends JFrame {
 		});
 		
 		JButton btnInfoHospedagens = new JButton("Info. Hospedagens");
+		
+		JButton btnCheckin = new JButton("CheckIn");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(181)
+					.addComponent(btnCheckin, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
+					.addGap(37)
+					.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
+					.addGap(193))
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(81)
 					.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
@@ -324,20 +329,14 @@ public class MenuView extends JFrame {
 					.addGap(36)
 					.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
 					.addGap(84))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(182)
-					.addComponent(btnAcomodaes, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(36)
-					.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(193))
 		);
 		gl_panel.setVerticalGroup(
 			gl_panel.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(162)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(btnAcomodaes, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCheckout, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addComponent(btnCheckout, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
+						.addComponent(btnCheckin, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
 					.addGap(69)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE, false)
 						.addComponent(btnClientes, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
