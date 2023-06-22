@@ -312,6 +312,12 @@ public class MenuView extends JFrame {
 		JButton btnInfoHospedagens = new JButton("Info. Hospedagens");
 		
 		JButton btnCheckin = new JButton("CheckIn");
+		btnCheckin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CheckInView janela = new CheckInView();
+				janela.setVisible(true);
+			}
+		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)

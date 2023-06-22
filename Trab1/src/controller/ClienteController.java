@@ -33,4 +33,14 @@ public class ClienteController implements Serializable {
 		
 		return table.toArray(new String[0][0]);
 	}
+	
+	public Hospede getHospede(long cpf) {
+		for(Hospede hospede : listaHospedes) {
+			if(hospede.getCpf() == cpf) {
+				return hospede;
+			}
+		}
+		
+		return null;
+	}
 }
