@@ -35,6 +35,16 @@ public class AptController implements Serializable {
 	public Acomodacao getApartamento(int numero) {
 		return apartamentos.get(numero);
 	}
+	
+	public String[] getApartamentosDisponiveis(String tipo) {
+		List<String> numerosApt = new ArrayList<String>();
+		for(Acomodacao acomodacao : apartamentos.values()) {
+			if(acomodacao.getTipo() == tipo && acomodacao.getEstadoOcupacao() == EEstadoOcupacao.DISPONIVEL) {
+				numerosApt.add(Integer.toString(acomodacao.getNumero()));
+			}
+		}
+		return numerosApt.toArray(new String[0]);
+	}
 
 	// TODO: .MANUTENCAO está aqui por motivos de testes. Tem que tirar.
 	public void concluirLimpeza(int numero) {

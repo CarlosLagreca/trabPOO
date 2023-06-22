@@ -18,22 +18,19 @@ public class Hospedagem implements Serializable {
 	private List<IHospede> acompanhantes = new ArrayList<IHospede>();
 	private IAcomodacao acomodacao;
 
-//	public Hospedagem(int inicioCheckin, int limiteCheckout, String id) {
-//		this.inicioCheckin = inicioCheckin;
-//		this.limiteCheckout = limiteCheckout;
-//		this.id = id;
-//		this.checkin = new Date();
-//	}
-
 	public Hospedagem(Acomodacao acomodacao, Hospede hospede) {
 		this.checkin = new Date();
 		this.conta = new Conta();
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
 	}
+	
+	public IConta getConta() {
+		return conta;
+	}
 
-	public void addAcompanhantes(List<IHospede> l) {
-		acompanhantes.addAll(l);
+	public void addAcompanhantes(List<IHospede> list) {
+		acompanhantes.addAll(list);
 	}
 
 	public StringBuilder listar() {

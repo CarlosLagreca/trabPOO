@@ -12,11 +12,13 @@ public class MainController implements Serializable {
 	private AptController aptcontroller;
 	private ItemController itemcontroller;
 	private ClienteController clientecontroller;
+	private static HospedagemController hospcontroller;
 
 	private MainController() {
 		aptcontroller = new AptController();
 		itemcontroller = new ItemController();
 		clientecontroller = new ClienteController();
+		hospcontroller = new HospedagemController();
 	}
 
 	public static MainController getInstance() {
@@ -34,12 +36,17 @@ public class MainController implements Serializable {
 	public static ItemController getItemController() {
 		return instance.itemcontroller;
 	}
+	
+	public static HospedagemController getHospedagemController() {
+		return instance.hospcontroller;
+	}
 
 	public static void load() {
 		instance = Serializer.readFile();
 		if (instance == null) {
 			instance = new MainController();
 		}
+		hospcontroller = new HospedagemController();
 	}
 
 	public static void save() {

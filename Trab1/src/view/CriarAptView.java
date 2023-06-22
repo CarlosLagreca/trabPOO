@@ -142,7 +142,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblEstado.gridy = 4;
 		contentPane.add(lblEstado, gbc_lblEstado);
 		
-		JLabel lblInfos = new JLabel("aaaaaaaaaaaa");
+		JLabel lblInfos = new JLabel("Selecione um tipo para ver as informações");
 		lblInfos.setToolTipText("Informações do tipo selecionado.");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
 		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
