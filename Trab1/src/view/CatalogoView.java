@@ -75,7 +75,12 @@ public class CatalogoView extends JFrame {
 
 		table_1 = new JTable();
 		table_1.setModel(tableModel);
-		buildTable(comboBox.getSelectedItem().toString());
+		try {
+			buildTable(comboBox.getSelectedItem().toString());
+		} catch(NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível acessar os Itens!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
 		tableModel.fireTableDataChanged();
 		barraRolagem = new JScrollPane(table_1);
 
@@ -162,7 +167,15 @@ public class CatalogoView extends JFrame {
 			String itemCodigo = textCodigo.getText();
 			String categoria = comboBox.getSelectedItem().toString();
 			int quantidade = Integer.parseInt(spinner.getValue().toString());
-			controller.addItemConta(numeroAcomodacao, categoria, itemCodigo, quantidade);
+			int ret = controller.addItemConta(numeroAcomodacao, categoria, itemCodigo, quantidade);
+			if(ret == 2) {
+				JOptionPane.showMessageDialog(null, "Insira um código de item válido!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
+			else if(ret == 3) {
+				JOptionPane.showMessageDialog(null, "Não há hospedagens nessa acomodação!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			JOptionPane.showMessageDialog(null, "Produto inserido na conta!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 			textNApt.setText("");
 			textCodigo.setText("");
@@ -176,7 +189,8 @@ public class CatalogoView extends JFrame {
 	
 	private String[] contentCombobox() {
 		ItemController controller = MainController.getItemController();
-		return controller.getCategorias();
+		String[] categorias = controller.getCategorias();
+		return categorias;
 	}
 	
 	private void buildTable(String categoria) {

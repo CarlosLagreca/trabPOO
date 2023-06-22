@@ -245,6 +245,7 @@ public class CheckInView extends JFrame {
 			
 			controller.criarHospedagem(numeroAcomodacao, cpfHospede, cpfAcompanhantes);
 			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
 		} catch(Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Não deu certo", "ERRO!", JOptionPane.ERROR_MESSAGE);

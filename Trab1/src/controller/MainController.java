@@ -12,7 +12,7 @@ public class MainController implements Serializable {
 	private AptController aptcontroller;
 	private ItemController itemcontroller;
 	private ClienteController clientecontroller;
-	private static HospedagemController hospcontroller;
+	private HospedagemController hospcontroller;
 
 	private MainController() {
 		aptcontroller = new AptController();
@@ -46,7 +46,6 @@ public class MainController implements Serializable {
 		if (instance == null) {
 			instance = new MainController();
 		}
-		hospcontroller = new HospedagemController();
 	}
 
 	public static void save() {

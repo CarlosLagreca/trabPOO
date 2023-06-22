@@ -49,18 +49,26 @@ public class HospedagemController implements Serializable{
 		MainController.save();
 	}
 	
-	public void addItemConta(int numeroAcomodacao, String categoria, String codigo, int quantidade) {
+	public int addItemConta(int numeroAcomodacao, String categoria, String codigo, int quantidade) {
 		ItemController itemcontroller = MainController.getItemController();
 		
 		//Pegando objetos
 		Item item = itemcontroller.getItem(categoria, Long.parseLong(codigo));
+		if(item == null) {
+			return 2;
+		}
 		ItemConta itemconta = new ItemConta(item, quantidade);
 		Hospedagem hospedagem = hospedagens.get(numeroAcomodacao);
+		if(hospedagem == null) {
+			return 3;
+		}
 		
 		// Inserindo item na conta
 		hospedagem.getConta().addItem(item, quantidade);
 		
 		MainController.save();
+		
+		return 0;
 	}
 	
 
