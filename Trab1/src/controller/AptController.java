@@ -46,9 +46,10 @@ public class AptController implements Serializable {
 		return numerosApt.toArray(new String[0]);
 	}
 
-	// TODO: .MANUTENCAO está aqui por motivos de testes. Tem que tirar.
+	// TODO: Verificar se o apartamento está ocupado.
+	// Não pode concluir limpeza se estiver ocupado
 	public void concluirLimpeza(int numero) {
-		apartamentos.get(numero).setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
+		apartamentos.get(numero).setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
 		MainController.save();
 	}
 

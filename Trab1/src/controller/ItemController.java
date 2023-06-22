@@ -83,4 +83,10 @@ public class ItemController implements Serializable {
 		
 		return table.toArray(new String[0][0]);
 	}
+	
+	public Item getItem(String nomeCategoria, long codItem) {
+		Categoria categoria = categorias.get(nomeCategoria);
+		Item item = categoria.getItens().get(codItem);
+		return item;
+	}
 }
