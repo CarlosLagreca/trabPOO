@@ -4,29 +4,34 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 import model.Hospede;
 
 public class ClienteController implements Serializable {
 	private static final long serialVersionUID = 2593105786319947110L;
 	
-	// TODO: Trocar forma da lista para ser mais fácil a pesquisa e remoção.
-	private List<Hospede> listaHospedes = new ArrayList<Hospede>();
+	private Map<Long, Hospede> listaHospedes = new TreeMap<>();
 
-	// TODO: Fazer tratamento caso cliente já esteja cadastrado;
-	public void cadastrarCliente(String nome, long cpf, long telefone, String email) {
+	public int cadastrarCliente(String nome, long cpf, long telefone, String email) {
 		try {
-			listaHospedes.add(new Hospede(cpf, nome, email, telefone));
+			if(listaHospedes.get(cpf) != null) {
+				return 2;
+			}
+			Hospede newHospede = new Hospede(cpf, nome, email, telefone);
+			listaHospedes.put(newHospede.getCpf(), newHospede);
 			MainController.save();
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
 		}
+		return 0;
 	}
 	
 	public String[][] getClientes() {
 		List<String[]> table = new ArrayList<String[]>();
-		for(Hospede cliente : listaHospedes) {
+		for(Hospede cliente : listaHospedes.values()) {
 			String[] linha = {cliente.getNome(), Long.toString(cliente.getCpf()), Long.toString(cliente.getTelefone()), cliente.getEmail()};
 			table.add(linha);
 		}
@@ -35,12 +40,7 @@ public class ClienteController implements Serializable {
 	}
 	
 	public Hospede getHospede(long cpf) {
-		for(Hospede hospede : listaHospedes) {
-			if(hospede.getCpf() == cpf) {
-				return hospede;
-			}
-		}
 		
-		return null;
+		return listaHospedes.get(cpf);
 	}
 }

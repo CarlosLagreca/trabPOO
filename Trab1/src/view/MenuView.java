@@ -2,7 +2,6 @@ package view;
 
 import controller.AptController;
 import controller.MainController;
-import controller.MenuController;
 import main.Main;
 import controller.ItemController;
 
@@ -62,7 +61,6 @@ public class MenuView extends JFrame {
 	 * TODO: Fazer botão (janela) Checkout.
 	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
-	 * TODO: Consertar combobox na vizualização de apartamento
 	 */
 	
 
@@ -235,9 +233,18 @@ public class MenuView extends JFrame {
 						return;
 					}
 					int numero = Integer.parseInt(input);
-					controller.concluirLimpeza(numero);
+					int ret = controller.concluirLimpeza(numero);
+					
+					if (ret == 2) {
+						JOptionPane.showMessageDialog(null, "Esta acomodação se encontra ocupada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+					}
 				} catch(NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Insira um numero válido.", "Erro!", JOptionPane.ERROR_MESSAGE);
+				} catch(NullPointerException ex) {
+					JOptionPane.showMessageDialog(null, "Acomodação não encontrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				} catch(Exception ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -294,8 +301,12 @@ public class MenuView extends JFrame {
 		JButton btnClientes = new JButton("Cadastro Clientes");
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				MenuController controller = new MenuController();
-				controller.openCadastroCliente();
+				try {
+					CadastroClienteView frame = new CadastroClienteView();
+					frame.setVisible(true);
+				} catch (Exception exp) {
+					exp.printStackTrace();
+				}
 			}
 		});
 		

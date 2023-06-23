@@ -46,25 +46,29 @@ public class AptController implements Serializable {
 		return numerosApt.toArray(new String[0]);
 	}
 
-	// TODO: Verificar se o apartamento está ocupado.
-	// Não pode concluir limpeza se estiver ocupado
-	public void concluirLimpeza(int numero) {
-		apartamentos.get(numero).setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
+	public int concluirLimpeza(int numero) {
+		Acomodacao acomodacao = apartamentos.get(numero);
+		if(acomodacao.getEstadoOcupacao() == EEstadoOcupacao.OCUPADO) {
+			return 2;
+		}
+		acomodacao.setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
 		MainController.save();
+		return 0;
 	}
 
 	public int deleteApartamento(int numero) {
 		// Verificando estado para excluir apartamento
 		Acomodacao ac = apartamentos.get(numero);
 
-		// TODO: Except NullPointerException para quando não tiver apartamento do numero
-
-		if (ac.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
-			return 2;
-		}
-
 		try {
+
+			if (ac.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
+				return 2;
+			}
+
 			apartamentos.remove(numero);
+		} catch (NullPointerException e) {
+			return 3;
 		} catch (Exception e) {
 			return 1;
 		}
