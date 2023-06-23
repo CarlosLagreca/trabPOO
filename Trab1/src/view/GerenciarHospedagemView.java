@@ -5,6 +5,12 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.HospedagemController;
+import controller.MainController;
+import main.Main;
+import model.Hospedagem;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
@@ -12,38 +18,28 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.GridLayout;
-import javax.swing.JToolBar;
 import javax.swing.JTabbedPane;
+import java.awt.Toolkit;
 
 public class GerenciarHospedagemView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table;
 	private JTable table_1;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					GerenciarHospedagemView frame = new GerenciarHospedagemView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+	private JLabel lblIdHosp;
+	private JLabel lblNumeroAcm;
+	private JLabel lblNomeCliente;
+	private JLabel lblPreco;
 
 	/**
 	 * Create the frame.
 	 */
-	public GerenciarHospedagemView() {
+	public GerenciarHospedagemView(int numeroAcomodacao) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GerenciarHospedagemView.class.getResource("/view/icone.png")));
+		setTitle("Listagem de Hospedagens");
 		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 577, 478);
+		setBounds(100, 100, 580, 480);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -65,33 +61,44 @@ public class GerenciarHospedagemView extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("Preço a ser pago");
 		
-		JLabel lblNewLabel_4 = new JLabel("R$: Preço");
-		
 		JButton btnNewButton = new JButton("Pagar");
+		
+		lblPreco = new JLabel("R$: Preço");
+		
+		lblIdHosp = new JLabel("New label");
+		
+		lblNumeroAcm = new JLabel("New label");
+		
+		lblNomeCliente = new JLabel("New label");
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(32)
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+							.addGroup(gl_panel_1.createSequentialGroup()
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+									.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
+									.addComponent(lblNewLabel_3))
+								.addPreferredGap(ComponentPlacement.RELATED))
+							.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
+								.addComponent(lblNmeroDaHospedagem, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
+								.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
+								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
+									.addComponent(lblNumeroAcm)
+									.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE))
+								.addGap(55)))
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
-								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 410, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel_1.createSequentialGroup()
-									.addComponent(lblNewLabel_3)
-									.addPreferredGap(ComponentPlacement.RELATED)))
-							.addPreferredGap(ComponentPlacement.RELATED))
-						.addGroup(gl_panel_1.createSequentialGroup()
-							.addComponent(lblNmeroDaHospedagem, GroupLayout.PREFERRED_SIZE, 151, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.RELATED, 59, Short.MAX_VALUE)
-							.addComponent(lblNewLabel_1, GroupLayout.PREFERRED_SIZE, 145, GroupLayout.PREFERRED_SIZE)
-							.addGap(55)))
-					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
+							.addComponent(lblIdHosp)
+							.addGap(370)))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
 							.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(lblNewLabel_4, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblPreco, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 							.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE))
+						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
+						.addComponent(lblNomeCliente))
 					.addGap(79))
 		);
 		gl_panel_1.setVerticalGroup(
@@ -104,7 +111,12 @@ public class GerenciarHospedagemView extends JFrame {
 						.addComponent(lblNewLabel_1))
 					.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel_1.createSequentialGroup()
-							.addGap(34)
+							.addGap(2)
+							.addGroup(gl_panel_1.createParallelGroup(Alignment.BASELINE)
+								.addComponent(lblIdHosp)
+								.addComponent(lblNumeroAcm)
+								.addComponent(lblNomeCliente))
+							.addGap(18)
 							.addComponent(lblNewLabel_3)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
 							.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE))
@@ -112,7 +124,7 @@ public class GerenciarHospedagemView extends JFrame {
 							.addGap(82)
 							.addComponent(lblNewLabel)
 							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblNewLabel_4)
+							.addComponent(lblPreco)
 							.addPreferredGap(ComponentPlacement.RELATED)
 							.addComponent(btnNewButton)))
 					.addGap(24))
@@ -132,5 +144,9 @@ public class GerenciarHospedagemView extends JFrame {
 		table_1 = new JTable();
 		panel_2.add(table_1);
 		panel_1.setLayout(gl_panel_1);
+	}
+	
+	private void buildInfos(int numApt) {
+		HospedagemController controller = MainController.getHospedagemController();
 	}
 }

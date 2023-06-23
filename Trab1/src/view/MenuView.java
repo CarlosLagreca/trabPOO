@@ -61,6 +61,7 @@ public class MenuView extends JFrame {
 	 * TODO: Fazer botão (janela) Checkout.
 	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
+	 * TODO: Organizar arquivos.
 	 */
 	
 
@@ -319,6 +320,12 @@ public class MenuView extends JFrame {
 		});
 		
 		JButton btnInfoHospedagens = new JButton("Info. Hospedagens");
+		btnInfoHospedagens.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				HospedagensView janela = new HospedagensView();
+				janela.setVisible(true);
+			}
+		});
 		
 		JButton btnCheckin = new JButton("CheckIn");
 		btnCheckin.addActionListener(new ActionListener() {

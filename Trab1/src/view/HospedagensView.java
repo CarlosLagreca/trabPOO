@@ -4,28 +4,41 @@ import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+
+import controller.HospedagemController;
+import controller.MainController;
+import model.Pagamento.ETipoPagamento;
+
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 import javax.swing.JButton;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class HospedagensView extends JFrame {
 
 	private JPanel contentPane;
-	private JTable table_1;
-	private JTable table_2;
-	private JTable table;
+	private JTable tableNew;
+	private JTable tableOld;
+	DefaultTableModel tableModelOld = new DefaultTableModel();
+	DefaultTableModel tableModelCurrent = new DefaultTableModel();
+	private JScrollPane barraRolagem1;
+	private JScrollPane barraRolagem2;
 
 	/**
 	 * Create the frame.
 	 */
 	public HospedagensView() {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 555, 382);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -42,8 +55,16 @@ public class HospedagensView extends JFrame {
 		JLabel lblNewLabel_3 = new JLabel("Itens da Hospedagem");
 		
 		JButton btnNewButton = new JButton("Visualizar Hospedagem");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vizualizarCurrentAction();
+			}
+		});
 		
-		table_2 = new JTable();
+		tableNew = new JTable();
+		tableNew.setModel(tableModelCurrent);
+		
+		barraRolagem1 = new JScrollPane(tableNew);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
@@ -57,7 +78,7 @@ public class HospedagensView extends JFrame {
 					.addGap(189))
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(30)
-					.addComponent(table_2, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
+					.addComponent(barraRolagem1, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(28, Short.MAX_VALUE))
 		);
 		gl_panel_1.setVerticalGroup(
@@ -66,7 +87,7 @@ public class HospedagensView extends JFrame {
 					.addContainerGap()
 					.addComponent(lblNewLabel_3)
 					.addGap(14)
-					.addComponent(table_2, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
+					.addComponent(barraRolagem1, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(btnNewButton)
 					.addContainerGap())
@@ -84,7 +105,9 @@ public class HospedagensView extends JFrame {
 		
 		JButton btnNewButton_1 = new JButton("Visualizar Hospedagem");
 		
-		table = new JTable();
+		tableOld = new JTable();
+		tableOld.setModel(tableModelOld);
+		barraRolagem2 = new JScrollPane(tableOld);
 		GroupLayout gl_panel_1_1 = new GroupLayout(panel_1_1);
 		gl_panel_1_1.setHorizontalGroup(
 			gl_panel_1_1.createParallelGroup(Alignment.LEADING)
@@ -99,7 +122,7 @@ public class HospedagensView extends JFrame {
 					.addGap(189))
 				.addGroup(gl_panel_1_1.createSequentialGroup()
 					.addGap(30)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
+					.addComponent(barraRolagem2, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(28, Short.MAX_VALUE))
 		);
 		gl_panel_1_1.setVerticalGroup(
@@ -109,12 +132,65 @@ public class HospedagensView extends JFrame {
 					.addContainerGap()
 					.addComponent(lblNewLabel_3_1)
 					.addGap(14)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
+					.addComponent(barraRolagem2, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 					.addComponent(btnNewButton_1)
 					.addContainerGap())
 		);
-		panel_1_1.setLayout(gl_panel_1_1);
+		panel_1_1.setLayout(gl_panel_1_1);		
 		
+		tableOld();
+		tableCurrent();
+	}
+	
+	private void vizualizarCurrentAction() {
+		try {
+			String input = JOptionPane.showInputDialog("Insira a Acomodação");
+			if (input == null || (input != null && ("".equals(input)))) {
+				return;
+			}
+			GerenciarHospedagemView janela = new GerenciarHospedagemView(Integer.parseInt(input));
+			janela.setVisible(true);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
+		} catch(Exception e) {
+			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
+	}
+	
+	private void tableCurrent() {
+		HospedagemController controller = MainController.getHospedagemController();
+		tableNew = new JTable();
+		
+		
+		tableModelCurrent.addColumn("Numero Apt.");
+		tableModelCurrent.addColumn("ID");
+		tableModelCurrent.addColumn("Nome Hospede");
+		
+		String[][] linhas = controller.getHospedagensAtuais();
+		
+		for(String[] linha : linhas) {
+			tableModelCurrent.addRow(linha);
+		}
+		
+		tableModelCurrent.fireTableDataChanged();
+	}
+	
+	private void tableOld() {
+		HospedagemController controller = MainController.getHospedagemController();
+		tableOld = new JTable();
+		
+		
+		tableModelOld.addColumn("Numero Apt.");
+		tableModelOld.addColumn("ID");
+		tableModelOld.addColumn("Nome Hospede");
+		
+		String[][] linhas = controller.getHospedagensAntigas();
+		
+		for(String[] linha : linhas) {
+			tableModelOld.addRow(linha);
+		}
+		
+		tableModelOld.fireTableDataChanged();
 	}
 }

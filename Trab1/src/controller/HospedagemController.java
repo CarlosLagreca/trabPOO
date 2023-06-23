@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import model.Acomodacao;
+import model.Categoria;
 import model.Acomodacao.EEstadoOcupacao;
 import model.Hospedagem;
 import model.Hospede;
@@ -69,6 +70,26 @@ public class HospedagemController implements Serializable{
 		MainController.save();
 		
 		return 0;
+	}
+	
+	public String[][] getHospedagensAtuais(){
+		List<String[]> table = new ArrayList<String[]>();
+		for(Hospedagem hospedagem : hospedagens.values()) {
+			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome()};
+			table.add(linha);
+		}
+		
+		return table.toArray(new String[0][0]);
+	}
+	
+	public String[][] getHospedagensAntigas(){
+		List<String[]> table = new ArrayList<String[]>();
+		for(Hospedagem hospedagem : oldHospedagens.values()) {
+			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome()};
+			table.add(linha);
+		}
+		
+		return table.toArray(new String[0][0]);
 	}
 	
 
