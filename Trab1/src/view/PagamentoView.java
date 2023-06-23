@@ -27,6 +27,8 @@ import java.awt.GridBagConstraints;
 import java.awt.Insets;
 import java.awt.TextField;
 import javax.swing.DefaultComboBoxModel;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class PagamentoView extends JFrame {
 
@@ -39,7 +41,7 @@ public class PagamentoView extends JFrame {
 	 * Create the frame.
 	 */
 	public PagamentoView(int id) {
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 350, 220);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -56,7 +58,7 @@ public class PagamentoView extends JFrame {
 		gbl_panel.rowWeights = new double[]{1.0, 0.0, 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
 		panel.setLayout(gbl_panel);
 		
-		setDados(id);
+		
 		JLabel lblNewLabel = new JLabel("Novo Pagamento");
 		lblNewLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
@@ -128,26 +130,33 @@ public class PagamentoView extends JFrame {
 		textField = new JTextField();
 		textField.setColumns(10);
 		GridBagConstraints gbc_textField = new GridBagConstraints();
-		gbc_textField.anchor = GridBagConstraints.WEST;
+		gbc_textField.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textField.insets = new Insets(0, 0, 5, 0);
 		gbc_textField.gridx = 1;
 		gbc_textField.gridy = 4;
 		panel.add(textField, gbc_textField);
 		
 		JButton btnNewButton = new JButton("Confirmar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ConfirmarAction();
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.anchor = GridBagConstraints.NORTH;
 		gbc_btnNewButton.gridwidth = 2;
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 5;
 		panel.add(btnNewButton, gbc_btnNewButton);
+		
+		setDados(id);
 	}
 	
 	private void ConfirmarAction() {
 		try {
 			HospedagemController controller = MainController.getHospedagemController();
 			ETipoPagamento tipo = (ETipoPagamento) comboBox.getSelectedItem();
-			double valor = Double.parseDouble(textField.getSelectedText());
+			double valor = Double.parseDouble(textField.getText());
 			int id = Integer.parseInt(labelid.getText());
 			controller.realizarPagamento(tipo, valor, id);
 		}catch(Exception e){
@@ -159,7 +168,7 @@ public class PagamentoView extends JFrame {
 		HospedagemController controller = MainController.getHospedagemController();
 		Hospedagem hospedagem = controller.getHospedagem(id);
 		double valor = controller.getValorItens(id);
-		labelid.setText(hospedagem.getId().toString());
+		labelid.setText(Integer.toString(id));
 		TotalValor.setText(Double.toString(valor));
 	}
 }

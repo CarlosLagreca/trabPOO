@@ -154,6 +154,7 @@ public class HospedagensView extends JFrame {
 		} catch(ArrayIndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
 		} catch(Exception e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}

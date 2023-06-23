@@ -80,6 +80,7 @@ public class HospedagemController implements Serializable{
 		Hospedagem hospedagem = hospedagens.get(numApt);
 		hospedagem.getPagamento().add(new Pagamento(tipo, valor));
 		System.out.println("pagamento feito!");
+		MainController.save();
 	}catch(Exception e) {
 		e.printStackTrace();
 	}

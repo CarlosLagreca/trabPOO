@@ -20,6 +20,8 @@ import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 import java.awt.Toolkit;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class GerenciarHospedagemView extends JFrame {
 
@@ -37,7 +39,6 @@ public class GerenciarHospedagemView extends JFrame {
 	public GerenciarHospedagemView(int numeroAcomodacao) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(GerenciarHospedagemView.class.getResource("/view/icone.png")));
 		setTitle("Listagem de Hospedagens");
-		setResizable(false);
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 580, 480);
 		contentPane = new JPanel();
@@ -62,6 +63,12 @@ public class GerenciarHospedagemView extends JFrame {
 		JLabel lblNewLabel = new JLabel("Preço a ser pago");
 		
 		JButton btnNewButton = new JButton("Pagar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PagamentoView janela = new PagamentoView(numeroAcomodacao);
+				janela.setVisible(true);
+			}
+		});
 		
 		lblPreco = new JLabel("R$: Preço");
 		
@@ -144,9 +151,15 @@ public class GerenciarHospedagemView extends JFrame {
 		table_1 = new JTable();
 		panel_2.add(table_1);
 		panel_1.setLayout(gl_panel_1);
+		buildInfos(numeroAcomodacao);
 	}
 	
 	private void buildInfos(int numApt) {
 		HospedagemController controller = MainController.getHospedagemController();
+		Hospedagem hospedagem = controller.getHospedagem(numApt);
+		lblIdHosp.setText(Integer.toString(numApt));
+		lblNomeCliente.setText(hospedagem.getHospede().getNome());
+		lblNumeroAcm.setText(Integer.toString(numApt));
+		lblPreco.setText(Double.toString(controller.getValorItens(numApt)));
 	}
 }
