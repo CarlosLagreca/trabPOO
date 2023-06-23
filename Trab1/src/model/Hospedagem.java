@@ -6,6 +6,8 @@ import java.util.Date;
 import java.util.List;
 import java.util.UUID;
 
+import model.Pagamento.ETipoPagamento;
+
 public class Hospedagem implements Serializable {
 	private static final long serialVersionUID = 7345409444938260273L;
 	private int inicioCheckin = 13;
@@ -17,6 +19,19 @@ public class Hospedagem implements Serializable {
 	private IHospede hospede;
 	private List<IHospede> acompanhantes = new ArrayList<IHospede>();
 	private IAcomodacao acomodacao;
+	
+	private List<Pagamento> pagamento = new ArrayList<Pagamento>();
+	
+	
+	
+	public List<Pagamento> getPagamento() {
+		return pagamento;
+	}
+
+	public void addPagamento(ETipoPagamento tipo, double valor) {
+		Pagamento pagar = new Pagamento(tipo, valor);
+		pagamento.add(pagar);
+	}
 
 	public Hospedagem(Acomodacao acomodacao, Hospede hospede) {
 		this.checkin = new Date();

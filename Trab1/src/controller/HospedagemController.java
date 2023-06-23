@@ -10,9 +10,13 @@ import model.Acomodacao;
 import model.Acomodacao.EEstadoOcupacao;
 import model.Hospedagem;
 import model.Hospede;
+import model.IAcomodacao;
+import model.IConta;
 import model.IHospede;
 import model.Item;
 import model.ItemConta;
+import model.Pagamento;
+import model.Pagamento.ETipoPagamento;
 
 public class HospedagemController implements Serializable{
 	
@@ -69,6 +73,38 @@ public class HospedagemController implements Serializable{
 		MainController.save();
 		
 		return 0;
+	}
+	public void realizarPagamento(ETipoPagamento tipo, double valor, int numApt){
+		try {
+		Hospedagem hospedagem = hospedagens.get(numApt);
+		hospedagem.getPagamento().add(new Pagamento(tipo, valor));
+		System.out.println("pagamento feito!");
+	}catch(Exception e) {
+		e.printStackTrace();
+	}
+	}
+	
+	public Hospedagem getHospedagem(int id) {
+		return hospedagens.get(id);
+	}
+	
+	public double getValorItens(int id) {
+		Hospedagem hospedagem = hospedagens.get(id);
+		IConta conta = hospedagem.getConta();
+		List<Pagamento> pagamento = hospedagem.getPagamento();
+		double valorPagamento = 0;
+		for (Pagamento aux : pagamento) {
+			valorPagamento+=aux.getValor();
+		}
+		//TODO tratar returns negativos
+		return conta.getTotal() - valorPagamento;	
+	}
+	
+	public double getValorTotal(int idApartamento, int dias, int acompanhantes) {
+		Hospedagem hospedagem = hospedagens.get(idApartamento);
+		IAcomodacao apt = hospedagem.getAcomodacao();
+		
+		return apt.getTarifaDiaria()*dias + apt.getAdicionalAcompanhante()*acompanhantes*dias + getValorItens(idApartamento);
 	}
 	
 
