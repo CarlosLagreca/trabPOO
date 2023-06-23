@@ -241,8 +241,8 @@ public class MenuView extends JFrame {
 				}
 			}
 		});
-		
-		JButton btnNewButton = new JButton("New button");
+		//TODO Terminar a parte de editar o cliente
+		JButton btnNewButton = new JButton("Editar");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
 		gbc_btnNewButton.gridx = 3;
