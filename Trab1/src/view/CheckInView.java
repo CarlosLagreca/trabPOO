@@ -49,11 +49,9 @@ public class CheckInView extends JFrame {
 	JLabel lblApt;
 	DefaultTableModel tableModel = new DefaultTableModel();
 	private List<String> acompanhantes = new ArrayList<String>();
-	
+
 	/*
-	 * TODO: Dar dispose ao fechar janela;
 	 * TODO: Melhorar tratamento de erros;
-	 * TODO: Arrumar a gambiarra do controller;
 	 */
 
 	/**
@@ -80,18 +78,18 @@ public class CheckInView extends JFrame {
 		setTitle("CheckIn");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 722, 511);
-		setMinimumSize(new Dimension(490,300));
+		setMinimumSize(new Dimension(490, 300));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
-		
+
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		
+
 		JLabel lblNewLabel = new JLabel("Selecione a Acomodação");
-		
+
 		JComboBox comboBox = new JComboBox();
 		comboBox.setModel(new DefaultComboBoxModel(contentCombobox()));
 		comboBox.addActionListener(new ActionListener() {
@@ -99,12 +97,12 @@ public class CheckInView extends JFrame {
 				buildComboboxApt(comboBox.getSelectedItem().toString());
 			}
 		});
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Digite o CPF do Cliente");
-		
+
 		textCpfCliente = new JTextField();
 		textCpfCliente.setColumns(10);
-		
+
 		table = new JTable();
 		table.setModel(tableModel);
 		barraRolagem = new JScrollPane(table);
@@ -112,19 +110,19 @@ public class CheckInView extends JFrame {
 		tableModel.addColumn("Cpf");
 		tableModel.addColumn("Email");
 		tableModel.addColumn("Telefone");
-		
+
 		JButton btnAdicionar = new JButton("Adicionar");
 		btnAdicionar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				addAcompanhante();
 			}
 		});
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Digite o CPF do acompanhante");
-		
+
 		textCpfAcompanhante = new JTextField();
 		textCpfAcompanhante.setColumns(10);
-		
+
 		btnConfirmar = new JButton("Confirmar hospedagem");
 		btnConfirmar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -136,18 +134,17 @@ public class CheckInView extends JFrame {
 		btnAdicionar.setEnabled(false);
 		table.setEnabled(false);
 		lblNewLabel_2.setEnabled(false);
-		
+
 		JToggleButton tglbtnAcompanhantes = new JToggleButton("Acompanhantes");
 		tglbtnAcompanhantes.addActionListener(new ActionListener() {
-			
+
 			public void actionPerformed(ActionEvent e) {
-				if(tglbtnAcompanhantes.isSelected()) {
+				if (tglbtnAcompanhantes.isSelected()) {
 					lblNewLabel_2.setEnabled(true);
 					textCpfAcompanhante.setEnabled(true);
 					btnAdicionar.setEnabled(true);
 					table.setEnabled(true);
-				}
-				else {
+				} else {
 					lblNewLabel_2.setEnabled(false);
 					textCpfAcompanhante.setEnabled(false);
 					btnAdicionar.setEnabled(false);
@@ -155,113 +152,126 @@ public class CheckInView extends JFrame {
 				}
 			}
 		});
-		
+
 		comboBox_numeros = new JComboBox();
 		comboBox_numeros.setEnabled(false);
 		comboBox_numeros.setVisible(false);
-		
+
 		lblApt = new JLabel("Selecione o número");
 		lblApt.setVisible(false);
-		
+
 		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(37)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+		gl_panel.setHorizontalGroup(gl_panel.createParallelGroup(Alignment.LEADING).addGroup(gl_panel
+				.createSequentialGroup().addGap(37)
+				.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(tglbtnAcompanhantes, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-								.addComponent(comboBox, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(comboBox_numeros, GroupLayout.PREFERRED_SIZE, 133, GroupLayout.PREFERRED_SIZE)
-									.addGap(203))
-								.addComponent(lblApt, GroupLayout.PREFERRED_SIZE, 336, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(2)
-							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+								.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+										.addComponent(tglbtnAcompanhantes, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(lblNewLabel, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
+												GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+										.addComponent(comboBox, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 133,
+												GroupLayout.PREFERRED_SIZE))
+								.addPreferredGap(ComponentPlacement.UNRELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addGroup(gl_panel.createSequentialGroup()
+												.addComponent(comboBox_numeros, GroupLayout.PREFERRED_SIZE, 133,
+														GroupLayout.PREFERRED_SIZE)
+												.addGap(203))
+										.addComponent(lblApt, GroupLayout.PREFERRED_SIZE, 336,
+												GroupLayout.PREFERRED_SIZE)))
+						.addGroup(gl_panel.createSequentialGroup().addGap(2).addComponent(barraRolagem,
+								GroupLayout.DEFAULT_SIZE, 477, Short.MAX_VALUE)))
+				.addGap(18)
+				.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
 						.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(btnAdicionar, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(textCpfAcompanhante, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))
-						.addComponent(btnConfirmar, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-								.addComponent(lblNewLabel_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE)
-								.addComponent(textCpfCliente, GroupLayout.PREFERRED_SIZE, 148, GroupLayout.PREFERRED_SIZE))))
-					.addContainerGap())
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(
+								gl_panel.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(btnAdicionar, GroupLayout.PREFERRED_SIZE, 148,
+												GroupLayout.PREFERRED_SIZE))
+						.addGroup(
+								gl_panel.createSequentialGroup()
+										.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE,
+												Short.MAX_VALUE)
+										.addComponent(textCpfAcompanhante, GroupLayout.PREFERRED_SIZE, 148,
+												GroupLayout.PREFERRED_SIZE))
+						.addComponent(btnConfirmar, Alignment.LEADING, GroupLayout.PREFERRED_SIZE, 148,
+								GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_panel.createSequentialGroup().addPreferredGap(ComponentPlacement.RELATED)
+								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+										.addComponent(lblNewLabel_1, Alignment.TRAILING, GroupLayout.PREFERRED_SIZE,
+												148, GroupLayout.PREFERRED_SIZE)
+										.addComponent(textCpfCliente, GroupLayout.PREFERRED_SIZE, 148,
+												GroupLayout.PREFERRED_SIZE))))
+				.addContainerGap()));
+		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(44)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(lblNewLabel)
-								.addComponent(lblApt))
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addComponent(comboBox_numeros, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(53)
-							.addComponent(lblNewLabel_2)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textCpfAcompanhante, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(15)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(tglbtnAcompanhantes)
-						.addComponent(btnAdicionar))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addComponent(lblNewLabel_1)
-							.addGap(2)
-							.addComponent(textCpfCliente, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addGap(15)
-							.addComponent(btnConfirmar)))
-					.addContainerGap())
-		);
+						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+								.addGroup(gl_panel.createSequentialGroup().addGap(44)
+										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+												.addComponent(lblNewLabel).addComponent(lblApt))
+										.addPreferredGap(ComponentPlacement.UNRELATED)
+										.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+												.addComponent(comboBox, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+												.addComponent(comboBox_numeros, GroupLayout.PREFERRED_SIZE,
+														GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+								.addGroup(gl_panel.createSequentialGroup().addGap(53).addComponent(lblNewLabel_2)
+										.addPreferredGap(ComponentPlacement.RELATED)
+										.addComponent(textCpfAcompanhante, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+						.addGap(15)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE).addComponent(tglbtnAcompanhantes)
+								.addComponent(btnAdicionar))
+						.addGap(18)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+								.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+								.addGroup(gl_panel.createSequentialGroup().addComponent(lblNewLabel_1).addGap(2)
+										.addComponent(textCpfCliente, GroupLayout.PREFERRED_SIZE,
+												GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+										.addGap(15).addComponent(btnConfirmar)))
+						.addContainerGap()));
 		panel.setLayout(gl_panel);
 	}
-	
+
 	private void confirmarHospedagemAction() {
 		try {
 			HospedagemController controller = MainController.getHospedagemController();
 			String cpfHospede = textCpfCliente.getText();
 			String numeroAcomodacao = comboBox_numeros.getSelectedItem().toString();
 			String[] cpfAcompanhantes = acompanhantes.toArray(new String[0]);
-			
+
 			controller.criarHospedagem(numeroAcomodacao, cpfHospede, cpfAcompanhantes);
-			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!",
+					JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Não deu certo", "ERRO!", JOptionPane.ERROR_MESSAGE);
 		}
-		
+
 	}
-	
+
 	private void addAcompanhante() {
-		//Pegando dados do acompanhante no controller
-		// TODO: Verificar se o cpf do acompanhante já foi adicionado
-		// TODO: Verificar se o cpf do acompanhante é o mesmo do Hospede (nao pode ne?)
+		// Pegando dados do acompanhante no controller
 		try {
+			if(textCpfCliente.getText().length() < 11) {
+				JOptionPane.showMessageDialog(null, "Primeiro, insira um CPF válido para hóspede principal.", "Atenção", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			if(textCpfAcompanhante.getText().equals(textCpfCliente.getText())) {
+				JOptionPane.showMessageDialog(null, "Hospede principal não pode ser acompanhante.", "Atenção", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			if(acompanhantes.contains(textCpfAcompanhante.getText())) {
+				JOptionPane.showMessageDialog(null, "Este acompanhante já foi adicionado!", "Atenção", JOptionPane.WARNING_MESSAGE);
+				return;
+			}
 			ClienteController controller = MainController.getClienteContoller();
 			long cpf = Long.parseLong(textCpfAcompanhante.getText());
 			Hospede acompanhante = controller.getHospede(cpf);
-			acompanhantes.add(textCpfAcompanhante.getText());
 			String novaLinha[] = new String[4];
 			novaLinha[0] = acompanhante.getNome();
 			novaLinha[1] = Long.toString(acompanhante.getCpf());
@@ -270,29 +280,34 @@ public class CheckInView extends JFrame {
 			tableModel.addRow(novaLinha);
 			tableModel.fireTableDataChanged();
 			textCpfAcompanhante.setText("");
-			
-		} catch(NumberFormatException e) {
+			acompanhantes.add(textCpfAcompanhante.getText());
+
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Insira um CPF válido!", "Erro!", JOptionPane.ERROR_MESSAGE);
-		} catch(NullPointerException e) {
-			//TODO: Fazer um showConfirmDialog perguntando se deseja cadastrar o CPF agora.
-			JOptionPane.showMessageDialog(null, "CPF não encontrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-		} catch(Exception e) {
+		} catch (NullPointerException e) {
+			int input = JOptionPane.showConfirmDialog(null, "CPF não encontrado, deseja realizar o cadastro?");
+			if(input == 0) {
+				CadastroClienteView janela = new CadastroClienteView();
+				janela.setVisible(rootPaneCheckingEnabled);
+			}
+			return;
+		} catch (Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
-	private String[] contentCombobox(){
+
+	private String[] contentCombobox() {
 		AptController controller = MainController.getAptController();
-		
+
 		String[][] tipos = controller.getTipos();
 		return tipos[0];
 	}
-	
+
 	private void buildComboboxApt(String tipo) {
 		AptController controller = MainController.getAptController();
 		String[] apartamentos = controller.getApartamentosDisponiveis(tipo);
-		if(apartamentos.length == 0) {
+		if (apartamentos.length == 0) {
 			lblApt.setText("Não há apartamentos disponíveis para este tipo!");
 			lblApt.setForeground(new Color(255, 0, 0));
 			lblApt.setVisible(true);

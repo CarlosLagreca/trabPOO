@@ -27,6 +27,7 @@ import javax.swing.DefaultComboBoxModel;
 import model.Pagamento.ETipoPagamento;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class CriarAptView extends JFrame {
 
@@ -40,6 +41,7 @@ public class CriarAptView extends JFrame {
 	 * Create the frame.
 	 */
 	public CriarAptView(int numeroAptVisu) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CriarAptView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 240);
 		setMinimumSize(new Dimension(450,240));
@@ -188,6 +190,7 @@ public class CriarAptView extends JFrame {
 			lblTitulo.setText("Acomodação");
 			Acomodacao apartamento = controller.getApartamento(numeroAptVisu);
 			if(apartamento == null) {
+				JOptionPane.showMessageDialog(null, "Apartamento não cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 				dispose();
 				return;
 			}
@@ -196,6 +199,11 @@ public class CriarAptView extends JFrame {
 			
 			textOcupacaomax.setText((String.format("%d", apartamento.getOcupacaoMax())));
 			textOcupacaomax.setEnabled(false);
+			
+			comboBox.setSelectedItem(apartamento.getTipo());
+			
+			btnCriarTipo.setEnabled(false);
+			btnCriarTipo.setVisible(false);
 			
 			comboBox.setEnabled(false);
 			
@@ -217,7 +225,7 @@ public class CriarAptView extends JFrame {
 	}
 	
 	
-	// TODO: Fazer protected (ou public) para atualizar atravez da janela de criar tipoAcomodacao
+	// TODO?: Atualizar atravez da janela de criar tipoAcomodacao
 	private String[][] attCombobox() {
 		try {
 			AptController controller = MainController.getAptController();
@@ -264,6 +272,9 @@ public class CriarAptView extends JFrame {
 		}
 		else if(ret == 2) {
 			JOptionPane.showMessageDialog(null, "Apartamento não está disponível!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
+		else if(ret == 3) {
+			JOptionPane.showMessageDialog(null, "Apartamento não cadastrado.", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 		
 	}

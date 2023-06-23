@@ -181,7 +181,11 @@ public class CadastroClienteView extends JFrame {
 			Long cpf =  Long.parseLong(textCpf.getText());
 			Long telefone = Long.parseLong(textTelefone.getText());
 			String email = textEmail.getText();
-			controller.cadastrarCliente(nome, cpf, telefone, email);
+			int ret = controller.cadastrarCliente(nome, cpf, telefone, email);
+			if(ret == 2) {
+				JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch(NumberFormatException e) {
