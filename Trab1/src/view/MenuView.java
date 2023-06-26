@@ -2,15 +2,10 @@ package view;
 
 import controller.AptController;
 import controller.MainController;
-import main.Main;
-import controller.ItemController;
-
-import view.CriarAptView;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
-import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -28,32 +23,13 @@ import javax.swing.border.LineBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
 import javax.swing.GroupLayout.Alignment;
-import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import java.awt.Toolkit;
-import javax.swing.JToggleButton;
 
 public class MenuView extends JFrame {
 	private static final long serialVersionUID = -4786237314541903229L;
 	private JTabbedPane tabbedPane;
-	
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					MenuView frame = new MenuView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
 	
 	/**
 	 * ESPAÇO PARA TODOs gerais do projeto:
@@ -62,6 +38,9 @@ public class MenuView extends JFrame {
 	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 * TODO: Organizar arquivos.
+	 * TODO: Fazer tratamento de erros no model
+	 * TODO: Não se esquecer de retirar TODOs
+	 * TODO: Investigar getSelectedRow nas tabelas.
 	 */
 	
 
@@ -187,7 +166,7 @@ public class MenuView extends JFrame {
 						return;
 					}
 					int numero = Integer.parseInt(input);
-					CriarAptView janela = new CriarAptView(numero);
+					new CriarAptView(numero);
 				} catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
 				}

@@ -1,11 +1,8 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
-import java.awt.BorderLayout;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -13,11 +10,11 @@ import javax.swing.JLabel;
 import java.awt.Font;
 import javax.swing.JTextField;
 import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextPane;
 import javax.swing.JButton;
 
 public class ContaView extends JFrame {
 
+	private static final long serialVersionUID = -6703211219600742095L;
 	private JPanel contentPane;
 	private JTextField textField;
 	private JTextField textField_1;
@@ -26,6 +23,10 @@ public class ContaView extends JFrame {
 	
 	
 	public ContaView() {
+		initialize();
+	}
+	
+	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 457, 338);
 		contentPane = new JPanel();
@@ -96,10 +97,5 @@ public class ContaView extends JFrame {
 					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
-	}
-	private static class __Tmp {
-		private static void __tmp() {
-			  javax.swing.JPanel __wbp_panel = new javax.swing.JPanel();
-		}
 	}
 }

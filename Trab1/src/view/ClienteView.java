@@ -1,6 +1,5 @@
 package view;
 
-import model.Hospede;
 import controller.MainController;
 import controller.ClienteController;
 
@@ -9,7 +8,6 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
-import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -19,10 +17,9 @@ import javax.swing.JButton;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class ClienteView extends JFrame {
-
+	private static final long serialVersionUID = -4078223847792620531L;
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane barraRolagem;
@@ -32,6 +29,10 @@ public class ClienteView extends JFrame {
 	 * Create the frame.
 	 */
 	public ClienteView() {
+		initialize();
+	}
+	
+	private void initialize() {
 		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteView.class.getResource("/view/icone.png")));
 		setTitle("Clientes");

@@ -5,7 +5,6 @@ import controller.AptController;
 import model.Acomodacao;
 
 import java.awt.Dimension;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,30 +16,32 @@ import javax.swing.JOptionPane;
 import java.awt.GridBagConstraints;
 import java.awt.Font;
 import java.awt.Insets;
-import java.util.ArrayList;
-import java.util.List;
 
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
-import model.Pagamento.ETipoPagamento;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
 public class CriarAptView extends JFrame {
 
+	private static final long serialVersionUID = -8004342113527068985L;
 	private JPanel contentPane;
 	private JTextField textNumero;
 	private JTextField textOcupacaomax;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 	String[][] tiposAcomodacao;
 
 	/**
 	 * Create the frame.
 	 */
 	public CriarAptView(int numeroAptVisu) {
+		initialize(numeroAptVisu);
+	}
+	
+	private void initialize(int numeroAptVisu) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CriarAptView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 450, 240);
@@ -106,14 +107,14 @@ public class CriarAptView extends JFrame {
 		gbc_lblNewLabel_3.gridy = 3;
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<>();
 		comboBox.setToolTipText("Selecione o tipo da acomodação. Informações do tipo mostradas abaixo.");
 		
 		try {
 			tiposAcomodacao = attCombobox();
-			comboBox.setModel(new DefaultComboBoxModel(tiposAcomodacao[0]));
+			comboBox.setModel(new DefaultComboBoxModel<>(tiposAcomodacao[0]));
 		} catch(Exception e) {
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+			comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 		}
 		
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
@@ -157,9 +158,9 @@ public class CriarAptView extends JFrame {
 		    	int index = comboBox.getSelectedIndex();
 		    	try {
 					tiposAcomodacao = attCombobox();
-					comboBox.setModel(new DefaultComboBoxModel(tiposAcomodacao[0]));
+					comboBox.setModel(new DefaultComboBoxModel<>(tiposAcomodacao[0]));
 				} catch(Exception exp) {
-					comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+					comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 				}
 		    	comboBox.setSelectedIndex(index);
 		    	String textLabel = "Tarifa Diária: " + tiposAcomodacao[index+1][0] + "   | Adicional acomp.: " + tiposAcomodacao[index+1][1];
@@ -221,7 +222,6 @@ public class CriarAptView extends JFrame {
 		}
 		
 		setVisible(true);
-		
 	}
 	
 	

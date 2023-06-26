@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -10,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.HospedagemController;
 import controller.MainController;
-import model.Pagamento.ETipoPagamento;
 
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
@@ -25,7 +22,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
 public class HospedagensView extends JFrame {
-
+	private static final long serialVersionUID = 5052628961516283573L;
 	private JPanel contentPane;
 	private JTable tableNew;
 	private JTable tableOld;
@@ -38,6 +35,12 @@ public class HospedagensView extends JFrame {
 	 * Create the frame.
 	 */
 	public HospedagensView() {
+		initialize();
+		tableOld();
+		tableCurrent();
+	}
+	
+	private void initialize() {
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 555, 382);
 		contentPane = new JPanel();
@@ -139,8 +142,6 @@ public class HospedagensView extends JFrame {
 		);
 		panel_1_1.setLayout(gl_panel_1_1);		
 		
-		tableOld();
-		tableCurrent();
 	}
 	
 	private void vizualizarCurrentAction() {

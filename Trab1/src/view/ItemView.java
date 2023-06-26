@@ -25,16 +25,21 @@ import java.awt.event.ActionEvent;
 
 public class ItemView extends JFrame {
 
+	private static final long serialVersionUID = -4391183686279732571L;
 	private JPanel contentPane;
 	private JTextField txtCodigo;
 	private JTextField txtDescricao;
 	private JTextField txtPreco;
-	private JComboBox comboBox;
+	private JComboBox<String> comboBox;
 
 	/**
 	 * Create the frame.
 	 */
 	public ItemView() {
+		initialize();
+	}
+	
+	private void initialize() {
 		setTitle("Adicionar Item");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 440, 360);
@@ -121,7 +126,7 @@ public class ItemView extends JFrame {
 		gbc_lblNewLabel_4.gridy = 4;
 		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		comboBox = new JComboBox();
+		comboBox = new JComboBox<>();
 		attComboBox();
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
@@ -162,9 +167,9 @@ public class ItemView extends JFrame {
 		String[] nomesCategorias;
 		try {
 			nomesCategorias = controller.getCategorias();
-			comboBox.setModel(new DefaultComboBoxModel(nomesCategorias));
+			comboBox.setModel(new DefaultComboBoxModel<>(nomesCategorias));
 		} catch(Exception exp) {
-			comboBox.setModel(new DefaultComboBoxModel(new String[] {}));
+			comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 		}
 	}
 	

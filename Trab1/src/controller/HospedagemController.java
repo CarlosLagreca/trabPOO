@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.TreeMap;
 
 import model.Acomodacao;
-import model.Categoria;
 import model.Acomodacao.EEstadoOcupacao;
 import model.Hospedagem;
 import model.Hospede;
@@ -15,7 +14,6 @@ import model.IAcomodacao;
 import model.IConta;
 import model.IHospede;
 import model.Item;
-import model.ItemConta;
 import model.Pagamento;
 import model.Pagamento.ETipoPagamento;
 
@@ -62,7 +60,6 @@ public class HospedagemController implements Serializable{
 		if(item == null) {
 			return 2;
 		}
-		ItemConta itemconta = new ItemConta(item, quantidade);
 		Hospedagem hospedagem = hospedagens.get(numeroAcomodacao);
 		if(hospedagem == null) {
 			return 3;

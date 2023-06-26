@@ -1,7 +1,5 @@
 package view;
 
-import java.awt.EventQueue;
-
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
@@ -15,7 +13,6 @@ import model.Hospede;
 
 import java.awt.GridLayout;
 
-import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -24,7 +21,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JComboBox;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTextField;
-import javax.swing.JRadioButton;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JButton;
@@ -38,13 +34,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CheckInView extends JFrame {
-
+	private static final long serialVersionUID = 3592668593351058496L;
 	private JPanel contentPane;
 	private JTextField textCpfCliente;
 	private JTable table;
 	private JTextField textCpfAcompanhante;
 	private JScrollPane barraRolagem;
-	JComboBox comboBox_numeros;
+	JComboBox<String> comboBox_numeros;
 	JButton btnConfirmar;
 	JLabel lblApt;
 	DefaultTableModel tableModel = new DefaultTableModel();
@@ -54,26 +50,11 @@ public class CheckInView extends JFrame {
 	 * TODO: Melhorar tratamento de erros;
 	 */
 
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					CheckInView frame = new CheckInView();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public CheckInView() {
+		initialize();
+	}
+	
+	private void initialize() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CheckInView.class.getResource("/view/icone.png")));
 		setTitle("CheckIn");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -90,8 +71,8 @@ public class CheckInView extends JFrame {
 
 		JLabel lblNewLabel = new JLabel("Selecione a Acomodação");
 
-		JComboBox comboBox = new JComboBox();
-		comboBox.setModel(new DefaultComboBoxModel(contentCombobox()));
+		JComboBox<String> comboBox = new JComboBox<>();
+		comboBox.setModel(new DefaultComboBoxModel<>(contentCombobox()));
 		comboBox.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				buildComboboxApt(comboBox.getSelectedItem().toString());
@@ -153,7 +134,7 @@ public class CheckInView extends JFrame {
 			}
 		});
 
-		comboBox_numeros = new JComboBox();
+		comboBox_numeros = new JComboBox<>();
 		comboBox_numeros.setEnabled(false);
 		comboBox_numeros.setVisible(false);
 
@@ -316,7 +297,7 @@ public class CheckInView extends JFrame {
 			btnConfirmar.setToolTipText("Precisa selecionar uma acomodação!");
 			return;
 		}
-		comboBox_numeros.setModel(new DefaultComboBoxModel(apartamentos));
+		comboBox_numeros.setModel(new DefaultComboBoxModel<>(apartamentos));
 		comboBox_numeros.setEnabled(true);
 		comboBox_numeros.setVisible(true);
 		lblApt.setForeground(new Color(0, 0, 0));
