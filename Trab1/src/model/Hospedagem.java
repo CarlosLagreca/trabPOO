@@ -8,6 +8,7 @@ import java.util.UUID;
 
 import model.Pagamento.ETipoPagamento;
 
+//TODO Revisar Model de Hospedagem
 public class Hospedagem implements Serializable {
 	private static final long serialVersionUID = 7345409444938260273L;
 	private int inicioCheckin = 13;

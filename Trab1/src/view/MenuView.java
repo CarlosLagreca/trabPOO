@@ -275,6 +275,8 @@ public class MenuView extends JFrame {
 		JButton btnCheckout = new JButton("CheckOut");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				CheckOutView janela = new CheckOutView();
+				janela.setVisible(true);
 			}
 		});
 		

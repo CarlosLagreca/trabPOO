@@ -6,38 +6,32 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import java.awt.GridLayout;
-import javax.swing.GroupLayout;
-import javax.swing.GroupLayout.Alignment;
+import java.awt.GridBagLayout;
 import javax.swing.JLabel;
-import javax.swing.JComboBox;
-import javax.swing.LayoutStyle.ComponentPlacement;
-import javax.swing.JTextField;
+import java.awt.GridBagConstraints;
 import javax.swing.JButton;
-import java.awt.Color;
+import java.awt.Insets;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
+import javax.swing.JTextField;
+import javax.swing.JTextArea;
+import java.awt.Toolkit;
 
 public class CheckOutView extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textField;
-	private JTextField textField_1;
-	private JTextField textField_2;
-	private JTextField textField_3;
-	private JTextField textField_4;
-	private JTextField textField_5;
-	private JTextField textField_6;
-	private JTextField textField_7;
-	private JTextField textField_8;
-	private JTextField textField_9;
-	private JTextField textField_10;
-
-
 
 	/**
 	 * Create the frame.
 	 */
 	public CheckOutView() {
+		initialize();
+	}
+	
+	private void initialize() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(CheckOutView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 604, 449);
+		setBounds(100, 100, 481, 343);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -46,174 +40,211 @@ public class CheckOutView extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{0, 0, 0, 0, 31, 123, 0, 0, 0};
+		gbl_panel.rowHeights = new int[]{0, 0, 0, 0, 0, 37, 40, 0, 0, 0, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
-		JLabel lblNewLabel = new JLabel("Número do apartamento:");
+		JLabel lblNewLabel = new JLabel("Número Apt:");
+		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
+		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel.gridx = 1;
+		gbc_lblNewLabel.gridy = 1;
+		panel.add(lblNewLabel, gbc_lblNewLabel);
 		
-		JLabel lblNewLabel_1 = new JLabel("Nome do Cliente:");
+		JLabel lblNumeroApt = new JLabel("New label");
+		GridBagConstraints gbc_lblNumeroApt = new GridBagConstraints();
+		gbc_lblNumeroApt.anchor = GridBagConstraints.WEST;
+		gbc_lblNumeroApt.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNumeroApt.gridx = 2;
+		gbc_lblNumeroApt.gridy = 1;
+		panel.add(lblNumeroApt, gbc_lblNumeroApt);
 		
-		textField = new JTextField();
-		textField.setColumns(10);
+		JLabel lblNewLabel_3 = new JLabel("Tipo Apt:");
+		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_3.gridx = 4;
+		gbc_lblNewLabel_3.gridy = 1;
+		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
-		JLabel lblNewLabel_2 = new JLabel("Cpf do Clente:");
+		JLabel lblTipoApt = new JLabel("New label");
+		GridBagConstraints gbc_lblTipoApt = new GridBagConstraints();
+		gbc_lblTipoApt.anchor = GridBagConstraints.WEST;
+		gbc_lblTipoApt.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoApt.gridx = 5;
+		gbc_lblTipoApt.gridy = 1;
+		panel.add(lblTipoApt, gbc_lblTipoApt);
 		
-		textField_1 = new JTextField();
-		textField_1.setColumns(10);
+		JLabel lblNewLabel_2 = new JLabel("Nome do Cliente:");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 1;
+		gbc_lblNewLabel_2.gridy = 2;
+		panel.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
-		textField_2 = new JTextField();
-		textField_2.setColumns(10);
+		JLabel lblNomeCliente = new JLabel("New label");
+		GridBagConstraints gbc_lblNomeCliente = new GridBagConstraints();
+		gbc_lblNomeCliente.anchor = GridBagConstraints.WEST;
+		gbc_lblNomeCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNomeCliente.gridx = 2;
+		gbc_lblNomeCliente.gridy = 2;
+		panel.add(lblNomeCliente, gbc_lblNomeCliente);
 		
-		JLabel lblNewLabel_3 = new JLabel("Tipo:");
+		JLabel lblNewLabel_4 = new JLabel("Cpf do Cliente:");
+		GridBagConstraints gbc_lblNewLabel_4 = new GridBagConstraints();
+		gbc_lblNewLabel_4.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_4.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_4.gridx = 4;
+		gbc_lblNewLabel_4.gridy = 2;
+		panel.add(lblNewLabel_4, gbc_lblNewLabel_4);
 		
-		textField_3 = new JTextField();
-		textField_3.setColumns(10);
+		JLabel lblCpfCliente = new JLabel("New label");
+		GridBagConstraints gbc_lblCpfCliente = new GridBagConstraints();
+		gbc_lblCpfCliente.anchor = GridBagConstraints.WEST;
+		gbc_lblCpfCliente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCpfCliente.gridx = 5;
+		gbc_lblCpfCliente.gridy = 2;
+		panel.add(lblCpfCliente, gbc_lblCpfCliente);
 		
-		JLabel lblNewLabel_4 = new JLabel("Dias de Estadia:");
+		JLabel lblNewLabel_1 = new JLabel("Período de estadia:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 1;
+		gbc_lblNewLabel_1.gridy = 3;
+		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
-		textField_4 = new JTextField();
-		textField_4.setColumns(10);
+		JLabel lblPeriodoEstadia = new JLabel("New label");
+		GridBagConstraints gbc_lblPeriodoEstadia = new GridBagConstraints();
+		gbc_lblPeriodoEstadia.anchor = GridBagConstraints.WEST;
+		gbc_lblPeriodoEstadia.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPeriodoEstadia.gridx = 2;
+		gbc_lblPeriodoEstadia.gridy = 3;
+		panel.add(lblPeriodoEstadia, gbc_lblPeriodoEstadia);
 		
 		JLabel lblNewLabel_5 = new JLabel("Acompanhantes:");
+		GridBagConstraints gbc_lblNewLabel_5 = new GridBagConstraints();
+		gbc_lblNewLabel_5.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_5.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_5.gridx = 4;
+		gbc_lblNewLabel_5.gridy = 3;
+		panel.add(lblNewLabel_5, gbc_lblNewLabel_5);
 		
-		textField_5 = new JTextField();
-		textField_5.setColumns(10);
+		JLabel lblAcompanhantes = new JLabel("New label");
+		GridBagConstraints gbc_lblAcompanhantes = new GridBagConstraints();
+		gbc_lblAcompanhantes.anchor = GridBagConstraints.WEST;
+		gbc_lblAcompanhantes.insets = new Insets(0, 0, 5, 5);
+		gbc_lblAcompanhantes.gridx = 5;
+		gbc_lblAcompanhantes.gridy = 3;
+		panel.add(lblAcompanhantes, gbc_lblAcompanhantes);
 		
-		JLabel lblNewLabel_6 = new JLabel("Valor Total das diárias:");
+		JLabel lblNewLabel_6 = new JLabel("Total diárias:");
+		GridBagConstraints gbc_lblNewLabel_6 = new GridBagConstraints();
+		gbc_lblNewLabel_6.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_6.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_6.gridx = 1;
+		gbc_lblNewLabel_6.gridy = 5;
+		panel.add(lblNewLabel_6, gbc_lblNewLabel_6);
 		
-		textField_6 = new JTextField();
-		textField_6.setColumns(10);
+		JLabel lblDiaria = new JLabel("New label");
+		GridBagConstraints gbc_lblDiaria = new GridBagConstraints();
+		gbc_lblDiaria.anchor = GridBagConstraints.WEST;
+		gbc_lblDiaria.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDiaria.gridx = 2;
+		gbc_lblDiaria.gridy = 5;
+		panel.add(lblDiaria, gbc_lblDiaria);
 		
-		JLabel lblNewLabel_7 = new JLabel("Valor Total dos acompanhantes:");
+		JLabel lblNewLabel_12 = new JLabel("Total da Hospedagem:");
+		GridBagConstraints gbc_lblNewLabel_12 = new GridBagConstraints();
+		gbc_lblNewLabel_12.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_12.gridx = 4;
+		gbc_lblNewLabel_12.gridy = 5;
+		panel.add(lblNewLabel_12, gbc_lblNewLabel_12);
 		
-		textField_7 = new JTextField();
-		textField_7.setColumns(10);
+		JLabel lblNewLabel_14 = new JLabel("Valor Pago:");
+		GridBagConstraints gbc_lblNewLabel_14 = new GridBagConstraints();
+		gbc_lblNewLabel_14.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_14.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNewLabel_14.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_14.gridx = 5;
+		gbc_lblNewLabel_14.gridy = 5;
+		panel.add(lblNewLabel_14, gbc_lblNewLabel_14);
 		
-		JLabel lblNewLabel_8 = new JLabel("Total da Conta:");
+		JLabel lblNewLabel_9 = new JLabel("Total Acompanhantes:");
+		GridBagConstraints gbc_lblNewLabel_9 = new GridBagConstraints();
+		gbc_lblNewLabel_9.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_9.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_9.gridx = 1;
+		gbc_lblNewLabel_9.gridy = 6;
+		panel.add(lblNewLabel_9, gbc_lblNewLabel_9);
 		
-		textField_8 = new JTextField();
-		textField_8.setColumns(10);
+		JLabel lblPrecoAcomp = new JLabel("New label");
+		GridBagConstraints gbc_lblPrecoAcomp = new GridBagConstraints();
+		gbc_lblPrecoAcomp.anchor = GridBagConstraints.WEST;
+		gbc_lblPrecoAcomp.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrecoAcomp.gridx = 2;
+		gbc_lblPrecoAcomp.gridy = 6;
+		panel.add(lblPrecoAcomp, gbc_lblPrecoAcomp);
 		
-		JLabel lblNewLabel_9 = new JLabel("Total da hospedagem:");
+		JLabel lblPreçoTotal = new JLabel("New label");
+		GridBagConstraints gbc_lblPreçoTotal = new GridBagConstraints();
+		gbc_lblPreçoTotal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPreçoTotal.gridx = 4;
+		gbc_lblPreçoTotal.gridy = 6;
+		panel.add(lblPreçoTotal, gbc_lblPreçoTotal);
 		
-		textField_9 = new JTextField();
-		textField_9.setColumns(10);
+		JLabel lblPreçoPago = new JLabel("New label");
+		GridBagConstraints gbc_lblPreçoPago = new GridBagConstraints();
+		gbc_lblPreçoPago.anchor = GridBagConstraints.EAST;
+		gbc_lblPreçoPago.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPreçoPago.gridx = 5;
+		gbc_lblPreçoPago.gridy = 6;
+		panel.add(lblPreçoPago, gbc_lblPreçoPago);
 		
-		JButton btnNewButton = new JButton("Pagar");
+		JLabel lblNewLabel_8 = new JLabel("Total Conta:");
+		GridBagConstraints gbc_lblNewLabel_8 = new GridBagConstraints();
+		gbc_lblNewLabel_8.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_8.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_8.gridx = 1;
+		gbc_lblNewLabel_8.gridy = 7;
+		panel.add(lblNewLabel_8, gbc_lblNewLabel_8);
 		
-		JLabel lblNewLabel_10 = new JLabel("Valor Pago:");
+		JLabel lblConta = new JLabel("New label");
+		GridBagConstraints gbc_lblConta = new GridBagConstraints();
+		gbc_lblConta.anchor = GridBagConstraints.WEST;
+		gbc_lblConta.insets = new Insets(0, 0, 5, 5);
+		gbc_lblConta.gridx = 2;
+		gbc_lblConta.gridy = 7;
+		panel.add(lblConta, gbc_lblConta);
 		
-		textField_10 = new JTextField();
-		textField_10.setColumns(10);
+		JButton btnVisualizar = new JButton("Visualizar Detalhes");
+		GridBagConstraints gbc_btnVisualizar = new GridBagConstraints();
+		gbc_btnVisualizar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnVisualizar.gridx = 4;
+		gbc_btnVisualizar.gridy = 7;
+		panel.add(btnVisualizar, gbc_btnVisualizar);
 		
-		JButton btnNewButton_1 = new JButton("Realizar Checkout");
-		btnNewButton_1.setBackground(new Color(128, 255, 128));
-		btnNewButton_1.setForeground(new Color(0, 0, 0));
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(34)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(lblNewLabel)
-							.addComponent(lblNewLabel_1)
-							.addComponent(lblNewLabel_4))
-						.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-							.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel_6)
-							.addComponent(lblNewLabel_9)
-							.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(btnNewButton)
-							.addComponent(lblNewLabel_10)
-							.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lblNewLabel_2))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lblNewLabel_3))
-								.addGroup(gl_panel.createSequentialGroup()
-									.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-									.addGap(18)
-									.addComponent(lblNewLabel_5))))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(58)
-							.addComponent(lblNewLabel_7))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(94)
-							.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-					.addGap(4)
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-								.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(textField_3)
-									.addComponent(textField_1)))
-							.addGap(143))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addComponent(btnNewButton_1)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-									.addComponent(lblNewLabel_8)
-									.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
-							.addGap(65))))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addContainerGap()
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(lblNewLabel)
-							.addComponent(textField_2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel_3))
-						.addComponent(textField_3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(textField, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_1)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addComponent(lblNewLabel_2)))
-					.addGap(18)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_4)
-						.addComponent(textField_4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_5)
-						.addComponent(textField_5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGap(45)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(lblNewLabel_6)
-						.addComponent(lblNewLabel_7)
-						.addComponent(lblNewLabel_8))
-					.addPreferredGap(ComponentPlacement.RELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(textField_6, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_8, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(textField_7, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
-					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(46)
-							.addComponent(lblNewLabel_9)
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(textField_9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(lblNewLabel_10)
-							.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-							.addComponent(textField_10, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnNewButton))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)))
-					.addGap(39))
-		);
-		panel.setLayout(gl_panel);
+		JButton btnPagar = new JButton("Pagar");
+		GridBagConstraints gbc_btnPagar = new GridBagConstraints();
+		gbc_btnPagar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnPagar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPagar.gridx = 5;
+		gbc_btnPagar.gridy = 7;
+		panel.add(btnPagar, gbc_btnPagar);
+		
+		JButton btnCheckout = new JButton("CheckOut");
+		GridBagConstraints gbc_btnCheckout = new GridBagConstraints();
+		gbc_btnCheckout.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnCheckout.gridwidth = 2;
+		gbc_btnCheckout.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCheckout.gridx = 4;
+		gbc_btnCheckout.gridy = 8;
+		panel.add(btnCheckout, gbc_btnCheckout);
 	}
+
 }
