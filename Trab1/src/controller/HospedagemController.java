@@ -126,5 +126,11 @@ public class HospedagemController implements Serializable{
 		return table.toArray(new String[0][0]);
 	}
 	
+	public String[] getDadosHospedagem(int x) {
+		return hospedagens.get(x).listarDados();
+	}
 
+	public String[] getDadosHospedagem(String x) {
+		return oldHospedagens.get(x).listarDados();
+	}
 }

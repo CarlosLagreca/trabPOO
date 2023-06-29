@@ -20,11 +20,9 @@ public class Hospedagem implements Serializable {
 	private IHospede hospede;
 	private List<IHospede> acompanhantes = new ArrayList<IHospede>();
 	private IAcomodacao acomodacao;
-	
+
 	private List<Pagamento> pagamento = new ArrayList<Pagamento>();
-	
-	
-	
+
 	public List<Pagamento> getPagamento() {
 		return pagamento;
 	}
@@ -40,17 +38,53 @@ public class Hospedagem implements Serializable {
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
 	}
-	
+
 	public IConta getConta() {
 		return conta;
+	}
+
+	public double getValorTotal() {
+		return getValorItens() + getValorAcompanhantes() + getValorDiarias();
+	}
+
+	public double getValorDiarias() {
+		return checkin.compareTo(new Date()) * acomodacao.getTarifaDiaria();
+	}
+
+	public double getValorAcompanhantes() {
+		return acomodacao.getAdicionalAcompanhante() * acompanhantes.size();
+	}
+
+	public double getValorItens() {
+		return conta.getTotal();
+	}
+
+	public double getValorPago() {
+		double total = 0;
+		for (Pagamento x : pagamento) {
+			total += x.getValor();
+		}
+		return total;
 	}
 
 	public void addAcompanhantes(List<IHospede> list) {
 		acompanhantes.addAll(list);
 	}
 
-	public StringBuilder listar() {
-		return null;
+	public String[] listarDados() {
+		List<String> lista = new ArrayList<String>();
+		lista.add(Integer.toString(acomodacao.getNumero()));
+		lista.add(hospede.getNome());
+		lista.add(Integer.toString(checkin.compareTo(checkout)));
+		lista.add(acomodacao.getTipo());
+		lista.add(Long.toString(hospede.getCpf()));
+		lista.add(Integer.toString(acompanhantes.size()));
+		lista.add(Double.toString(getValorDiarias()));
+		lista.add(Double.toString(getValorAcompanhantes()));
+		lista.add(Double.toString(getValorItens()));
+		lista.add(Double.toString(getValorTotal()));
+		lista.add(Double.toString(getValorPago()));
+		return (String[]) lista.toArray();
 	}
 
 	public String getId() {
