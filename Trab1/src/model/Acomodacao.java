@@ -44,7 +44,7 @@ public class Acomodacao implements IAcomodacao, Serializable{
 	public String getTipo() {
 		return tipo.getNome();
 	}
-
+	
 	@Override
 	public double getTarifaDiaria() {
 		return tipo.getTarifaDiaria();
