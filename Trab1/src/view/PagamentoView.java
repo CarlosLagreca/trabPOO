@@ -10,6 +10,7 @@ import model.Pagamento.ETipoPagamento;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JComboBox;
@@ -21,6 +22,7 @@ import java.awt.Insets;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class PagamentoView extends JFrame {
 	static final long serialVersionUID = -5154384979178170870L;
@@ -33,6 +35,8 @@ public class PagamentoView extends JFrame {
 	 * Create the frame.
 	 */
 	public PagamentoView(int id) {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(PagamentoView.class.getResource("/view/icone.png")));
+		setTitle("Pagamento");
 		initialize();
 		setDados(id);
 	}
@@ -90,6 +94,7 @@ public class PagamentoView extends JFrame {
 		panel.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		TotalValor = new JLabel("teste");
+		TotalValor.setToolTipText("Valor total da hospedagem até o momento atual.");
 		GridBagConstraints gbc_TotalValor = new GridBagConstraints();
 		gbc_TotalValor.anchor = GridBagConstraints.WEST;
 		gbc_TotalValor.insets = new Insets(0, 0, 5, 0);
@@ -155,6 +160,7 @@ public class PagamentoView extends JFrame {
 			int id = Integer.parseInt(labelid.getText());
 			controller.realizarPagamento(tipo, valor, id);
 		}catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado.", "Erro!", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}

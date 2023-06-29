@@ -150,7 +150,7 @@ public class HospedagensView extends JFrame {
 			if (input == null || (input != null && ("".equals(input)))) {
 				return;
 			}
-			GerenciarHospedagemView janela = new GerenciarHospedagemView(Integer.parseInt(input));
+			GerenciarHospedagemView janela = new GerenciarHospedagemView(Integer.parseInt(input), false);
 			janela.setVisible(true);
 		} catch(ArrayIndexOutOfBoundsException e) {
 			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);

@@ -33,12 +33,12 @@ public class GerenciarHospedagemView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public GerenciarHospedagemView(int numeroAcomodacao) {
-		initialize(numeroAcomodacao);
+	public GerenciarHospedagemView(int numeroAcomodacao, boolean janelaCheckout) {
+		initialize(numeroAcomodacao, janelaCheckout);
 		buildInfos(numeroAcomodacao);
 	}
 
-	private void initialize(int numeroAcomodacao) {
+	private void initialize(int numeroAcomodacao, boolean janelaCheckout) {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(GerenciarHospedagemView.class.getResource("/view/icone.png")));
 		setTitle("Listagem de Hospedagens");
@@ -63,10 +63,10 @@ public class GerenciarHospedagemView extends JFrame {
 
 		JTabbedPane tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 
-		JLabel lblNewLabel = new JLabel("Preço a ser pago");
+		JLabel lblPagamento = new JLabel("Preço a ser pago");
 
-		JButton btnNewButton = new JButton("Pagar");
-		btnNewButton.addActionListener(new ActionListener() {
+		JButton btnPagar = new JButton("Pagar");
+		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PagamentoView janela = new PagamentoView(numeroAcomodacao);
 				janela.setVisible(true);
@@ -103,11 +103,11 @@ public class GerenciarHospedagemView extends JFrame {
 								.addGroup(gl_panel_1.createSequentialGroup().addComponent(lblIdHosp).addGap(370)))
 						.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING)
 								.addGroup(gl_panel_1.createParallelGroup(Alignment.LEADING, false)
-										.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(btnPagar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)
 										.addComponent(lblPreco, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE)
-										.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
+										.addComponent(lblPagamento, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
 												Short.MAX_VALUE))
 								.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 85, GroupLayout.PREFERRED_SIZE)
 								.addComponent(lblNomeCliente))
@@ -122,9 +122,9 @@ public class GerenciarHospedagemView extends JFrame {
 										.addComponent(lblNumeroAcm).addComponent(lblNomeCliente))
 								.addGap(18).addComponent(lblNewLabel_3).addPreferredGap(ComponentPlacement.UNRELATED)
 								.addComponent(tabbedPane, GroupLayout.PREFERRED_SIZE, 341, GroupLayout.PREFERRED_SIZE))
-						.addGroup(gl_panel_1.createSequentialGroup().addGap(82).addComponent(lblNewLabel)
+						.addGroup(gl_panel_1.createSequentialGroup().addGap(82).addComponent(lblPagamento)
 								.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblPreco)
-								.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnNewButton)))
+								.addPreferredGap(ComponentPlacement.RELATED).addComponent(btnPagar)))
 				.addGap(24)));
 
 		JPanel panel = new JPanel();
@@ -141,6 +141,15 @@ public class GerenciarHospedagemView extends JFrame {
 		table_1 = new JTable();
 		panel_2.add(table_1);
 		panel_1.setLayout(gl_panel_1);
+		
+		// Caso a janela tenha sido chamada pela janela de checkout, desabilitar opções de pagamento
+		if(janelaCheckout) {
+			lblPagamento.setVisible(false);
+			lblPreco.setVisible(false);
+			btnPagar.setEnabled(false);
+			btnPagar.setVisible(false);
+		}
+		
 	}
 
 	private void buildInfos(int numApt) {
