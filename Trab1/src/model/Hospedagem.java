@@ -5,7 +5,9 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
+import model.Acomodacao.EEstadoOcupacao;
 import model.Pagamento.ETipoPagamento;
 
 //TODO Revisar Model de Hospedagem
@@ -48,7 +50,12 @@ public class Hospedagem implements Serializable {
 	}
 
 	public double getValorDiarias() {
-		return checkin.compareTo(new Date()) * acomodacao.getTarifaDiaria();
+		long periodo = getDateDiff(checkin, new Date(), TimeUnit.DAYS);
+		if (periodo < 1) {
+			return acomodacao.getTarifaDiaria();
+		}
+
+		return periodo * acomodacao.getTarifaDiaria();
 	}
 
 	public double getValorAcompanhantes() {
@@ -75,7 +82,7 @@ public class Hospedagem implements Serializable {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
 		lista.add(hospede.getNome());
-		lista.add(Integer.toString(checkin.compareTo(checkout)));
+		lista.add(Long.toString(getDateDiff(checkin, new Date(), TimeUnit.DAYS)));
 		lista.add(acomodacao.getTipo());
 		lista.add(Long.toString(hospede.getCpf()));
 		lista.add(Integer.toString(acompanhantes.size()));
@@ -84,7 +91,7 @@ public class Hospedagem implements Serializable {
 		lista.add(Double.toString(getValorItens()));
 		lista.add(Double.toString(getValorTotal()));
 		lista.add(Double.toString(getValorPago()));
-		return (String[]) lista.toArray();
+		return lista.toArray(new String[0]);
 	}
 
 	public String getId() {
@@ -105,6 +112,20 @@ public class Hospedagem implements Serializable {
 
 	public IAcomodacao getAcomodacao() {
 		return acomodacao;
+	}
+	
+	public void realizarCheckout() {
+		// TODO: Verificar questão do limite checkout
+		// TODO: Verificar se ja está corretamente pago
+		checkout = new Date();
+		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
+	}
+	
+
+	// TODO: Criar package utilities
+	public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+		long diffInMillies = date2.getTime() - date1.getTime();
+		return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
 	}
 
 }

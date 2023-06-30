@@ -225,8 +225,7 @@ public class CheckInView extends JFrame {
 			String[] cpfAcompanhantes = acompanhantes.toArray(new String[0]);
 
 			controller.criarHospedagem(numeroAcomodacao, cpfHospede, cpfAcompanhantes);
-			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!",
-					JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -260,8 +259,8 @@ public class CheckInView extends JFrame {
 			novaLinha[3] = Long.toString(acompanhante.getTelefone());
 			tableModel.addRow(novaLinha);
 			tableModel.fireTableDataChanged();
-			textCpfAcompanhante.setText("");
 			acompanhantes.add(textCpfAcompanhante.getText());
+			textCpfAcompanhante.setText("");
 
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Insira um CPF válido!", "Erro!", JOptionPane.ERROR_MESSAGE);

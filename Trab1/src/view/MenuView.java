@@ -275,8 +275,17 @@ public class MenuView extends JFrame {
 		JButton btnCheckout = new JButton("CheckOut");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CheckOutView janela = new CheckOutView();
-				janela.setVisible(true);
+				try {
+					String input = JOptionPane.showInputDialog("Insira a Acomodação");
+					if (input == null || (input != null && ("".equals(input)))) {
+						return;
+					}
+					int numero = Integer.parseInt(input);
+					CheckOutView janela = new CheckOutView(numero);
+					janela.setVisible(true);
+				} catch(NumberFormatException ex) {
+					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+				}
 			}
 		});
 		

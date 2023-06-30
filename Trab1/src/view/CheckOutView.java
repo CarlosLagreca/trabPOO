@@ -10,6 +10,8 @@ import controller.MainController;
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
@@ -36,9 +38,10 @@ public class CheckOutView extends JFrame {
 	private String[] infos;
 
 
-	public CheckOutView() {
+	public CheckOutView(int numeroAcomodacao) {
 		setTitle("Checkout");
 		initialize();
+		fillLabels(numeroAcomodacao);
 	}
 	
 	private void initialize() {
@@ -269,6 +272,11 @@ public class CheckOutView extends JFrame {
 		panel.add(btnPagar, gbc_btnPagar);
 		
 		JButton btnCheckout = new JButton("CheckOut");
+		btnCheckout.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				checkoutAction();
+			}
+		});
 		btnCheckout.setFont(new Font("Tahoma", Font.BOLD, 11));
 		GridBagConstraints gbc_btnCheckout = new GridBagConstraints();
 		gbc_btnCheckout.fill = GridBagConstraints.HORIZONTAL;
@@ -277,6 +285,13 @@ public class CheckOutView extends JFrame {
 		gbc_btnCheckout.gridx = 4;
 		gbc_btnCheckout.gridy = 8;
 		panel.add(btnCheckout, gbc_btnCheckout);
+	}
+	
+	private void checkoutAction() {
+		HospedagemController controller = MainController.getHospedagemController();
+		controller.realizarCheckout(Integer.parseInt(infos[0]));
+		JOptionPane.showMessageDialog(null, "Checkout realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+		dispose();
 	}
 	
 	private void visualizarAction() {
@@ -298,9 +313,10 @@ public class CheckOutView extends JFrame {
 		lblCpfCliente.setText(infos[4]);
 		lblAcompanhantes.setText(infos[5]);
 		lblDiaria.setText(infos[6]);
-		lblConta.setText(infos[7]);
-		lblPreçoTotal.setText(infos[8]);
-		lblPreçoPago.setText(infos[9]);
+		lblPrecoAcomp.setText(infos[7]);
+		lblConta.setText(infos[8]);
+		lblPreçoTotal.setText(infos[9]);
+		lblPreçoPago.setText(infos[10]);
 		
 	}
 
