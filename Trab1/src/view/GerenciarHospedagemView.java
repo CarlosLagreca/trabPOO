@@ -2,7 +2,9 @@ package view;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
 
 import controller.HospedagemController;
 import controller.MainController;
@@ -23,22 +25,32 @@ import java.awt.event.ActionEvent;
 public class GerenciarHospedagemView extends JFrame {
 	private static final long serialVersionUID = -8666884440398223144L;
 	private JPanel contentPane;
-	private JTable table;
-	private JTable table_1;
+	private JTable tableItens;
+	private DefaultTableModel modelItens = new DefaultTableModel();
+	private JTable tableAcompanhantes;
+	private DefaultTableModel modelAcompanhantes = new DefaultTableModel();
 	private JLabel lblIdHosp;
 	private JLabel lblNumeroAcm;
 	private JLabel lblNomeCliente;
 	private JLabel lblPreco;
+	private JScrollPane scrollItens;
+	private JScrollPane scrollAcompanhantes;
+	private String[] infos;
 
 	/**
 	 * Create the frame.
 	 */
 	public GerenciarHospedagemView(int numeroAcomodacao, boolean janelaCheckout) {
-		initialize(numeroAcomodacao, janelaCheckout);
+		initialize(janelaCheckout);
 		buildInfos(numeroAcomodacao);
 	}
+	
+	public GerenciarHospedagemView(String idAcomodacao) {
+		initialize(true);
+		buildInfos(idAcomodacao);
+	}
 
-	private void initialize(int numeroAcomodacao, boolean janelaCheckout) {
+	private void initialize(boolean janelaCheckout) {
 		setIconImage(
 				Toolkit.getDefaultToolkit().getImage(GerenciarHospedagemView.class.getResource("/view/icone.png")));
 		setTitle("Listagem de Hospedagens");
@@ -68,7 +80,7 @@ public class GerenciarHospedagemView extends JFrame {
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PagamentoView janela = new PagamentoView(numeroAcomodacao);
+				PagamentoView janela = new PagamentoView(Integer.parseInt(infos[0]));
 				janela.setVisible(true);
 			}
 		});
@@ -131,15 +143,19 @@ public class GerenciarHospedagemView extends JFrame {
 		tabbedPane.addTab("Itens", null, panel, null);
 		panel.setLayout(new GridLayout(1, 0, 0, 0));
 
-		table = new JTable();
-		panel.add(table);
+		tableItens = new JTable();
+		tableItens.setModel(modelItens);
+		scrollItens = new JScrollPane(tableItens);
+		panel.add(scrollItens);
 
 		JPanel panel_2 = new JPanel();
 		tabbedPane.addTab("Acompanhantes", null, panel_2, null);
 		panel_2.setLayout(new GridLayout(1, 0, 0, 0));
 
-		table_1 = new JTable();
-		panel_2.add(table_1);
+		tableAcompanhantes = new JTable();
+		tableAcompanhantes.setModel(modelAcompanhantes);
+		scrollAcompanhantes = new JScrollPane(tableAcompanhantes);
+		panel_2.add(scrollAcompanhantes);
 		panel_1.setLayout(gl_panel_1);
 		
 		// Caso a janela tenha sido chamada pela janela de checkout, desabilitar opções de pagamento
@@ -153,11 +169,80 @@ public class GerenciarHospedagemView extends JFrame {
 	}
 
 	private void buildInfos(int numApt) {
+		// Pegando informações e preenchendo labels
 		HospedagemController controller = MainController.getHospedagemController();
-		Hospedagem hospedagem = controller.getHospedagem(numApt);
-		lblIdHosp.setText(Integer.toString(numApt));
-		lblNomeCliente.setText(hospedagem.getHospede().getNome());
-		lblNumeroAcm.setText(Integer.toString(numApt));
-		lblPreco.setText(Double.toString(controller.getValorItens(numApt)));
+		infos = controller.getDadosHospedagem(numApt);
+		
+		lblIdHosp.setText(infos[0]);
+		lblNomeCliente.setText(infos[1]);
+		lblNumeroAcm.setText(infos[5]);
+		lblPreco.setText(infos[9]);
+		
+		// Preenchendo table de itens da conta da hospedagem
+		modelItens.addColumn("Descrição");
+		modelItens.addColumn("Preço");
+		modelItens.addColumn("Quantidade");
+		String[][] itens = controller.getItensHospedagem(numApt);
+		for(String[] linha : itens) {
+			modelItens.addRow(itens[0]);
+			modelItens.addRow(itens[1]);
+			modelItens.addRow(itens[2]);
+		}
+		
+		// Preenchendo table de acompanhantes da hospedagem
+		
+		modelAcompanhantes.addColumn("Nome");
+		modelAcompanhantes.addColumn("CPF");
+		modelAcompanhantes.addColumn("Telefone");
+		modelAcompanhantes.addColumn("Email");
+		String[][] acompanhantes = controller.getAcompanhantesHospedagem(numApt);
+		for(String[] linha : itens) {
+			modelAcompanhantes.addRow(itens[0]);
+			modelAcompanhantes.addRow(itens[1]);
+			modelAcompanhantes.addRow(itens[2]);
+			modelAcompanhantes.addRow(itens[3]);
+		}
+		
+		modelAcompanhantes.fireTableDataChanged();
+		modelItens.fireTableDataChanged();
+	}
+	
+	private void buildInfos(String id) {
+		// Pegando informações e preenchendo labels
+		HospedagemController controller = MainController.getHospedagemController();
+		infos = controller.getDadosHospedagem(id);
+		
+		lblIdHosp.setText(infos[0]);
+		lblNomeCliente.setText(infos[1]);
+		lblNumeroAcm.setText(infos[5]);
+		lblPreco.setText(infos[9]);
+		
+		// Preenchendo table de itens da conta da hospedagem
+		modelItens.addColumn("Descrição");
+		modelItens.addColumn("Preço");
+		modelItens.addColumn("Quantidade");
+		String[][] itens = controller.getItensHospedagem(id);
+		for(String[] linha : itens) {
+			modelItens.addRow(itens[0]);
+			modelItens.addRow(itens[1]);
+			modelItens.addRow(itens[2]);
+		}
+		
+		// Preenchendo table de acompanhantes da hospedagem
+		
+		modelAcompanhantes.addColumn("Nome");
+		modelAcompanhantes.addColumn("CPF");
+		modelAcompanhantes.addColumn("Telefone");
+		modelAcompanhantes.addColumn("Email");
+		String[][] acompanhantes = controller.getAcompanhantesHospedagem(id);
+		for(String[] linha : itens) {
+			modelAcompanhantes.addRow(itens[0]);
+			modelAcompanhantes.addRow(itens[1]);
+			modelAcompanhantes.addRow(itens[2]);
+			modelAcompanhantes.addRow(itens[3]);
+		}
+		
+		modelAcompanhantes.fireTableDataChanged();
+		modelItens.fireTableDataChanged();
 	}
 }

@@ -264,6 +264,11 @@ public class CheckOutView extends JFrame {
 		panel.add(btnVisualizar, gbc_btnVisualizar);
 		
 		JButton btnPagar = new JButton("Pagar");
+		btnPagar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				PagamentoView janela = new PagamentoView(Integer.parseInt(infos[0]));
+			}
+		});
 		GridBagConstraints gbc_btnPagar = new GridBagConstraints();
 		gbc_btnPagar.fill = GridBagConstraints.HORIZONTAL;
 		gbc_btnPagar.insets = new Insets(0, 0, 5, 5);

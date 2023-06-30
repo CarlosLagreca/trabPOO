@@ -107,6 +107,11 @@ public class HospedagensView extends JFrame {
 		JLabel lblNewLabel_3_1 = new JLabel("Itens da Hospedagem");
 		
 		JButton btnNewButton_1 = new JButton("Visualizar Hospedagem");
+		btnNewButton_1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				vizualizarOldAction();
+			}
+		});
 		
 		tableOld = new JTable();
 		tableOld.setModel(tableModelOld);
@@ -142,6 +147,22 @@ public class HospedagensView extends JFrame {
 		);
 		panel_1_1.setLayout(gl_panel_1_1);		
 		
+	}
+	
+	private void vizualizarOldAction() {
+		try {
+			String input = JOptionPane.showInputDialog("Insira a Acomodação");
+			if (input == null || (input != null && ("".equals(input)))) {
+				return;
+			}
+			GerenciarHospedagemView janela = new GerenciarHospedagemView(input.toString());
+			janela.setVisible(true);
+		} catch(ArrayIndexOutOfBoundsException e) {
+			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void vizualizarCurrentAction() {

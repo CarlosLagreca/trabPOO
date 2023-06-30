@@ -285,6 +285,11 @@ public class MenuView extends JFrame {
 					janela.setVisible(true);
 				} catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+				} catch(NullPointerException ex) {
+					JOptionPane.showMessageDialog(null, "Nenhuma hospedagem na acomodação informada.", "Atenção!", JOptionPane.WARNING_MESSAGE);
+				} catch(Exception ex) {
+					ex.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
