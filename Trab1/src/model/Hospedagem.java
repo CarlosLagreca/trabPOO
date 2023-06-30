@@ -53,11 +53,11 @@ public class Hospedagem implements Serializable {
 	public double getValorDiarias() {
 		long dias = ChronoUnit.DAYS.between(LocalDateTime.now(), checkin);
 		if (LocalDateTime.now().getHour() > limiteCheckout && checkin.getHour() < inicioCheckin)
-			return dias * acomodacao.getTarifaDiaria() + 2;
+			return (dias + 2) * acomodacao.getTarifaDiaria();
 		else if(LocalDateTime.now().getHour() > limiteCheckout)
-			return dias * acomodacao.getTarifaDiaria() + 1;
+			return (dias + 1) * acomodacao.getTarifaDiaria();
 		else if(checkin.getHour() < inicioCheckin)
-			return dias * acomodacao.getTarifaDiaria() + 1;
+			return (dias + 1) * acomodacao.getTarifaDiaria();
 		else if(dias == 0)
 			return acomodacao.getTarifaDiaria();
 		else 
@@ -88,7 +88,10 @@ public class Hospedagem implements Serializable {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
 		lista.add(hospede.getNome());
-		lista.add(Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), checkin)));
+		long dias = ChronoUnit.DAYS.between(LocalDateTime.now(), checkin);
+		if(dias == 0)
+			dias = 1;
+		lista.add(Long.toString(dias));
 		lista.add(acomodacao.getTipo());
 		lista.add(Long.toString(hospede.getCpf()));
 		lista.add(Integer.toString(acompanhantes.size()));

@@ -8,7 +8,6 @@ import javax.swing.table.DefaultTableModel;
 
 import controller.HospedagemController;
 import controller.MainController;
-import model.Hospedagem;
 
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -184,9 +183,7 @@ public class GerenciarHospedagemView extends JFrame {
 		modelItens.addColumn("Quantidade");
 		String[][] itens = controller.getItensHospedagem(numApt);
 		for(String[] linha : itens) {
-			modelItens.addRow(itens[0]);
-			modelItens.addRow(itens[1]);
-			modelItens.addRow(itens[2]);
+			modelItens.addRow(linha);
 		}
 		
 		// Preenchendo table de acompanhantes da hospedagem
@@ -196,11 +193,8 @@ public class GerenciarHospedagemView extends JFrame {
 		modelAcompanhantes.addColumn("Telefone");
 		modelAcompanhantes.addColumn("Email");
 		String[][] acompanhantes = controller.getAcompanhantesHospedagem(numApt);
-		for(String[] linha : itens) {
-			modelAcompanhantes.addRow(itens[0]);
-			modelAcompanhantes.addRow(itens[1]);
-			modelAcompanhantes.addRow(itens[2]);
-			modelAcompanhantes.addRow(itens[3]);
+		for(String[] linha : acompanhantes) {
+			modelAcompanhantes.addRow(linha);
 		}
 		
 		modelAcompanhantes.fireTableDataChanged();
@@ -223,9 +217,7 @@ public class GerenciarHospedagemView extends JFrame {
 		modelItens.addColumn("Quantidade");
 		String[][] itens = controller.getItensHospedagem(id);
 		for(String[] linha : itens) {
-			modelItens.addRow(itens[0]);
-			modelItens.addRow(itens[1]);
-			modelItens.addRow(itens[2]);
+			modelItens.addRow(linha);
 		}
 		
 		// Preenchendo table de acompanhantes da hospedagem
@@ -235,11 +227,8 @@ public class GerenciarHospedagemView extends JFrame {
 		modelAcompanhantes.addColumn("Telefone");
 		modelAcompanhantes.addColumn("Email");
 		String[][] acompanhantes = controller.getAcompanhantesHospedagem(id);
-		for(String[] linha : itens) {
-			modelAcompanhantes.addRow(itens[0]);
-			modelAcompanhantes.addRow(itens[1]);
-			modelAcompanhantes.addRow(itens[2]);
-			modelAcompanhantes.addRow(itens[3]);
+		for(String[] linha : acompanhantes) {
+			modelAcompanhantes.addRow(linha);
 		}
 		
 		modelAcompanhantes.fireTableDataChanged();

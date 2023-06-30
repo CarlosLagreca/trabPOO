@@ -147,11 +147,19 @@ public class HospedagemController implements Serializable{
 		return oldHospedagens.get(x).listarDados();
 	}
 	
-	public String[][] getItensHospedagem(){
-		return getItensHospedagem();
+	public String[][] getItensHospedagem(int apt){
+		return hospedagens.get(apt).getItensHospedagem();
 	}
 	
-	public String[][] getAcompanhantesHospedagem(){
-		return getAcompanhantesHospedagem();
+	public String[][] getItensHospedagem(String id){
+		return oldHospedagens.get(id).getItensHospedagem();
+	}
+	
+	public String[][] getAcompanhantesHospedagem(int apt){
+		return hospedagens.get(apt).getAcompanhantesHospedagem();
+	}
+	
+	public String[][] getAcompanhantesHospedagem(String id){
+		return oldHospedagens.get(id).getAcompanhantesHospedagem();
 	}
 }
