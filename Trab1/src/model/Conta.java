@@ -2,6 +2,7 @@ package model;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.List;
 
 public class Conta implements IConta, Serializable{
 	private static final long serialVersionUID = -2382567513224317717L;
@@ -28,15 +29,13 @@ public class Conta implements IConta, Serializable{
 	}
 
 	@Override
-	public StringBuilder listar() {
-		StringBuilder sb = new StringBuilder();
+	public String[][] getItens() {
+		List<String[]> table = new ArrayList<String[]>();
 		for(ItemConta item : itens) {
-			sb.append("Item: " + item.getDescricao() + 
-					" | Preço: R$" + item.getPreco() + 
-					" | Qtd: " + item.getQtde() + "\n");
-			
+			String[] linha = {item.getDescricao(), Double.toString(item.getPreco()), Integer.toString(item.getQtde())};
+			table.add(linha);
 		}
-		return sb;
+		return table.toArray(new String[0][0]);
 	}
 
 }
