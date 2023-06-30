@@ -1,11 +1,11 @@
 package model;
 
 import java.io.Serializable;
-import java.time.LocalDateTime;
-import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.UUID;
+import java.util.concurrent.TimeUnit;
 
 import model.Acomodacao.EEstadoOcupacao;
 import model.Pagamento.ETipoPagamento;
@@ -16,9 +16,9 @@ public class Hospedagem implements Serializable {
 	private int inicioCheckin = 13;
 	private int limiteCheckout = 12;
 	private final String id = UUID.randomUUID().toString().replace("-", "");
-	private LocalDateTime checkin;
+	private Date checkin;
 	private IConta conta;
-	private LocalDateTime checkout;
+	private Date checkout;
 	private IHospede hospede;
 	private List<IHospede> acompanhantes = new ArrayList<IHospede>();
 	private IAcomodacao acomodacao;
@@ -35,7 +35,7 @@ public class Hospedagem implements Serializable {
 	}
 
 	public Hospedagem(Acomodacao acomodacao, Hospede hospede) {
-		this.checkin = LocalDateTime.now();
+		this.checkin = new Date();
 		this.conta = new Conta();
 		this.acomodacao = acomodacao;
 		this.hospede = hospede;
@@ -50,17 +50,12 @@ public class Hospedagem implements Serializable {
 	}
 
 	public double getValorDiarias() {
-		long dias = ChronoUnit.DAYS.between(LocalDateTime.now(), checkin);
-		if (LocalDateTime.now().getHour() > limiteCheckout && checkin.getHour() < inicioCheckin)
-			return dias * acomodacao.getTarifaDiaria() + 2;
-		else if(LocalDateTime.now().getHour() > limiteCheckout)
-			return dias * acomodacao.getTarifaDiaria() + 1;
-		else if(checkin.getHour() < inicioCheckin)
-			return dias * acomodacao.getTarifaDiaria() + 1;
-		else if(dias == 0)
+		long periodo = getDateDiff(checkin, new Date(), TimeUnit.DAYS);
+		if (periodo < 1) {
 			return acomodacao.getTarifaDiaria();
-		else 
-			return dias * acomodacao.getTarifaDiaria();
+		}
+
+		return periodo * acomodacao.getTarifaDiaria();
 	}
 
 	public double getValorAcompanhantes() {
@@ -87,7 +82,7 @@ public class Hospedagem implements Serializable {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
 		lista.add(hospede.getNome());
-		lista.add(Long.toString(ChronoUnit.DAYS.between(LocalDateTime.now(), checkin)));
+		lista.add(Long.toString(getDateDiff(checkin, new Date(), TimeUnit.DAYS)));
 		lista.add(acomodacao.getTipo());
 		lista.add(Long.toString(hospede.getCpf()));
 		lista.add(Integer.toString(acompanhantes.size()));
@@ -98,25 +93,12 @@ public class Hospedagem implements Serializable {
 		lista.add(Double.toString(getValorPago()));
 		return lista.toArray(new String[0]);
 	}
-	
-	public String[][] getItensHospedagem() {
-		return conta.getItens();
-	}
-	
-	public String[][] getAcompanhantesHospedagem(){
-		List<String[]> table = new ArrayList<String[]>();
-		for (IHospede acompanhante : acompanhantes) {
-			String[] linha = {acompanhante.getNome(), Long.toString(acompanhante.getCpf()), Long.toString(acompanhante.getTelefone()), acompanhante.getEmail()};
-			table.add(linha);
-		}
-		return table.toArray(new String[0][0]);
-	}
 
 	public String getId() {
 		return id;
 	}
-	
-	public LocalDateTime getCheckin() {
+
+	public Date getCheckin() {
 		return checkin;
 	}
 
@@ -132,16 +114,18 @@ public class Hospedagem implements Serializable {
 		return acomodacao;
 	}
 	
-	public LocalDateTime getCheckout() {
-		return checkout;
-	}
-	
 	public void realizarCheckout() {
 		// TODO: Verificar questão do limite checkout
 		// TODO: Verificar se ja está corretamente pago
-		checkout = LocalDateTime.now();
+		checkout = new Date();
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
 	}
 	
-	
+
+	// TODO: Criar package utilities
+	public static long getDateDiff(Date date1, Date date2, TimeUnit timeUnit) {
+		long diffInMillies = date2.getTime() - date1.getTime();
+		return timeUnit.convert(diffInMillies, TimeUnit.MILLISECONDS);
+	}
+
 }
