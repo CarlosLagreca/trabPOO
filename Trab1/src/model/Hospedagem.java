@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
@@ -146,11 +147,20 @@ public class Hospedagem implements Serializable {
 		return checkout;
 	}
 	
-	public void realizarCheckout() {
+	public boolean realizarCheckout() {
 		// TODO: Verificar questão do limite checkout
 		// TODO: Verificar se ja está corretamente pago
-		checkout = LocalDateTime.now();
-		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);
+		double totalPago=0;
+		for (Pagamento pag : pagamento) {
+			totalPago += pag.getValor();
+		}
+		
+		if(getValorTotal() <= totalPago) {
+			checkout = LocalDateTime.now();
+			acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);	
+			return true;
+		}
+		return false;
 	}
 	
 	

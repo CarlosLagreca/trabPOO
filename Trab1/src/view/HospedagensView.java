@@ -130,42 +130,63 @@ public class HospedagensView extends JFrame {
 	}
 	
 	private void vizualizarOldAction() {
+//		try {
+//			String input = JOptionPane.showInputDialog("Insira a Acomodação");
+//			if (input == null || (input != null && ("".equals(input)))) {
+//				return;
+//			}
+//			GerenciarHospedagemView janela = new GerenciarHospedagemView(input.toString());
+//			janela.setVisible(true);
+//		} catch(ArrayIndexOutOfBoundsException e) {
+//			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+//		}
 		try {
-			String input = JOptionPane.showInputDialog("Insira a Acomodação");
-			if (input == null || (input != null && ("".equals(input)))) {
+			int index = tableNew.getSelectedRow();
+			System.out.println(index);
+			if(index <0) {
+				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
+						JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			GerenciarHospedagemView janela = new GerenciarHospedagemView(input.toString());
+			String idHospedagem = tableModelOld.getValueAt(index, 1).toString();
+			GerenciarHospedagemView janela = new GerenciarHospedagemView(idHospedagem);		
 			janela.setVisible(true);
-		} catch(ArrayIndexOutOfBoundsException e) {
-			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
-		} catch(Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
 	private void vizualizarCurrentAction() {
+
 		try {
-			String input = JOptionPane.showInputDialog("Insira a Acomodação");
-			if (input == null || (input != null && ("".equals(input)))) {
+			int index = tableNew.getSelectedRow();
+			System.out.println(index);
+			if(index <0) {
+				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
+						JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			GerenciarHospedagemView janela = new GerenciarHospedagemView(Integer.parseInt(input), false);
+			int numApt = Integer.parseInt(tableModelCurrent.getValueAt(index, 0).toString());
+			GerenciarHospedagemView janela = new GerenciarHospedagemView(numApt, false);		
 			janela.setVisible(true);
-		} catch(ArrayIndexOutOfBoundsException e) {
-			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
-		} catch(Exception e) {
+			
+		}catch(Exception e) {
 			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
+		
 	}
 	
 	private void tableCurrent() {
 		HospedagemController controller = MainController.getHospedagemController();
-		tableNew = new JTable();
 		
-		
+		tableModelCurrent.setColumnCount(0);
+		tableModelCurrent.setRowCount(0);
 		tableModelCurrent.addColumn("Numero Apt.");
 		tableModelCurrent.addColumn("ID");
 		tableModelCurrent.addColumn("Nome Hospede");
@@ -181,9 +202,9 @@ public class HospedagensView extends JFrame {
 	
 	private void tableOld() {
 		HospedagemController controller = MainController.getHospedagemController();
-		tableOld = new JTable();
 		
-		
+		tableModelCurrent.setColumnCount(0);
+		tableModelCurrent.setRowCount(0);
 		tableModelOld.addColumn("Numero Apt.");
 		tableModelOld.addColumn("ID");
 		tableModelOld.addColumn("Nome Hospede");

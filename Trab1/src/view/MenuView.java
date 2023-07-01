@@ -327,6 +327,7 @@ public class MenuView extends JFrame {
 		btnInfoHospedagens.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HospedagensView janela = new HospedagensView();
+				//TesteView janela = new TesteView();
 				janela.setVisible(true);
 			}
 		});
