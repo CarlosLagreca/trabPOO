@@ -6,6 +6,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import javax.swing.JOptionPane;
+
 import model.Acomodacao;
 import model.Acomodacao.EEstadoOcupacao;
 import model.Hospedagem;
@@ -120,9 +122,15 @@ public class HospedagemController implements Serializable{
 	
 	public void realizarCheckout(int numeroApt) {
 		try {
-			hospedagens.get(numeroApt).realizarCheckout();
-			oldHospedagens.put(hospedagens.get(numeroApt).getId(), hospedagens.get(numeroApt));
-			hospedagens.remove(numeroApt);
+			boolean check = hospedagens.get(numeroApt).realizarCheckout();
+			if(check) {
+				oldHospedagens.put(hospedagens.get(numeroApt).getId(), hospedagens.get(numeroApt));
+				hospedagens.remove(numeroApt);
+				MainController.save();
+			}
+			else {
+				JOptionPane.showMessageDialog(null, "Faça o pagamento completo para realizar o checkout", "Erro!", JOptionPane.ERROR_MESSAGE);
+			}
 		}catch(Exception e){
 			e.printStackTrace();
 			throw e;
