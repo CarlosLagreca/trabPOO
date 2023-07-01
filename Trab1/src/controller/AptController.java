@@ -15,7 +15,6 @@ public class AptController implements Serializable {
 	private static final long serialVersionUID = 2252831249496233980L;
 
 	
-	//TODO: Arrumar relação entre acomodação e tipos.
 	private Map<Integer, Acomodacao> apartamentos;
 	private Map<String, TipoAcomodacao> tipos;
 

@@ -322,15 +322,15 @@ public class CheckOutView extends JFrame {
 		// Preechendo as labels com as informações recebidas
 		lblNumeroApt.setText(infos[0]);
 		lblNomeCliente.setText(infos[1]);
-		lblPeriodoEstadia.setText(infos[2]);
+		lblPeriodoEstadia.setText(infos[2] + " dias");
 		lblTipoApt.setText(infos[3]);
 		lblCpfCliente.setText(infos[4]);
 		lblAcompanhantes.setText(infos[5]);
-		lblDiaria.setText(infos[6]);
-		lblPrecoAcomp.setText(infos[7]);
-		lblConta.setText(infos[8]);
-		lblPreçoTotal.setText(infos[9]);
-		lblPreçoPago.setText(infos[10]);
+		lblDiaria.setText("R$ " + infos[6]);
+		lblPrecoAcomp.setText("R$ " + infos[7]);
+		lblConta.setText("R$ " + infos[8]);
+		lblPreçoTotal.setText("R$ " + infos[9]);
+		lblPreçoPago.setText("R$ " + infos[10]);
 		
 	}
 

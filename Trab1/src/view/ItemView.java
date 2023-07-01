@@ -182,7 +182,7 @@ public class ItemView extends JFrame {
 			ItemController controller = MainController.getItemController();
 			long codigo = Long.parseLong(txtCodigo.getText());
 			String descricao = txtDescricao.getText();
-			double preco = Double.parseDouble(txtPreco.getText());
+			double preco = Double.parseDouble(txtPreco.getText().replace(',', '.'));
 			String categoria = comboBox.getSelectedItem().toString();
 			controller.addItem(categoria, codigo, descricao, preco);
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);

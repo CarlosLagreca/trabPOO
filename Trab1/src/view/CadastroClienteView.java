@@ -170,6 +170,8 @@ public class CadastroClienteView extends JDialog {
 		btnCancelar.setBackground(new Color(255, 153, 153));
 		panel_4.add(btnCancelar);
 		
+		getRootPane().setDefaultButton(btnCadastrar);
+		
 		setModal(true);
 	}
 

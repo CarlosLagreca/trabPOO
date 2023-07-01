@@ -40,8 +40,6 @@ public class MenuView extends JFrame {
 	 * TODO: Não se esquecer de retirar TODOs.
 	 * TODO: Investigar getSelectedRow nas tabelas (InfoHospedagens).
 	 * TODO: Resolver remendicionamento da janela de gerenciamento (segunda tab) (deve ter um action listener no botao da tab)
-	 * TODO: Botar R$ nos preços das views que mostram preços.
-	 * TODO: Fazer tratamento de ponto para virgula e vice-versa nos inputs de preço (?)
 	 * TODO: Implementar edição do cliente. (excluir clientes também)
 	 * TODO: Colocar um ícone decente.
 	 */

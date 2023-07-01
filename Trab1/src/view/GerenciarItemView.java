@@ -180,7 +180,7 @@ public class GerenciarItemView extends JFrame {
 			}
 			
 			long codigo = Long.parseLong(tableModel.getValueAt(index, 0).toString());
-			double preco = Double.parseDouble(textField_1.getText());
+			double preco = Double.parseDouble(textField_1.getText().replace(',', '.'));
 			controller.editPreco(categoria, codigo, preco);
 			JOptionPane.showMessageDialog(null, "Preço alterado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			listarAction();

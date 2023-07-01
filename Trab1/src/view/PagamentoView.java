@@ -162,7 +162,7 @@ public class PagamentoView extends JDialog {
 		try {
 			HospedagemController controller = MainController.getHospedagemController();
 			ETipoPagamento tipo = (ETipoPagamento) comboBox.getSelectedItem();
-			double valor = Double.parseDouble(textField.getText());
+			double valor = Double.parseDouble(textField.getText().replace(',', '.'));
 			int id = Integer.parseInt(labelid.getText());
 			controller.realizarPagamento(tipo, valor, id);
 			JOptionPane.showMessageDialog(null, "Pagamento realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
@@ -175,7 +175,6 @@ public class PagamentoView extends JDialog {
 	
 	private void setDados(int id) {
 		HospedagemController controller = MainController.getHospedagemController();
-//		Hospedagem hospedagem = controller.getHospedagem(id);
 		double valor = controller.getValorTotal(id);
 		labelid.setText(Integer.toString(id));
 		TotalValor.setText(Double.toString(valor));
