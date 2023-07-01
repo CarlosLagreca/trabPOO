@@ -84,6 +84,9 @@ public class Hospedagem implements Serializable {
 		acompanhantes.addAll(list);
 	}
 
+	private String getTime(LocalDateTime x) {
+		return String.format("%s/%s/%s", Integer.toString(x.getDayOfMonth()), Integer.toString(x.getMonthValue()), Integer.toString(x.getYear()));
+	}
 	public String[] listarDados() {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
@@ -100,6 +103,9 @@ public class Hospedagem implements Serializable {
 		lista.add(Double.toString(getValorItens()));
 		lista.add(Double.toString(getValorTotal()));
 		lista.add(Double.toString(getValorPago()));
+		lista.add(getTime(checkin));
+		if(checkout == null) {}
+		else lista.add(getTime(checkout));
 		return lista.toArray(new String[0]);
 	}
 	

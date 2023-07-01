@@ -9,6 +9,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.HospedagemController;
 import controller.MainController;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
 import javax.swing.JLabel;
@@ -54,8 +55,7 @@ public class HospedagensView extends JFrame {
 		
 		JPanel panel_1 = new JPanel();
 		tabbedPane.addTab("Hospedagens Ativas", null, panel_1, null);
-		
-		JLabel lblNewLabel_3 = new JLabel("Itens da Hospedagem");
+		setMinimumSize(new Dimension(500, 350));
 		
 		JButton btnNewButton = new JButton("Visualizar Hospedagem");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -70,28 +70,20 @@ public class HospedagensView extends JFrame {
 		barraRolagem1 = new JScrollPane(tableNew);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
-			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
-					.addGap(209)
-					.addComponent(lblNewLabel_3)
-					.addGap(210))
-				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
-					.addContainerGap(194, Short.MAX_VALUE)
-					.addComponent(btnNewButton)
-					.addGap(189))
+			gl_panel_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1.createSequentialGroup()
 					.addGap(30)
-					.addComponent(barraRolagem1, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(28, Short.MAX_VALUE))
+					.addGroup(gl_panel_1.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+						.addComponent(barraRolagem1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+					.addGap(28))
 		);
 		gl_panel_1.setVerticalGroup(
 			gl_panel_1.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel_1.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panel_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel_3)
-					.addGap(14)
-					.addComponent(barraRolagem1, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(barraRolagem1, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewButton)
 					.addContainerGap())
 		);
@@ -103,8 +95,6 @@ public class HospedagensView extends JFrame {
 		
 		JPanel panel_1_1 = new JPanel();
 		panel.add(panel_1_1);
-		
-		JLabel lblNewLabel_3_1 = new JLabel("Itens da Hospedagem");
 		
 		JButton btnNewButton_1 = new JButton("Visualizar Hospedagem");
 		btnNewButton_1.addActionListener(new ActionListener() {
@@ -118,30 +108,20 @@ public class HospedagensView extends JFrame {
 		barraRolagem2 = new JScrollPane(tableOld);
 		GroupLayout gl_panel_1_1 = new GroupLayout(panel_1_1);
 		gl_panel_1_1.setHorizontalGroup(
-			gl_panel_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 524, Short.MAX_VALUE)
-				.addGroup(gl_panel_1_1.createSequentialGroup()
-					.addGap(209)
-					.addComponent(lblNewLabel_3_1)
-					.addGap(210))
-				.addGroup(Alignment.TRAILING, gl_panel_1_1.createSequentialGroup()
-					.addContainerGap(194, Short.MAX_VALUE)
-					.addComponent(btnNewButton_1)
-					.addGap(189))
+			gl_panel_1_1.createParallelGroup(Alignment.TRAILING)
 				.addGroup(gl_panel_1_1.createSequentialGroup()
 					.addGap(30)
-					.addComponent(barraRolagem2, GroupLayout.PREFERRED_SIZE, 466, GroupLayout.PREFERRED_SIZE)
-					.addContainerGap(28, Short.MAX_VALUE))
+					.addGroup(gl_panel_1_1.createParallelGroup(Alignment.TRAILING)
+						.addComponent(btnNewButton_1, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE)
+						.addComponent(barraRolagem2, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 466, Short.MAX_VALUE))
+					.addGap(28))
 		);
 		gl_panel_1_1.setVerticalGroup(
 			gl_panel_1_1.createParallelGroup(Alignment.LEADING)
-				.addGap(0, 305, Short.MAX_VALUE)
-				.addGroup(gl_panel_1_1.createSequentialGroup()
+				.addGroup(Alignment.TRAILING, gl_panel_1_1.createSequentialGroup()
 					.addContainerGap()
-					.addComponent(lblNewLabel_3_1)
-					.addGap(14)
-					.addComponent(barraRolagem2, GroupLayout.PREFERRED_SIZE, 226, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+					.addComponent(barraRolagem2, GroupLayout.DEFAULT_SIZE, 254, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(btnNewButton_1)
 					.addContainerGap())
 		);

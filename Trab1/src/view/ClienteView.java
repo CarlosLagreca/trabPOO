@@ -8,6 +8,7 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.border.EmptyBorder;
 
+import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -33,14 +34,13 @@ public class ClienteView extends JFrame {
 	}
 	
 	private void initialize() {
-		setResizable(false);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(ClienteView.class.getResource("/view/icone.png")));
 		setTitle("Clientes");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 800, 600);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
-
+		setMinimumSize(new Dimension(500, 300));
 		setContentPane(contentPane);
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 		
@@ -72,10 +72,10 @@ public class ClienteView extends JFrame {
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
 					.addGap(17)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
 						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, 747, Short.MAX_VALUE)
-						.addGroup(Alignment.TRAILING, gl_panel.createSequentialGroup()
-							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 636, Short.MAX_VALUE)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 624, Short.MAX_VALUE)
 							.addGap(18)
 							.addComponent(btnNewButton_1, GroupLayout.PREFERRED_SIZE, 105, GroupLayout.PREFERRED_SIZE)))
 					.addContainerGap())
@@ -87,9 +87,9 @@ public class ClienteView extends JFrame {
 					.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
 					.addGap(14)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-						.addComponent(barraRolagem, GroupLayout.PREFERRED_SIZE, 492, GroupLayout.PREFERRED_SIZE)
+						.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 492, Short.MAX_VALUE)
 						.addComponent(btnNewButton_1))
-					.addContainerGap(311, Short.MAX_VALUE))
+					.addContainerGap())
 		);
 		panel.setLayout(gl_panel);
 	}

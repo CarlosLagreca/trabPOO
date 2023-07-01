@@ -26,6 +26,7 @@ import javax.swing.GroupLayout.Alignment;
 import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import java.awt.Toolkit;
+import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenuView extends JFrame {
 	private static final long serialVersionUID = -4786237314541903229L;
@@ -50,8 +51,8 @@ public class MenuView extends JFrame {
 	public MenuView() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 100, 800, 600);
-		setMinimumSize(new Dimension(500, 400));
+		setBounds(200, 100, 559, 349);
+		setMinimumSize(new Dimension(530, 350));
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -272,6 +273,14 @@ public class MenuView extends JFrame {
 		JPanel panel = new JPanel();
 		panelMenu.add(panel, BorderLayout.CENTER);
 		
+		JButton btnCheckin = new JButton("CheckIn");
+		btnCheckin.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CheckInView janela = new CheckInView();
+				janela.setVisible(true);
+			}
+		});
+		
 		JButton btnCheckout = new JButton("CheckOut");
 		btnCheckout.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -321,45 +330,40 @@ public class MenuView extends JFrame {
 				janela.setVisible(true);
 			}
 		});
-		
-		JButton btnCheckin = new JButton("CheckIn");
-		btnCheckin.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CheckInView janela = new CheckInView();
-				janela.setVisible(true);
-			}
-		});
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
 			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(181)
-					.addComponent(btnCheckin, GroupLayout.PREFERRED_SIZE, 174, GroupLayout.PREFERRED_SIZE)
-					.addGap(37)
-					.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(193))
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(81)
-					.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(36)
-					.addComponent(btnServios, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(36)
-					.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 174, Short.MAX_VALUE)
-					.addGap(84))
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(124)
+							.addComponent(btnCheckin, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
+							.addGap(31)
+							.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
+							.addGap(75))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addGap(58)
+							.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
+							.addGap(10)
+							.addComponent(btnServios, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
+					.addGap(57))
 		);
 		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.TRAILING)
+			gl_panel.createParallelGroup(Alignment.LEADING)
 				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(162)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addComponent(btnCheckout, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnCheckin, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
 					.addGap(69)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE, false)
-						.addComponent(btnClientes, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnServios, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE)
-						.addComponent(btnInfoHospedagens, GroupLayout.PREFERRED_SIZE, 51, GroupLayout.PREFERRED_SIZE))
-					.addGap(163))
+					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+						.addComponent(btnCheckin, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
+						.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
+						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
+							.addComponent(btnServios, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
+							.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+						.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
+					.addGap(70))
 		);
 		panel.setLayout(gl_panel);
 	}

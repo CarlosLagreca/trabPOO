@@ -87,23 +87,15 @@ public class HospedagemController implements Serializable{
 		return hospedagens.get(id);
 	}
 	
-	public double getValorItens(int id) {
-		Hospedagem hospedagem = hospedagens.get(id);
-		IConta conta = hospedagem.getConta();
-		List<Pagamento> pagamento = hospedagem.getPagamento();
-		double valorPagamento = 0;
-		for (Pagamento aux : pagamento) {
-			valorPagamento+=aux.getValor();
-		}
-		//TODO tratar returns negativos
-		return conta.getTotal() - valorPagamento;	
-	}
+//	public double getValorItens(int id) {
+//		Hospedagem hospedagem = hospedagens.get(id);
+//		return hospedagem.getValorItens();	
+//	}
 	
-	public double getValorTotal(int idApartamento, int dias, int acompanhantes) {
+	public double getValorTotal(int idApartamento) {
 		Hospedagem hospedagem = hospedagens.get(idApartamento);
-		IAcomodacao apt = hospedagem.getAcomodacao();
 		
-		return apt.getTarifaDiaria()*dias + apt.getAdicionalAcompanhante()*acompanhantes*dias + getValorItens(idApartamento);
+		return hospedagem.getValorTotal();
 	}
 	
 	public String[][] getHospedagensAtuais(){

@@ -12,6 +12,7 @@ import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JComboBox;
 import javax.swing.JButton;
@@ -52,6 +53,9 @@ public class PagamentoView extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
+		setMinimumSize(new Dimension(320, 220));
+
+		
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{98, 188, 0};
 		gbl_panel.rowHeights = new int[]{17, 0, 22, 20, 36, 30, 0};
@@ -168,7 +172,7 @@ public class PagamentoView extends JFrame {
 	private void setDados(int id) {
 		HospedagemController controller = MainController.getHospedagemController();
 //		Hospedagem hospedagem = controller.getHospedagem(id);
-		double valor = controller.getValorItens(id);
+		double valor = controller.getValorTotal(id);
 		labelid.setText(Integer.toString(id));
 		TotalValor.setText(Double.toString(valor));
 	}

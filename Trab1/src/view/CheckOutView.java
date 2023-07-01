@@ -16,6 +16,7 @@ import java.awt.GridBagConstraints;
 import javax.swing.JButton;
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -55,6 +56,7 @@ public class CheckOutView extends JFrame {
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel = new JPanel();
+		setMinimumSize(new Dimension(480, 270));
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 159, 0, 0, 31, 123, 0, 0, 0};
@@ -267,6 +269,7 @@ public class CheckOutView extends JFrame {
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				PagamentoView janela = new PagamentoView(Integer.parseInt(infos[0]));
+				janela.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnPagar = new GridBagConstraints();

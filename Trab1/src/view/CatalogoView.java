@@ -37,7 +37,6 @@ public class CatalogoView extends JFrame {
 	DefaultTableModel tableModel = new DefaultTableModel();
 	private JComboBox<String> comboBox;
 	private JScrollPane barraRolagem;
-	private JTextField textCodigo;
 	private JTextField textNApt;
 	JSpinner spinner;
 
@@ -60,7 +59,7 @@ public class CatalogoView extends JFrame {
 		setTitle("Catálogo");
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 600, 400);
-		setMinimumSize(new Dimension(300, 300));
+		setMinimumSize(new Dimension(450, 300));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
@@ -99,67 +98,55 @@ public class CatalogoView extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("Quantidade:");
 
-		textCodigo = new JTextField();
-		textCodigo.setColumns(10);
-
-		JLabel lblNewLabel_2 = new JLabel("Codigo item:");
-
 		textNApt = new JTextField();
 		textNApt.setColumns(10);
 
 		JLabel lblNewLabel_3 = new JLabel("Nº Apt.:");
 		GroupLayout gl_panel = new GroupLayout(panel);
 		gl_panel.setHorizontalGroup(
-				gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup().addGap(17)
-								.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createSequentialGroup().addComponent(lblNewLabel)
-												.addPreferredGap(ComponentPlacement.RELATED).addComponent(comboBox, 0,
-														314, Short.MAX_VALUE))
-										.addComponent(
-												barraRolagem, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 436,
-												Short.MAX_VALUE))
-								.addPreferredGap(ComponentPlacement.RELATED)
-								.addGroup(gl_panel
-										.createParallelGroup(Alignment.LEADING)
-										.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-												.addComponent(btnConfirmar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE,
-														GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-												.addComponent(spinner, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105,
-														Short.MAX_VALUE))
-										.addComponent(lblNewLabel_1)
-										.addComponent(textCodigo, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-										.addComponent(lblNewLabel_2)
-										.addComponent(textNApt, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
-										.addComponent(lblNewLabel_3))
-								.addContainerGap()));
-		gl_panel.setVerticalGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup().addGap(14)
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(17)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(comboBox, 0, 314, Short.MAX_VALUE))
+						.addComponent(barraRolagem, Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 436, Short.MAX_VALUE))
+					.addPreferredGap(ComponentPlacement.RELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
 						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-								.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE,
-										Short.MAX_VALUE)
-								.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-										GroupLayout.PREFERRED_SIZE))
-						.addPreferredGap(ComponentPlacement.UNRELATED)
-						.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
-								.addGroup(
-										gl_panel.createSequentialGroup()
-												.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 292,
-														Short.MAX_VALUE)
-												.addGap(11))
-								.addGroup(gl_panel.createSequentialGroup().addComponent(lblNewLabel_3).addGap(1)
-										.addComponent(textNApt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(lblNewLabel_2)
-										.addGap(1)
-										.addComponent(textCodigo, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.RELATED).addComponent(lblNewLabel_1)
-										.addGap(1)
-										.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE,
-												GroupLayout.PREFERRED_SIZE)
-										.addPreferredGap(ComponentPlacement.UNRELATED).addComponent(btnConfirmar)
-										.addGap(8)))));
+							.addComponent(btnConfirmar, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(spinner, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE))
+						.addComponent(lblNewLabel_1)
+						.addComponent(textNApt, GroupLayout.DEFAULT_SIZE, 105, Short.MAX_VALUE)
+						.addComponent(lblNewLabel_3))
+					.addContainerGap())
+		);
+		gl_panel.setVerticalGroup(
+			gl_panel.createParallelGroup(Alignment.LEADING)
+				.addGroup(gl_panel.createSequentialGroup()
+					.addGap(14)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
+						.addComponent(lblNewLabel, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+					.addPreferredGap(ComponentPlacement.UNRELATED)
+					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 295, Short.MAX_VALUE)
+							.addGap(11))
+						.addGroup(gl_panel.createSequentialGroup()
+							.addComponent(lblNewLabel_3)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(textNApt, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED)
+							.addComponent(lblNewLabel_1)
+							.addGap(1)
+							.addComponent(spinner, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnConfirmar)
+							.addGap(8))))
+		);
 		panel.setLayout(gl_panel);
 	}
 
