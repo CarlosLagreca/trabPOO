@@ -51,7 +51,7 @@ public class MenuView extends JFrame {
 	public MenuView() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(MenuView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(200, 100, 559, 349);
+		setBounds(200, 100, 679, 429);
 		setMinimumSize(new Dimension(530, 350));
 		tabbedPane = new JTabbedPane(JTabbedPane.TOP);
 		tabbedPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -83,17 +83,25 @@ public class MenuView extends JFrame {
 		gbc_panel_1_2.gridy = 0;
 		panelGerenciamento.add(panel_1_2, gbc_panel_1_2);
 		GridBagLayout gbl_panel_1_2 = new GridBagLayout();
-		gbl_panel_1_2.columnWidths = new int[]{51, 141, 139, 148, 0};
-		gbl_panel_1_2.rowHeights = new int[]{34, 18, 94, 27, 123, 25, 137, 25, 0};
-		gbl_panel_1_2.columnWeights = new double[]{0.0, 1.0, 1.0, 1.0, Double.MIN_VALUE};
-		gbl_panel_1_2.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel_1_2.columnWidths = new int[]{21, 129, 86, 105, 121, 71, 0, 0};
+		gbl_panel_1_2.rowHeights = new int[]{35, 18, 39, 27, 39, 25, 48, 0, 25, 0};
+		gbl_panel_1_2.columnWeights = new double[]{1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel_1_2.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
 		panel_1_2.setLayout(gbl_panel_1_2);
 		
-		JButton btnItemEditPreco = new JButton("Visualizar");
-		btnItemEditPreco.addActionListener(new ActionListener() {
+		JButton btnItemCriar = new JButton("Criar novo");
+		btnItemCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				GerenciarItemView janela = new GerenciarItemView();
+				ItemView janela = new ItemView();
 				janela.setVisible(true);
+			}
+		});
+		
+		JButton btnAptCriar = new JButton("Criar novo");
+		btnAptCriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				CriarAptView novajanela = new CriarAptView(-1);
+				novajanela.setVisible(true);
 			}
 		});
 		
@@ -113,33 +121,17 @@ public class MenuView extends JFrame {
 		GridBagConstraints gbc_lblItens_2_1 = new GridBagConstraints();
 		gbc_lblItens_2_1.anchor = GridBagConstraints.NORTH;
 		gbc_lblItens_2_1.insets = new Insets(0, 0, 5, 5);
-		gbc_lblItens_2_1.gridx = 2;
+		gbc_lblItens_2_1.gridx = 3;
 		gbc_lblItens_2_1.gridy = 1;
 		panel_1_2.add(lblItens_2_1, gbc_lblItens_2_1);
-		
-		JButton btnItemCriar = new JButton("Criar novo");
-		btnItemCriar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				ItemView janela = new ItemView();
-				janela.setVisible(true);
-			}
-		});
-		
-		JButton btnAptCriar = new JButton("Criar novo");
-		btnAptCriar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				CriarAptView novajanela = new CriarAptView(-1);
-				novajanela.setVisible(true);
-			}
-		});
 		
 		JLabel lblItens_2_2 = new JLabel("Clientes");
 		lblItens_2_2.setHorizontalAlignment(SwingConstants.CENTER);
 		lblItens_2_2.setFont(new Font("Verdana", Font.BOLD, 14));
 		GridBagConstraints gbc_lblItens_2_2 = new GridBagConstraints();
 		gbc_lblItens_2_2.anchor = GridBagConstraints.NORTH;
-		gbc_lblItens_2_2.insets = new Insets(0, 0, 5, 0);
-		gbc_lblItens_2_2.gridx = 3;
+		gbc_lblItens_2_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblItens_2_2.gridx = 5;
 		gbc_lblItens_2_2.gridy = 1;
 		panel_1_2.add(lblItens_2_2, gbc_lblItens_2_2);
 		btnAptCriar.setFont(new Font("Verdana", Font.PLAIN, 14));
@@ -153,9 +145,17 @@ public class MenuView extends JFrame {
 		GridBagConstraints gbc_btnItemCriar = new GridBagConstraints();
 		gbc_btnItemCriar.anchor = GridBagConstraints.NORTH;
 		gbc_btnItemCriar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnItemCriar.gridx = 2;
+		gbc_btnItemCriar.gridx = 3;
 		gbc_btnItemCriar.gridy = 3;
 		panel_1_2.add(btnItemCriar, gbc_btnItemCriar);
+		
+		JButton btnItemEditPreco = new JButton("Visualizar");
+		btnItemEditPreco.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				GerenciarItemView janela = new GerenciarItemView();
+				janela.setVisible(true);
+			}
+		});
 		
 		JButton btnAptVisualizar = new JButton("Visualizar");
 		
@@ -184,8 +184,8 @@ public class MenuView extends JFrame {
 		btnNewButton_2.setFont(new Font("Verdana", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnNewButton_2 = new GridBagConstraints();
 		gbc_btnNewButton_2.anchor = GridBagConstraints.NORTH;
-		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton_2.gridx = 3;
+		gbc_btnNewButton_2.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton_2.gridx = 5;
 		gbc_btnNewButton_2.gridy = 3;
 		panel_1_2.add(btnNewButton_2, gbc_btnNewButton_2);
 		
@@ -200,7 +200,7 @@ public class MenuView extends JFrame {
 		GridBagConstraints gbc_btnItemEditPreco = new GridBagConstraints();
 		gbc_btnItemEditPreco.anchor = GridBagConstraints.NORTH;
 		gbc_btnItemEditPreco.insets = new Insets(0, 0, 5, 5);
-		gbc_btnItemEditPreco.gridx = 2;
+		gbc_btnItemEditPreco.gridx = 3;
 		gbc_btnItemEditPreco.gridy = 5;
 		panel_1_2.add(btnItemEditPreco, gbc_btnItemEditPreco);
 		
@@ -232,14 +232,14 @@ public class MenuView extends JFrame {
 		//TODO Terminar a parte de editar o cliente
 		JButton btnNewButton = new JButton("Editar");
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
-		gbc_btnNewButton.insets = new Insets(0, 0, 5, 0);
-		gbc_btnNewButton.gridx = 3;
+		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
+		gbc_btnNewButton.gridx = 5;
 		gbc_btnNewButton.gridy = 5;
 		panel_1_2.add(btnNewButton, gbc_btnNewButton);
 		btnAptConcluir.setFont(new Font("Tahoma", Font.PLAIN, 14));
 		GridBagConstraints gbc_btnAptConcluir = new GridBagConstraints();
 		gbc_btnAptConcluir.anchor = GridBagConstraints.NORTH;
-		gbc_btnAptConcluir.insets = new Insets(0, 0, 0, 5);
+		gbc_btnAptConcluir.insets = new Insets(0, 0, 5, 5);
 		gbc_btnAptConcluir.gridx = 1;
 		gbc_btnAptConcluir.gridy = 7;
 		panel_1_2.add(btnAptConcluir, gbc_btnAptConcluir);
@@ -272,12 +272,37 @@ public class MenuView extends JFrame {
 		
 		JPanel panel = new JPanel();
 		panelMenu.add(panel, BorderLayout.CENTER);
+		GridBagLayout gbl_panel = new GridBagLayout();
+		gbl_panel.columnWidths = new int[]{38, 183, 54, 31, 75, 177, 0, 0};
+		gbl_panel.rowHeights = new int[]{69, 46, 49, 86, 0};
+		gbl_panel.columnWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_panel.rowWeights = new double[]{1.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		panel.setLayout(gbl_panel);
 		
 		JButton btnCheckin = new JButton("CheckIn");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				CheckInView janela = new CheckInView();
 				janela.setVisible(true);
+			}
+		});
+		GridBagConstraints gbc_btnCheckin = new GridBagConstraints();
+		gbc_btnCheckin.fill = GridBagConstraints.BOTH;
+		gbc_btnCheckin.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCheckin.gridwidth = 3;
+		gbc_btnCheckin.gridx = 1;
+		gbc_btnCheckin.gridy = 1;
+		panel.add(btnCheckin, gbc_btnCheckin);
+		
+		JButton btnClientes = new JButton("Cadastro Clientes");
+		btnClientes.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					CadastroClienteView frame = new CadastroClienteView();
+					frame.setVisible(true);
+				} catch (Exception exp) {
+					exp.printStackTrace();
+				}
 			}
 		});
 		
@@ -302,18 +327,19 @@ public class MenuView extends JFrame {
 				}
 			}
 		});
-		
-		JButton btnClientes = new JButton("Cadastro Clientes");
-		btnClientes.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				try {
-					CadastroClienteView frame = new CadastroClienteView();
-					frame.setVisible(true);
-				} catch (Exception exp) {
-					exp.printStackTrace();
-				}
-			}
-		});
+		GridBagConstraints gbc_btnCheckout = new GridBagConstraints();
+		gbc_btnCheckout.gridwidth = 2;
+		gbc_btnCheckout.fill = GridBagConstraints.BOTH;
+		gbc_btnCheckout.insets = new Insets(0, 0, 5, 5);
+		gbc_btnCheckout.gridx = 4;
+		gbc_btnCheckout.gridy = 1;
+		panel.add(btnCheckout, gbc_btnCheckout);
+		GridBagConstraints gbc_btnClientes = new GridBagConstraints();
+		gbc_btnClientes.fill = GridBagConstraints.BOTH;
+		gbc_btnClientes.insets = new Insets(0, 0, 5, 5);
+		gbc_btnClientes.gridx = 1;
+		gbc_btnClientes.gridy = 2;
+		panel.add(btnClientes, gbc_btnClientes);
 		
 		JButton btnServios = new JButton("Serviços Adicionais");
 		btnServios.addActionListener(new ActionListener() {
@@ -322,6 +348,13 @@ public class MenuView extends JFrame {
 				janela.setVisible(true);
 			}
 		});
+		GridBagConstraints gbc_btnServios = new GridBagConstraints();
+		gbc_btnServios.fill = GridBagConstraints.BOTH;
+		gbc_btnServios.insets = new Insets(0, 0, 5, 5);
+		gbc_btnServios.gridwidth = 3;
+		gbc_btnServios.gridx = 2;
+		gbc_btnServios.gridy = 2;
+		panel.add(btnServios, gbc_btnServios);
 		
 		JButton btnInfoHospedagens = new JButton("Info. Hospedagens");
 		btnInfoHospedagens.addActionListener(new ActionListener() {
@@ -331,41 +364,11 @@ public class MenuView extends JFrame {
 				janela.setVisible(true);
 			}
 		});
-		GroupLayout gl_panel = new GroupLayout(panel);
-		gl_panel.setHorizontalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING)
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(124)
-							.addComponent(btnCheckin, GroupLayout.DEFAULT_SIZE, 115, Short.MAX_VALUE)
-							.addGap(31)
-							.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 116, Short.MAX_VALUE)
-							.addGap(75))
-						.addGroup(gl_panel.createSequentialGroup()
-							.addGap(58)
-							.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 128, Short.MAX_VALUE)
-							.addGap(10)
-							.addComponent(btnServios, GroupLayout.DEFAULT_SIZE, 123, Short.MAX_VALUE)
-							.addPreferredGap(ComponentPlacement.UNRELATED)
-							.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 132, Short.MAX_VALUE)))
-					.addGap(57))
-		);
-		gl_panel.setVerticalGroup(
-			gl_panel.createParallelGroup(Alignment.LEADING)
-				.addGroup(gl_panel.createSequentialGroup()
-					.addGap(69)
-					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-						.addComponent(btnCheckin, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE)
-						.addComponent(btnCheckout, GroupLayout.DEFAULT_SIZE, 46, Short.MAX_VALUE))
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addGroup(gl_panel.createParallelGroup(Alignment.LEADING, false)
-						.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
-							.addComponent(btnServios, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE)
-							.addComponent(btnInfoHospedagens, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-						.addComponent(btnClientes, GroupLayout.DEFAULT_SIZE, 49, Short.MAX_VALUE))
-					.addGap(70))
-		);
-		panel.setLayout(gl_panel);
+		GridBagConstraints gbc_btnInfoHospedagens = new GridBagConstraints();
+		gbc_btnInfoHospedagens.insets = new Insets(0, 0, 5, 5);
+		gbc_btnInfoHospedagens.fill = GridBagConstraints.BOTH;
+		gbc_btnInfoHospedagens.gridx = 5;
+		gbc_btnInfoHospedagens.gridy = 2;
+		panel.add(btnInfoHospedagens, gbc_btnInfoHospedagens);
 	}
 }
