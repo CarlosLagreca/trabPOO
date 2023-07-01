@@ -29,6 +29,7 @@ import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 import javax.swing.JTextField;
 
+// TODO: Zerar spin appós adicionar item.
 public class CatalogoView extends JFrame {
 	private static final long serialVersionUID = -2567542433679844732L;
 
@@ -188,7 +189,6 @@ public class CatalogoView extends JFrame {
 			JOptionPane.showMessageDialog(null, "Produto inserido na conta!", "Sucesso!",
 					JOptionPane.INFORMATION_MESSAGE);
 			textNApt.setText("");
-			textCodigo.setText("");
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente", "Erro!",
 					JOptionPane.ERROR_MESSAGE);

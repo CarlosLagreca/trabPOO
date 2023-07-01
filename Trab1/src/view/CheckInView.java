@@ -51,6 +51,7 @@ public class CheckInView extends JFrame {
 	private JButton btnConfCliente;
 	/*
 	 * TODO: Melhorar tratamento de erros;
+	 * TODO: Ta dando merda nos acompanhantes
 	 */
 
 	public CheckInView() {

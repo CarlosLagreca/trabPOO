@@ -34,13 +34,16 @@ public class MenuView extends JFrame {
 	
 	/**
 	 * ESPAÇO PARA TODOs gerais do projeto:
-	 * TODO: Fazer botão (janela) Serviços adicionais.
-	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 * TODO: Organizar arquivos.
-	 * TODO: Fazer tratamento de erros no model
-	 * TODO: Não se esquecer de retirar TODOs
-	 * TODO: Investigar getSelectedRow nas tabelas.
+	 * TODO: Fazer tratamento de erros no model.
+	 * TODO: Não se esquecer de retirar TODOs.
+	 * TODO: Investigar getSelectedRow nas tabelas (InfoHospedagens).
+	 * TODO: Resolver remendicionamento da janela de gerenciamento (segunda tab) (deve ter um action listener no botao da tab)
+	 * TODO: Botar R$ nos preços das views que mostram preços.
+	 * TODO: Fazer tratamento de ponto para virgula e vice-versa nos inputs de preço (?)
+	 * TODO: Implementar edição do cliente. (excluir clientes também)
+	 * TODO: Colocar um ícone decente.
 	 */
 	
 
