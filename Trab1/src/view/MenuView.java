@@ -34,7 +34,6 @@ public class MenuView extends JFrame {
 	/**
 	 * ESPAÇO PARA TODOs gerais do projeto:
 	 * TODO: Fazer botão (janela) Serviços adicionais.
-	 * TODO: Fazer botão (janela) Checkout.
 	 * TODO: Fazer botão (janela) Info. Hospedagens.
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 * TODO: Organizar arquivos.

@@ -180,7 +180,14 @@ public class GerenciarItemView extends JFrame {
 		try {
 			ItemController controller = MainController.getItemController();
 			String categoria = (String) comboBox.getSelectedItem();
-			long codigo = Long.parseLong(textField.getText());
+			int index = table.getSelectedRow();
+			if(index < 0) {
+				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
+			long codigo = Long.parseLong(tableModel.getValueAt(index, 0).toString());
 			double preco = Double.parseDouble(textField_1.getText());
 			controller.editPreco(categoria, codigo, preco);
 			JOptionPane.showMessageDialog(null, "Preço alterado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -197,7 +204,14 @@ public class GerenciarItemView extends JFrame {
 		try {
 			ItemController controller = MainController.getItemController();
 			String categoria = (String) comboBox.getSelectedItem();
-			long codigo = Long.parseLong(textField.getText());
+			int index = table.getSelectedRow();
+			if(index < 0) {
+				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
+			long codigo = Long.parseLong(tableModel.getValueAt(index, 0).toString());
 			controller.removeItem(categoria, codigo);
 			JOptionPane.showMessageDialog(null, "Item removido!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			listarAction();

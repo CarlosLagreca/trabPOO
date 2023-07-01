@@ -34,7 +34,17 @@ public class CatalogoView extends JFrame {
 
 	private JPanel contentPane;
 	private JTable table_1;
-	DefaultTableModel tableModel = new DefaultTableModel();
+	
+	@SuppressWarnings("serial")
+	DefaultTableModel tableModel = new DefaultTableModel(){
+
+		@Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
+	
 	private JComboBox<String> comboBox;
 	private JScrollPane barraRolagem;
 	private JTextField textCodigo;
@@ -166,8 +176,16 @@ public class CatalogoView extends JFrame {
 	private void confirmarAction() {
 		try {
 			HospedagemController controller = MainController.getHospedagemController();
+			// Pegando codigo do item da tabela
+			int index = table_1.getSelectedRow();
+			if(index < 0) {
+				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			
 			int numeroAcomodacao = Integer.parseInt(textNApt.getText());
-			String itemCodigo = textCodigo.getText();
+			String itemCodigo = tableModel.getValueAt(index, 0).toString();
 			String categoria = comboBox.getSelectedItem().toString();
 			int quantidade = Integer.parseInt(spinner.getValue().toString());
 			int ret = controller.addItemConta(numeroAcomodacao, categoria, itemCodigo, quantidade);
@@ -213,6 +231,7 @@ public class CatalogoView extends JFrame {
 			linha[1] = linhas[i][1];
 			linha[2] = linhas[i][2];
 			tableModel.addRow(linha);
+			tableModel.isCellEditable(i, 0);
 		}
 
 		tableModel.fireTableDataChanged();

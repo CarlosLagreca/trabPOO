@@ -12,6 +12,7 @@ import model.Categoria;
 public class ItemController implements Serializable {
 	private static final long serialVersionUID = 8263992833356022496L;
 
+	// TODO: Fazer relação de itens e categoria da mesma forma que apt e tipo.
 	private Map<String, Categoria> categorias;
 
 	public ItemController() {
