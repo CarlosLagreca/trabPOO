@@ -14,7 +14,6 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
-import javax.swing.JDialog;
 
 import java.awt.Insets;
 import java.awt.Toolkit;
@@ -58,6 +57,7 @@ public class CheckOutView extends JFrame {
 		contentPane.setLayout(new GridLayout(1, 0, 0, 0));
 		
 		JPanel panel = new JPanel();
+		setMinimumSize(new Dimension(480, 270));
 		contentPane.add(panel);
 		GridBagLayout gbl_panel = new GridBagLayout();
 		gbl_panel.columnWidths = new int[]{0, 159, 0, 0, 31, 123, 0, 0, 0};

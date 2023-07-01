@@ -39,6 +39,7 @@ public class GerenciarHospedagemView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
+	//TODO arrumar a responsividade na parte de nome dos clientes, um nome grande não vai aparecer. (window builder quebrado)
 	public GerenciarHospedagemView(int numeroAcomodacao, boolean janelaCheckout) {
 		initialize(janelaCheckout);
 		buildInfos(numeroAcomodacao);
@@ -68,7 +69,7 @@ public class GerenciarHospedagemView extends JFrame {
 
 		JLabel lblNewLabel_1 = new JLabel("Numero da acomodação");
 
-		JLabel lblNewLabel_2 = new JLabel("Nome do Cliente");
+		JLabel lblNewLabel_2 = new JLabel("Nome Cliente");
 
 		JLabel lblNewLabel_3 = new JLabel("Informações");
 

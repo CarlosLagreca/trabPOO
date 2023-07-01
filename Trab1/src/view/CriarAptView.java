@@ -45,33 +45,35 @@ public class CriarAptView extends JFrame {
 	private void initialize(int numeroAptVisu) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CriarAptView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-		setBounds(100, 100, 450, 240);
-		setMinimumSize(new Dimension(450,240));
+		setBounds(100, 100, 390, 187);
+		setMinimumSize(new Dimension(350,200));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[]{0, 47, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{1.0, 1.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowHeights = new int[]{45, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0};
+		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
 		JLabel lblTitulo = new JLabel("Cadastrar nova Acomodação");
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 14));
 		GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
+		gbc_lblTitulo.anchor = GridBagConstraints.EAST;
 		gbc_lblTitulo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTitulo.gridwidth = 3;
 		gbc_lblTitulo.gridx = 0;
-		gbc_lblTitulo.gridy = 0;
+		gbc_lblTitulo.gridy = 1;
 		contentPane.add(lblTitulo, gbc_lblTitulo);
 		
 		JLabel lblNewLabel_1 = new JLabel("Numero:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 1;
+		gbc_lblNewLabel_1.gridy = 2;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 		
 		textNumero = new JTextField();
@@ -80,15 +82,16 @@ public class CriarAptView extends JFrame {
 		gbc_textNumero.insets = new Insets(0, 0, 5, 5);
 		gbc_textNumero.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textNumero.gridx = 1;
-		gbc_textNumero.gridy = 1;
+		gbc_textNumero.gridy = 2;
 		contentPane.add(textNumero, gbc_textNumero);
 		textNumero.setColumns(10);
 		
 		JLabel lblNewLabel_2 = new JLabel("Ocupacão Máxima:");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 2;
+		gbc_lblNewLabel_2.gridy = 3;
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
 		
 		textOcupacaomax = new JTextField();
@@ -97,15 +100,16 @@ public class CriarAptView extends JFrame {
 		gbc_textOcupacaomax.insets = new Insets(0, 0, 5, 5);
 		gbc_textOcupacaomax.fill = GridBagConstraints.HORIZONTAL;
 		gbc_textOcupacaomax.gridx = 1;
-		gbc_textOcupacaomax.gridy = 2;
+		gbc_textOcupacaomax.gridy = 3;
 		contentPane.add(textOcupacaomax, gbc_textOcupacaomax);
 		textOcupacaomax.setColumns(10);
 		
 		JLabel lblNewLabel_3 = new JLabel("Tipo:");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
+		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
 		gbc_lblNewLabel_3.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNewLabel_3.gridx = 0;
-		gbc_lblNewLabel_3.gridy = 3;
+		gbc_lblNewLabel_3.gridy = 4;
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
 		
 		lblInfos = new JLabel("Selecione um tipo para ver as informações");
@@ -125,7 +129,7 @@ public class CriarAptView extends JFrame {
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 1;
-		gbc_comboBox.gridy = 3;
+		gbc_comboBox.gridy = 4;
 		contentPane.add(comboBox, gbc_comboBox);
 		
 		JButton btnCriarTipo = new JButton("Criar novo");
@@ -138,16 +142,18 @@ public class CriarAptView extends JFrame {
 			}
 		});
 		GridBagConstraints gbc_btnCriarTipo = new GridBagConstraints();
+		gbc_btnCriarTipo.anchor = GridBagConstraints.WEST;
 		gbc_btnCriarTipo.insets = new Insets(0, 0, 5, 5);
 		gbc_btnCriarTipo.gridx = 2;
-		gbc_btnCriarTipo.gridy = 3;
+		gbc_btnCriarTipo.gridy = 4;
 		contentPane.add(btnCriarTipo, gbc_btnCriarTipo);
 		
 		JLabel lblEstado = new JLabel("");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.anchor = GridBagConstraints.EAST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
 		gbc_lblEstado.gridx = 0;
-		gbc_lblEstado.gridy = 4;
+		gbc_lblEstado.gridy = 5;
 		contentPane.add(lblEstado, gbc_lblEstado);
 		
 		lblInfos.setToolTipText("Informações do tipo selecionado.");
@@ -155,7 +161,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
 		gbc_lblInfos.gridwidth = 3;
 		gbc_lblInfos.gridx = 1;
-		gbc_lblInfos.gridy = 4;
+		gbc_lblInfos.gridy = 5;
 		contentPane.add(lblInfos, gbc_lblInfos);
 		comboBox.addActionListener (new ActionListener () {
 		    public void actionPerformed(ActionEvent e) {
@@ -172,11 +178,10 @@ public class CriarAptView extends JFrame {
 		JButton btnCriar = new JButton("Criar");
 		btnCriar.addActionListener(btnACCriar);
 		GridBagConstraints gbc_btnCriar = new GridBagConstraints();
-		gbc_btnCriar.gridheight = 2;
-		gbc_btnCriar.gridwidth = 4;
+		gbc_btnCriar.anchor = GridBagConstraints.EAST;
 		gbc_btnCriar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnCriar.gridx = 0;
-		gbc_btnCriar.gridy = 5;
+		gbc_btnCriar.gridx = 1;
+		gbc_btnCriar.gridy = 6;
 		contentPane.add(btnCriar, gbc_btnCriar);
 		
 		
