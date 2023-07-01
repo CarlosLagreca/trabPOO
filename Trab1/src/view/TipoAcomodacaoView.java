@@ -16,10 +16,12 @@ import java.awt.GridBagConstraints;
 import javax.swing.JTextField;
 import java.awt.Insets;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TipoAcomodacaoView extends JFrame {
+public class TipoAcomodacaoView extends JDialog{
 
 	private static final long serialVersionUID = -541841408239843211L;
 	private JPanel contentPane;
@@ -124,6 +126,8 @@ public class TipoAcomodacaoView extends JFrame {
 		gbc_btnCriar.gridx = 2;
 		gbc_btnCriar.gridy = 4;
 		contentPane.add(btnCriar, gbc_btnCriar);
+		
+		setModal(true);
 	}
 
 	private void criarAction() {
@@ -133,8 +137,6 @@ public class TipoAcomodacaoView extends JFrame {
 			double adicional = Double.parseDouble(textAdicionalAcmp.getText());
 			AptController controller = MainController.getAptController();
 			controller.addTipoAcomodacao(nome, tarifaD, adicional);
-			JOptionPane.showMessageDialog(null, "Categoria criada. Selecione qualquer uma para atualizar a lista.",
-					"Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",

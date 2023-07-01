@@ -10,6 +10,7 @@ import controller.ClienteController;
 import java.awt.GridBagLayout;
 import java.awt.BorderLayout;
 import javax.swing.JButton;
+import javax.swing.JDialog;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
@@ -23,7 +24,7 @@ import java.awt.Dimension;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class CadastroClienteView extends JFrame {
+public class CadastroClienteView extends JDialog {
 
 	private static final long serialVersionUID = -2682751366885232624L;
 	private JPanel contentPane;
@@ -168,6 +169,8 @@ public class CadastroClienteView extends JFrame {
 		});
 		btnCancelar.setBackground(new Color(255, 153, 153));
 		panel_4.add(btnCancelar);
+		
+		setModal(true);
 	}
 
 	private void ConfirmarCadastro() {

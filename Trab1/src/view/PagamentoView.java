@@ -14,6 +14,7 @@ import javax.swing.JOptionPane;
 
 import java.awt.Font;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JButton;
 import javax.swing.JTextField;
 import java.awt.GridBagLayout;
@@ -24,7 +25,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
-public class PagamentoView extends JFrame {
+public class PagamentoView extends JDialog {
 	static final long serialVersionUID = -5154384979178170870L;
 	private JPanel contentPane;
 	private JTextField textField;
@@ -150,6 +151,7 @@ public class PagamentoView extends JFrame {
 		gbc_btnNewButton.gridx = 0;
 		gbc_btnNewButton.gridy = 5;
 		panel.add(btnNewButton, gbc_btnNewButton);
+		setModal(true);
 	}
 	
 	private void ConfirmarAction() {
@@ -159,6 +161,8 @@ public class PagamentoView extends JFrame {
 			double valor = Double.parseDouble(textField.getText());
 			int id = Integer.parseInt(labelid.getText());
 			controller.realizarPagamento(tipo, valor, id);
+			JOptionPane.showMessageDialog(null, "Pagamento realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
 		}catch(Exception e){
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado.", "Erro!", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();

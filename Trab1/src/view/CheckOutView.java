@@ -14,8 +14,11 @@ import javax.swing.JOptionPane;
 
 import java.awt.GridBagConstraints;
 import javax.swing.JButton;
+import javax.swing.JDialog;
+
 import java.awt.Insets;
 import java.awt.Toolkit;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -266,7 +269,7 @@ public class CheckOutView extends JFrame {
 		JButton btnPagar = new JButton("Pagar");
 		btnPagar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				PagamentoView janela = new PagamentoView(Integer.parseInt(infos[0]));
+				pagarAction();
 			}
 		});
 		GridBagConstraints gbc_btnPagar = new GridBagConstraints();
@@ -290,6 +293,12 @@ public class CheckOutView extends JFrame {
 		gbc_btnCheckout.gridx = 4;
 		gbc_btnCheckout.gridy = 8;
 		panel.add(btnCheckout, gbc_btnCheckout);
+	}
+	
+	private void pagarAction() {
+		PagamentoView janela = new PagamentoView(Integer.parseInt(infos[0]));
+		janela.setVisible(true);
+		fillLabels(Integer.parseInt(infos[0]));
 	}
 	
 	private void checkoutAction() {
