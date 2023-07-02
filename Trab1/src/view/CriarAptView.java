@@ -1,6 +1,7 @@
 package view;
 
 import controller.MainController;
+import exceptions.CannotCreateModelException;
 import exceptions.OperationNotAllowedException;
 import controller.AptController;
 import model.Acomodacao;
@@ -127,7 +128,6 @@ public class CriarAptView extends JFrame {
 			attCombobox();
 			comboBox.setSelectedIndex(0);
 		} catch (Exception e) {
-			e.printStackTrace();
 			comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 		}
 
@@ -191,8 +191,9 @@ public class CriarAptView extends JFrame {
 		contentPane.add(btnCriar, gbc_btnCriar);
 
 		// Formatando janela para Edição
-		if (numeroAptVisu > 0) {
+		if (numeroAptVisu != 0) {
 			editView(numeroAptVisu);
+			return;
 		}
 		setVisible(true);
 	}
@@ -219,7 +220,6 @@ public class CriarAptView extends JFrame {
 			lblInfos.setText(textLabel);
 
 		} catch (Exception e) {
-			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado ao acessar categorias!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
 		}
@@ -237,8 +237,11 @@ public class CriarAptView extends JFrame {
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
+		} catch (CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível criar acomodação.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 
@@ -297,6 +300,8 @@ public class CriarAptView extends JFrame {
 				ActionExcluir(apartamento.getNumero(), controller);
 			}
 		});
+		
+		setVisible(true);
 	}
 
 }

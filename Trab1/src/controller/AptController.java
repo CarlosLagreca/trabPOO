@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
+import exceptions.CannotCreateModelException;
 import exceptions.OperationNotAllowedException;
 
 import java.util.ArrayList;
@@ -26,6 +27,8 @@ public class AptController implements Serializable {
 	}
 
 	public void addApartamento(int numero, int ocupacaomax, String nomeTipo) throws Exception {
+		if(apartamentos.get(numero) != null)
+			throw new CannotCreateModelException("Numero já foi utilizado.");
 		TipoAcomodacao tipo = tipos.get(nomeTipo);
 		Acomodacao apartamento = new Acomodacao(numero, ocupacaomax, tipo);
 		apartamentos.put(apartamento.getNumero(), apartamento);
@@ -49,6 +52,8 @@ public class AptController implements Serializable {
 
 	public void concluirLimpeza(int numero) throws Exception {
 		Acomodacao acomodacao = apartamentos.get(numero);
+		if(acomodacao.getEstadoOcupacao() == EEstadoOcupacao.DISPONIVEL)
+			throw new OperationNotAllowedException("Já está disponível.");
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
 		MainController.save();
 	}

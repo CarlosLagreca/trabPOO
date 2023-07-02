@@ -23,6 +23,7 @@ import javax.swing.DefaultComboBoxModel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class ItemView extends JFrame {
 
@@ -37,6 +38,7 @@ public class ItemView extends JFrame {
 	 * Create the frame.
 	 */
 	public ItemView() {
+		setIconImage(Toolkit.getDefaultToolkit().getImage(ItemView.class.getResource("/view/icone.png")));
 		initialize();
 	}
 	
@@ -165,6 +167,7 @@ public class ItemView extends JFrame {
 		gbc_btnNewButton_1.gridx = 0;
 		gbc_btnNewButton_1.gridy = 5;
 		panel.add(btnNewButton_1, gbc_btnNewButton_1);
+		getRootPane().setDefaultButton(btnNewButton_1);
 	}
 	
 	private void attComboBox() {
@@ -184,7 +187,13 @@ public class ItemView extends JFrame {
 			long codigo = Long.parseLong(txtCodigo.getText());
 			String descricao = txtDescricao.getText();
 			double preco = Double.parseDouble(txtPreco.getText().replace(',', '.'));
-			String categoria = comboBox.getSelectedItem().toString();
+			String categoria;
+			try {
+				categoria = comboBox.getSelectedItem().toString();
+			} catch(NullPointerException e) {
+				JOptionPane.showMessageDialog(null, "Selecione uma categoria", "Erro!", JOptionPane.ERROR_MESSAGE);
+				return;
+			}
 			controller.addItem(categoria, codigo, descricao, preco);
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 	

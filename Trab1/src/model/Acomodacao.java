@@ -19,6 +19,9 @@ public class Acomodacao implements IAcomodacao, Serializable{
 		if(tipo == null) {
 			throw new CannotCreateModelException("Tipo não pode ser null.");
 		}
+		if(ocupacaoMax < 1) {
+			throw new CannotCreateModelException("Ocupação máxima inválida.");
+		}
 		this.numero = numero;
 		this.ocupacaoMax = ocupacaoMax;
 		this.estadoOcupacao = EEstadoOcupacao.DISPONIVEL;

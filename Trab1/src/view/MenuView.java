@@ -94,7 +94,7 @@ public class MenuView extends JFrame {
 		JButton btnAptCriar = new JButton("Criar novo");
 		btnAptCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CriarAptView novajanela = new CriarAptView(-1);
+				CriarAptView novajanela = new CriarAptView(0);
 				novajanela.setVisible(true);
 			}
 		});
@@ -160,6 +160,8 @@ public class MenuView extends JFrame {
 					if (input == null || (input != null && ("".equals(input)))) {
 						return;
 					}
+					if(input.equals("0"))
+						input = "error";
 					int numero = Integer.parseInt(input);
 					new CriarAptView(numero);
 				} catch(NumberFormatException ex) {
@@ -209,7 +211,7 @@ public class MenuView extends JFrame {
 					}
 					int numero = Integer.parseInt(input);
 					controller.concluirLimpeza(numero);
-					
+					JOptionPane.showMessageDialog(null, "Limpeza concluída!\nAcomodação disponível.", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 				} catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Insira um numero válido.", "Erro!", JOptionPane.ERROR_MESSAGE);
 				} catch(NullPointerException ex) {
@@ -231,8 +233,12 @@ public class MenuView extends JFrame {
 					if (input == null || (input != null && ("".equals(input)))) {
 						return;
 					}
+					if(input.equals("0"))
+						input = "error";
 					long cpf = Long.parseLong(input);
 					new CadastroClienteView(cpf);
+				} catch (NumberFormatException exp) {
+					JOptionPane.showMessageDialog(null, "Insira um cpf válido!\n", "Erro!", JOptionPane.ERROR_MESSAGE);
 				} catch (Exception exp) {
 					exp.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + exp.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
@@ -306,8 +312,7 @@ public class MenuView extends JFrame {
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					CadastroClienteView frame = new CadastroClienteView(0);
-					frame.setVisible(true);
+					new CadastroClienteView(0);
 				} catch (Exception exp) {
 					exp.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + exp.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);

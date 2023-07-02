@@ -181,8 +181,9 @@ public class CadastroClienteView extends JDialog {
 		
 		setModal(true);
 		
-		if (cpf > 0) {
+		if (cpf != 0) {
 			editTela(cpf);
+			return;
 		}
 		setVisible(true);
 	}
@@ -229,20 +230,27 @@ public class CadastroClienteView extends JDialog {
 	}
 	
 	private void editTela(long cpf) {
-		ClienteController controller = MainController.getClienteContoller();
-		IHospede cliente = controller.getHospede(cpf);
-		lblTitulo.setText("Modifique os dados do hospede");
-		textNome.setText(cliente.getNome());
-		textCpf.setText(Long.toString(cpf));
-		textCpf.setEditable(false);
-		textEmail.setText(cliente.getEmail());
-		textTelefone.setText(Long.toString(cliente.getTelefone()));
-		btnCadastrar.setToolTipText("Confirmar edição do cliente.");
-		btnCadastrar.removeActionListener(btnACConfirmar);
-		btnCadastrar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				actionConfirmarEdit();
-			}
-		});
+		try {
+			ClienteController controller = MainController.getClienteContoller();
+			IHospede cliente = controller.getHospede(cpf);
+			lblTitulo.setText("Modifique os dados do hospede");
+			textNome.setText(cliente.getNome());
+			textCpf.setText(Long.toString(cpf));
+			textCpf.setEditable(false);
+			textEmail.setText(cliente.getEmail());
+			textTelefone.setText(Long.toString(cliente.getTelefone()));
+			btnCadastrar.setText("Salvar");
+			btnCadastrar.setToolTipText("Confirmar edição do cliente.");
+			btnCadastrar.removeActionListener(btnACConfirmar);
+			btnCadastrar.addActionListener(new ActionListener() {
+				public void actionPerformed(ActionEvent e) {
+					actionConfirmarEdit();
+				}
+			});
+			setVisible(true);
+		} catch(NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Cpf não encontrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			dispose();
+		}
 	}
 }
