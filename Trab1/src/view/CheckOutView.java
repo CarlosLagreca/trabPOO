@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.HospedagemController;
 import controller.MainController;
+import exceptions.OperationNotAllowedException;
 
 import java.awt.GridLayout;
 import java.awt.GridBagLayout;
@@ -302,10 +303,17 @@ public class CheckOutView extends JFrame {
 	}
 	
 	private void checkoutAction() {
-		HospedagemController controller = MainController.getHospedagemController();
-		controller.realizarCheckout(Integer.parseInt(infos[0]));
-		JOptionPane.showMessageDialog(null, "Checkout realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
-		dispose();
+		try {
+			HospedagemController controller = MainController.getHospedagemController();
+			controller.realizarCheckout(Integer.parseInt(infos[0]));
+			JOptionPane.showMessageDialog(null, "Checkout realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+		} catch(OperationNotAllowedException e) {
+			JOptionPane.showMessageDialog(null, "Checkout não pode ser realizado!\n" + e.getMessage(), "ERRO!", JOptionPane.ERROR_MESSAGE);
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "ERRO!", JOptionPane.ERROR_MESSAGE);
+		}
 	}
 	
 	private void visualizarAction() {

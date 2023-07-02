@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.HospedagemController;
 import controller.MainController;
+import exceptions.OperationNotAllowedException;
 import model.Pagamento.ETipoPagamento;
 
 import java.awt.GridLayout;
@@ -167,8 +168,12 @@ public class PagamentoView extends JDialog {
 			controller.realizarPagamento(tipo, valor, id);
 			JOptionPane.showMessageDialog(null, "Pagamento realizado!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		}catch(Exception e){
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado.", "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(OperationNotAllowedException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível realizar o pagamento.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível realizar o pagamento.\n" + e.getMessage(), "Atenção!", JOptionPane.WARNING_MESSAGE);
+		} catch(Exception e){
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 			e.printStackTrace();
 		}
 	}

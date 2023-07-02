@@ -4,15 +4,15 @@ import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
 import java.util.UUID;
 
-
+import exceptions.CannotCreateModelException;
+import exceptions.OperationNotAllowedException;
 import model.Acomodacao.EEstadoOcupacao;
 import model.Pagamento.ETipoPagamento;
+import util.Time;
 
-//TODO Revisar Model de Hospedagem
 public class Hospedagem implements Serializable {
 	private static final long serialVersionUID = 7345409444938260273L;
 	private int inicioCheckin = 13;
@@ -31,15 +31,33 @@ public class Hospedagem implements Serializable {
 		return pagamento;
 	}
 
-	public void addPagamento(ETipoPagamento tipo, double valor) {
+	public void addPagamento(ETipoPagamento tipo, double valor) throws OperationNotAllowedException {
+		if(getTotalPago() + valor > getValorTotal())
+			throw new OperationNotAllowedException("Valor maior do que a dívida.");
 		Pagamento pagar = new Pagamento(tipo, valor);
 		pagamento.add(pagar);
 	}
 
-	public Hospedagem(Acomodacao acomodacao, Hospede hospede) {
+	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws CannotCreateModelException{
+		// Verificando se acomodacao pode ser criada
+		if(acomodacao == null) {
+			throw new CannotCreateModelException("Acomodação não pode ser null");
+		}
+		if(acomodacao.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
+			throw new CannotCreateModelException("Acmodação não disponível. (" + acomodacao.getEstadoOcupacao().toString() + ")");
+		}
+		if(hospede == null) {
+			throw new CannotCreateModelException("Hospede não pode ser null.");
+		}
+		
 		this.checkin = LocalDateTime.now();
 		this.conta = new Conta();
 		this.acomodacao = acomodacao;
+		try {
+			acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
+		} catch(OperationNotAllowedException e) {
+			throw new CannotCreateModelException(e.getMessage());
+		}
 		this.hospede = hospede;
 	}
 
@@ -82,12 +100,12 @@ public class Hospedagem implements Serializable {
 	}
 
 	public void addAcompanhantes(List<IHospede> list) {
+		if(list.contains(null)){
+			throw new NullPointerException("Lista de acompanhantes contém null.");
+		}
 		acompanhantes.addAll(list);
 	}
-
-	private String getTime(LocalDateTime x) {
-		return String.format("%s/%s/%s", Integer.toString(x.getDayOfMonth()), Integer.toString(x.getMonthValue()), Integer.toString(x.getYear()));
-	}
+	
 	public String[] listarDados() {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
@@ -104,9 +122,9 @@ public class Hospedagem implements Serializable {
 		lista.add(Double.toString(getValorItens()));
 		lista.add(Double.toString(getValorTotal()));
 		lista.add(Double.toString(getValorPago()));
-		lista.add(getTime(checkin));
+		lista.add(Time.formatTime(checkin));
 		if(checkout == null) {}
-		else lista.add(getTime(checkout));
+		else lista.add(Time.formatTime(checkout));
 		return lista.toArray(new String[0]);
 	}
 	
@@ -147,20 +165,22 @@ public class Hospedagem implements Serializable {
 		return checkout;
 	}
 	
-	public boolean realizarCheckout() {
-		// TODO: Verificar questão do limite checkout
-		// TODO: Verificar se ja está corretamente pago
+	public double getTotalPago() {
 		double totalPago=0;
 		for (Pagamento pag : pagamento) {
 			totalPago += pag.getValor();
 		}
-		
-		if(getValorTotal() <= totalPago) {
-			checkout = LocalDateTime.now();
-			acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);	
-			return true;
+		return totalPago;
+	}
+	
+	public void realizarCheckout() throws OperationNotAllowedException {
+
+		if(getValorTotal() >= getTotalPago()) {
+			throw new OperationNotAllowedException("Pagamento pendente.");
 		}
-		return false;
+		
+		checkout = LocalDateTime.now();
+		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);	
 	}
 	
 	

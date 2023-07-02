@@ -1,16 +1,19 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 public class Pagamento implements Serializable{
 	private static final long serialVersionUID = -1119751179085551545L;
 	private final ETipoPagamento tipo;
-	private final Date data;
+	private final LocalDateTime data;
 	private final double valor;
 
 	public Pagamento(ETipoPagamento tipo, double valor) {
-		this.data = new Date();
+		if(valor < 0.01) {
+			throw new IllegalArgumentException("Valor inválido.");
+		}
+		this.data = LocalDateTime.now();
 		this.tipo = tipo;
 		this.valor = valor;
 	}
@@ -19,7 +22,7 @@ public class Pagamento implements Serializable{
 		return tipo;
 	}
 
-	public Date getData() {
+	public LocalDateTime getData() {
 		return data;
 	}
 

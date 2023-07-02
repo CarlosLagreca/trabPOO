@@ -6,17 +6,12 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
-import javax.swing.JOptionPane;
-
+import exceptions.OperationNotAllowedException;
 import model.Acomodacao;
-import model.Acomodacao.EEstadoOcupacao;
 import model.Hospedagem;
 import model.Hospede;
-import model.IAcomodacao;
-import model.IConta;
 import model.IHospede;
 import model.Item;
-import model.Pagamento;
 import model.Pagamento.ETipoPagamento;
 
 public class HospedagemController implements Serializable{
@@ -30,7 +25,7 @@ public class HospedagemController implements Serializable{
 		oldHospedagens = new TreeMap<>();
 	}
 	
-	public void criarHospedagem(String numeroAcomodacao, String cpfHospede, String[] acompanhantes) {
+	public void criarHospedagem(String numeroAcomodacao, String cpfHospede, String[] acompanhantes) throws Exception {
 		AptController aptcontroller = MainController.getAptController();
 		ClienteController clientecontroller = MainController.getClienteContoller();
 		
@@ -49,40 +44,30 @@ public class HospedagemController implements Serializable{
 		
 		hospedagens.put(acomodacao.getNumero(), hospedagem);
 		
-		acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
-		
 		MainController.save();
 	}
 	
-	public int addItemConta(int numeroAcomodacao, String categoria, String codigo, int quantidade) {
+	public void addItemConta(int numeroAcomodacao, String categoria, String codigo, int quantidade) throws Exception {
 		ItemController itemcontroller = MainController.getItemController();
 		
 		//Pegando objetos
 		Item item = itemcontroller.getItem(categoria, Long.parseLong(codigo));
-		if(item == null) {
-			return 2;
-		}
 		Hospedagem hospedagem = hospedagens.get(numeroAcomodacao);
 		if(hospedagem == null) {
-			return 3;
+			throw new NullPointerException("Não foi possível acessar hospedagem.");
 		}
 		
 		// Inserindo item na conta
 		hospedagem.getConta().addItem(item, quantidade);
 		
 		MainController.save();
-		
-		return 0;
 	}
-	public void realizarPagamento(ETipoPagamento tipo, double valor, int numApt){
-		try {
+	public void realizarPagamento(ETipoPagamento tipo, double valor, int numApt) throws Exception{
 		Hospedagem hospedagem = hospedagens.get(numApt);
-		hospedagem.getPagamento().add(new Pagamento(tipo, valor));
+		hospedagem.addPagamento(tipo, valor);
 		System.out.println("pagamento feito!");
 		MainController.save();
-	}catch(Exception e) {
-		e.printStackTrace();
-	}
+
 	}
 	
 	public Hospedagem getHospedagem(int id) {
@@ -120,23 +105,12 @@ public class HospedagemController implements Serializable{
 		return table.toArray(new String[0][0]);
 	}
 	
-	public void realizarCheckout(int numeroApt) {
-		try {
-			boolean check = hospedagens.get(numeroApt).realizarCheckout();
-			if(check) {
-				oldHospedagens.put(hospedagens.get(numeroApt).getId(), hospedagens.get(numeroApt));
-				hospedagens.remove(numeroApt);
-				MainController.save();
-			}
-			else {
-				JOptionPane.showMessageDialog(null, "Faça o pagamento completo para realizar o checkout", "Erro!", JOptionPane.ERROR_MESSAGE);
-			}
-		}catch(Exception e){
-			e.printStackTrace();
-			throw e;
-		}
+	public void realizarCheckout(int numeroApt) throws OperationNotAllowedException {
+		hospedagens.get(numeroApt).realizarCheckout();
+		oldHospedagens.put(hospedagens.get(numeroApt).getId(), hospedagens.get(numeroApt));
+		hospedagens.remove(numeroApt);
+		MainController.save();
 	}
-	
 	
 	
 	public String[] getDadosHospedagem(int x) {

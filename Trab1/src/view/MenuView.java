@@ -2,6 +2,7 @@ package view;
 
 import controller.AptController;
 import controller.MainController;
+import exceptions.OperationNotAllowedException;
 
 import java.awt.BorderLayout;
 import java.awt.Color;
@@ -214,15 +215,14 @@ public class MenuView extends JFrame {
 						return;
 					}
 					int numero = Integer.parseInt(input);
-					int ret = controller.concluirLimpeza(numero);
+					controller.concluirLimpeza(numero);
 					
-					if (ret == 2) {
-						JOptionPane.showMessageDialog(null, "Esta acomodação se encontra ocupada!", "Erro!", JOptionPane.ERROR_MESSAGE);
-					}
 				} catch(NumberFormatException ex) {
 					JOptionPane.showMessageDialog(null, "Insira um numero válido.", "Erro!", JOptionPane.ERROR_MESSAGE);
 				} catch(NullPointerException ex) {
 					JOptionPane.showMessageDialog(null, "Acomodação não encontrada!", "Erro!", JOptionPane.ERROR_MESSAGE);
+				} catch(OperationNotAllowedException ex) {
+					JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				} catch(Exception ex) {
 					ex.printStackTrace();
 					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);

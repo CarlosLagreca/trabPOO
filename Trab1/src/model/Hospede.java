@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 
+import exceptions.CannotCreateModelException;
+import util.Cpf;
+
 public class Hospede implements IHospede, Serializable {
 	private static final long serialVersionUID = 3193785960528259305L;
 	private final long cpf;
@@ -9,7 +12,11 @@ public class Hospede implements IHospede, Serializable {
 	private String email;
 	private long telefone;
 
-	public Hospede(long cpf, String nome, String email, long telefone) {
+	public Hospede(long cpf, String nome, String email, long telefone) throws CannotCreateModelException {
+		if(!Cpf.isCpf(cpf))
+			throw new CannotCreateModelException("Cpf inválido.");
+		if(nome.length() < 1)
+			throw new CannotCreateModelException("Nome inválido.");
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

@@ -11,6 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.HospedagemController;
 import controller.ItemController;
 import controller.MainController;
+import exceptions.OperationNotAllowedException;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -176,25 +177,20 @@ public class CatalogoView extends JFrame {
 			String itemCodigo = tableModel.getValueAt(index, 0).toString();
 			String categoria = comboBox.getSelectedItem().toString();
 			int quantidade = Integer.parseInt(spinner.getValue().toString());
-			int ret = controller.addItemConta(numeroAcomodacao, categoria, itemCodigo, quantidade);
-			if (ret == 2) {
-				JOptionPane.showMessageDialog(null, "Insira um código de item válido!", "Erro!",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			} else if (ret == 3) {
-				JOptionPane.showMessageDialog(null, "Não há hospedagens nessa acomodação!", "Erro!",
-						JOptionPane.ERROR_MESSAGE);
-				return;
-			}
+			controller.addItemConta(numeroAcomodacao, categoria, itemCodigo, quantidade);
 			JOptionPane.showMessageDialog(null, "Produto inserido na conta!", "Sucesso!",
 					JOptionPane.INFORMATION_MESSAGE);
 			textNApt.setText("");
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Erro de acesso!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(OperationNotAllowedException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível adicionar o item na conta!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

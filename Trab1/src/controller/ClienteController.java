@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import exceptions.CannotCreateModelException;
 import model.Hospede;
 
 public class ClienteController implements Serializable {
@@ -13,19 +14,13 @@ public class ClienteController implements Serializable {
 	
 	private Map<Long, Hospede> listaHospedes = new TreeMap<>();
 
-	public int cadastrarCliente(String nome, long cpf, long telefone, String email) {
-		try {
+	public void cadastrarCliente(String nome, long cpf, long telefone, String email) throws Exception {
 			if(listaHospedes.get(cpf) != null) {
-				return 2;
+				throw new CannotCreateModelException("Cpf já cadastrado!");
 			}
 			Hospede newHospede = new Hospede(cpf, nome, email, telefone);
 			listaHospedes.put(newHospede.getCpf(), newHospede);
 			MainController.save();
-		} catch (Exception e) {
-			e.printStackTrace();
-			throw e;
-		}
-		return 0;
 	}
 	
 	public String[][] getClientes() {

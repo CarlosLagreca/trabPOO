@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.MainController;
+import exceptions.CannotCreateModelException;
 import controller.ClienteController;
 
 import java.awt.GridBagLayout;
@@ -182,18 +183,17 @@ public class CadastroClienteView extends JDialog {
 			Long cpf = Long.parseLong(textCpf.getText());
 			Long telefone = Long.parseLong(textTelefone.getText());
 			String email = textEmail.getText();
-			int ret = controller.cadastrarCliente(nome, cpf, telefone, email);
-			if (ret == 2) {
-				JOptionPane.showMessageDialog(null, "CPF já cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-				return;
-			}
+			controller.cadastrarCliente(nome, cpf, telefone, email);
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
+		} catch(CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível cadastrar o cliente!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 
 	}

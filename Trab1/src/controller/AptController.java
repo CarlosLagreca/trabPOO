@@ -3,6 +3,7 @@ package controller;
 import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -23,7 +24,7 @@ public class AptController implements Serializable {
 		tipos = new TreeMap<>();
 	}
 
-	public void addApartamento(int numero, int ocupacaomax, String nomeTipo) {
+	public void addApartamento(int numero, int ocupacaomax, String nomeTipo) throws Exception {
 		TipoAcomodacao tipo = tipos.get(nomeTipo);
 		Acomodacao apartamento = new Acomodacao(numero, ocupacaomax, tipo);
 		apartamentos.put(apartamento.getNumero(), apartamento);
@@ -45,14 +46,10 @@ public class AptController implements Serializable {
 		return numerosApt.toArray(new String[0]);
 	}
 
-	public int concluirLimpeza(int numero) {
+	public void concluirLimpeza(int numero) throws Exception {
 		Acomodacao acomodacao = apartamentos.get(numero);
-		if(acomodacao.getEstadoOcupacao() == EEstadoOcupacao.OCUPADO) {
-			return 2;
-		}
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.DISPONIVEL);
 		MainController.save();
-		return 0;
 	}
 
 	public int deleteApartamento(int numero) {

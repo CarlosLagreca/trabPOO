@@ -2,6 +2,9 @@ package model;
 
 import java.io.Serializable;
 
+import exceptions.CannotCreateModelException;
+import exceptions.OperationNotAllowedException;
+
 public class Acomodacao implements IAcomodacao, Serializable{
 	private static final long serialVersionUID = -4335473616730693277L;
 	private final int numero;
@@ -9,7 +12,13 @@ public class Acomodacao implements IAcomodacao, Serializable{
 	private EEstadoOcupacao estadoOcupacao;
 	private TipoAcomodacao tipo;
 
-	public Acomodacao(int numero, int ocupacaoMax, TipoAcomodacao tipo) {
+	public Acomodacao(int numero, int ocupacaoMax, TipoAcomodacao tipo) throws CannotCreateModelException {
+		if(numero <= 0) {
+			throw new CannotCreateModelException("Numero inválido.");
+		}
+		if(tipo == null) {
+			throw new CannotCreateModelException("Tipo não pode ser null.");
+		}
 		this.numero = numero;
 		this.ocupacaoMax = ocupacaoMax;
 		this.estadoOcupacao = EEstadoOcupacao.DISPONIVEL;
@@ -31,7 +40,9 @@ public class Acomodacao implements IAcomodacao, Serializable{
 	}
 
 	@Override
-	public void setEstadoOcupacao(EEstadoOcupacao estadoOcupacao) {
+	public void setEstadoOcupacao(EEstadoOcupacao estadoOcupacao) throws OperationNotAllowedException {
+		if(this.estadoOcupacao == EEstadoOcupacao.OCUPADO && estadoOcupacao != EEstadoOcupacao.MANUTENCAO)
+			throw new OperationNotAllowedException("Acomodação atualmente ocupada!");
 		this.estadoOcupacao = estadoOcupacao;
 	}
 
