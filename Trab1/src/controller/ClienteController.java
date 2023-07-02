@@ -42,4 +42,11 @@ public class ClienteController implements Serializable {
 		
 		return listaHospedes.get(cpf);
 	}
+	
+	public void editCliente(String nome, long cpf, String email, long telefone) {
+		Hospede cliente = listaHospedes.get(cpf);
+		cliente.setNome(nome);
+		cliente.setEmail(email);
+		cliente.setTelefone(telefone);
+	}
 }

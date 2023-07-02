@@ -22,11 +22,8 @@ import javax.swing.border.EmptyBorder;
 import javax.swing.border.LineBorder;
 import javax.swing.JTabbedPane;
 import javax.swing.SwingConstants;
-import javax.swing.GroupLayout.Alignment;
-import javax.swing.GroupLayout;
 import javax.swing.JButton;
 import java.awt.Toolkit;
-import javax.swing.LayoutStyle.ComponentPlacement;
 
 public class MenuView extends JFrame {
 	private static final long serialVersionUID = -4786237314541903229L;
@@ -231,6 +228,21 @@ public class MenuView extends JFrame {
 		});
 		//TODO Terminar a parte de editar o cliente
 		JButton btnNewButton = new JButton("Editar");
+		btnNewButton.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				try {
+					String input = JOptionPane.showInputDialog("Insira o Cpf do Cliente");
+					if (input == null || (input != null && ("".equals(input)))) {
+						return;
+					}
+					long cpf = Long.parseLong(input);
+					new CadastroClienteView(cpf);
+					MainController.save();
+				} catch (Exception exp) {
+					exp.printStackTrace();
+				}
+			}
+		});
 		GridBagConstraints gbc_btnNewButton = new GridBagConstraints();
 		gbc_btnNewButton.insets = new Insets(0, 0, 5, 5);
 		gbc_btnNewButton.gridx = 5;
@@ -298,7 +310,7 @@ public class MenuView extends JFrame {
 		btnClientes.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					CadastroClienteView frame = new CadastroClienteView();
+					CadastroClienteView frame = new CadastroClienteView(0);
 					frame.setVisible(true);
 				} catch (Exception exp) {
 					exp.printStackTrace();
@@ -360,7 +372,6 @@ public class MenuView extends JFrame {
 		btnInfoHospedagens.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				HospedagensView janela = new HospedagensView();
-				//TesteView janela = new TesteView();
 				janela.setVisible(true);
 			}
 		});

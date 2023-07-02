@@ -27,8 +27,23 @@ public class Hospede implements IHospede, Serializable {
 	}
 
 	@Override
+	public void setNome(String nome) {
+		this.nome = nome;
+	}
+
+	@Override
 	public String getEmail() {
 		return email;
+	}
+
+	@Override
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	@Override
+	public void setTelefone(long telefone) {
+		this.telefone = telefone;
 	}
 
 	@Override
