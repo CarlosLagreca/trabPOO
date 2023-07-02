@@ -113,6 +113,12 @@ public class HospedagemController implements Serializable{
 		MainController.save();
 	}
 	
+	public void retirarItemHospedagem(int item, int numApt) {
+		if (hospedagens.get(numApt) == null)
+			throw new NullPointerException("Não há hospedagem nesse apartamento!");
+		hospedagens.get(numApt).removerItemConta(item);
+		MainController.save();
+	}
 	
 	public String[] getDadosHospedagem(int x) {
 		return hospedagens.get(x).listarDados();
