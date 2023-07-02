@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
 
+import exceptions.CannotCreateModelException;
 import model.Item;
 import model.Categoria;
 
@@ -29,6 +30,9 @@ public class ItemController implements Serializable {
 			Categoria categoria = categorias.get(nomeCategoria);
 			if(categoria == null)
 				throw new NullPointerException("Não foi possível acessar a categoria.");
+			if(itens.get(codigo) != null) {
+				throw new CannotCreateModelException("Este codigo já foi cadastrado.");
+			}
 			Item item = new Item(codigo, descricao, preco);
 			itens.put(codigo, item);
 			categoria.addItem(item);

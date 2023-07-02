@@ -24,13 +24,22 @@ import javax.swing.JButton;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import java.awt.Toolkit;
 
 public class GerenciarItemView extends JFrame {
 
 	private static final long serialVersionUID = 527190976211931832L;
 	private JPanel contentPane;
 	private JTable table;
-	DefaultTableModel tableModel = new DefaultTableModel();
+	@SuppressWarnings("serial")
+	DefaultTableModel tableModel = new DefaultTableModel(){
+
+		@Override
+	    public boolean isCellEditable(int row, int column) {
+	       //all cells false
+	       return false;
+	    }
+	};
 	private JTextField textField_1;
 	private JComboBox<String> comboBox;
 	private JScrollPane barraRolagem;
@@ -39,6 +48,8 @@ public class GerenciarItemView extends JFrame {
 	 * Create the frame.
 	 */
 	public GerenciarItemView() {
+		setTitle("Listagem Itens");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GerenciarItemView.class.getResource("/view/icone.png")));
 		initialize();
 	}
 

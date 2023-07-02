@@ -133,6 +133,8 @@ public class TipoAcomodacaoView extends JDialog {
 		gbc_btnCriar.gridx = 3;
 		gbc_btnCriar.gridy = 3;
 		contentPane.add(btnCriar, gbc_btnCriar);
+		
+		setModal(true);
 	}
 
 	private void criarAction() {
