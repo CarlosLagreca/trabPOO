@@ -307,7 +307,7 @@ public class CheckInView extends JFrame {
 		} catch (NullPointerException e) {
 			int input = JOptionPane.showConfirmDialog(null, "CPF não encontrado, deseja realizar o cadastro?");
 			if(input == 0) {
-				CadastroClienteView janela = new CadastroClienteView();
+				CadastroClienteView janela = new CadastroClienteView(0);
 				janela.setVisible(rootPaneCheckingEnabled);
 			}
 			return;
@@ -351,7 +351,7 @@ public class CheckInView extends JFrame {
 		} catch (NullPointerException e) {
 			int input = JOptionPane.showConfirmDialog(null, "CPF não encontrado, deseja realizar o cadastro?");
 			if(input == 0) {
-				CadastroClienteView janela = new CadastroClienteView();
+				CadastroClienteView janela = new CadastroClienteView(0);
 				janela.setVisible(rootPaneCheckingEnabled);
 			}
 			return;

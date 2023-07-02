@@ -14,9 +14,11 @@ public class ItemController implements Serializable {
 
 	// TODO: Fazer relação de itens e categoria da mesma forma que apt e tipo.
 	private Map<String, Categoria> categorias;
+	private Map<Long, Item> itens;
 
 	public ItemController() {
 		categorias = new TreeMap<>();
+		itens = new TreeMap<>();
 	}
 
 	public void addCategoria(String nome) {
@@ -29,6 +31,7 @@ public class ItemController implements Serializable {
 		try {
 			Categoria categoria = categorias.get(nomeCategoria);
 			Item item = new Item(codigo, descricao, preco);
+			itens.put(codigo, item);
 			categoria.addItem(item);
 			MainController.save();
 		} catch(Exception e) {
@@ -43,6 +46,7 @@ public class ItemController implements Serializable {
 		try {
 			Categoria categoria = categorias.get(nomeCategoria);
 			categoria.getItens().remove(codigo);
+			itens.remove(codigo);
 			MainController.save();
 		}catch(Exception e) {
 			e.printStackTrace();
@@ -54,8 +58,7 @@ public class ItemController implements Serializable {
 
 	public int editPreco(String nomeCategoria, long codItem, double preco) {
 		try {
-			Categoria categoria = categorias.get(nomeCategoria);
-			Item item = categoria.getItens().get(codItem);
+			Item item = itens.get(codItem);
 			item.setPreco(preco);
 			MainController.save();
 		} catch(Exception e) {
@@ -86,8 +89,6 @@ public class ItemController implements Serializable {
 	}
 	
 	public Item getItem(String nomeCategoria, long codItem) {
-		Categoria categoria = categorias.get(nomeCategoria);
-		Item item = categoria.getItens().get(codItem);
-		return item;
+		return itens.get(codItem);
 	}
 }

@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.MainController;
 import exceptions.CannotCreateModelException;
+import model.IHospede;
 import controller.ClienteController;
 
 import java.awt.GridBagLayout;
@@ -29,16 +30,19 @@ public class CadastroClienteView extends JDialog {
 
 	private static final long serialVersionUID = -2682751366885232624L;
 	private JPanel contentPane;
-	private JTextField txtNome;
+	private JTextField textNome;
 	private JTextField textCpf;
 	private JTextField textTelefone;
 	private JTextField textEmail;
+	private JButton btnCadastrar;
+	private ActionListener btnACConfirmar;
+	private JLabel lblTitulo;
 
-	public CadastroClienteView() {
-		initialize();
+	public CadastroClienteView(long cpf) {
+		initialize(cpf);
 	}
 	
-	private void initialize() {
+	private void initialize(long cpf) {
 		setType(Type.UTILITY);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CadastroClienteView.class.getResource("/view/icone.png")));
 		setTitle("Cadastro de Clientes");
@@ -54,8 +58,8 @@ public class CadastroClienteView extends JDialog {
 		JPanel panel = new JPanel();
 		contentPane.add(panel, BorderLayout.NORTH);
 
-		JLabel lblNewLabel_4 = new JLabel("Insira as informações do novo hospede");
-		panel.add(lblNewLabel_4);
+		lblTitulo = new JLabel("Insira as informações do novo hospede");
+		panel.add(lblTitulo);
 
 		JPanel panel_1 = new JPanel();
 		contentPane.add(panel_1, BorderLayout.WEST);
@@ -66,40 +70,40 @@ public class CadastroClienteView extends JDialog {
 		gbl_panel_1.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0 };
 		panel_1.setLayout(gbl_panel_1);
 
-		JLabel lblNewLabel = new JLabel("Nome:");
-		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
-		gbc_lblNewLabel.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel.gridx = 0;
-		gbc_lblNewLabel.gridy = 0;
-		panel_1.add(lblNewLabel, gbc_lblNewLabel);
+		JLabel lblNome = new JLabel("Nome:");
+		GridBagConstraints gbc_lblNome = new GridBagConstraints();
+		gbc_lblNome.anchor = GridBagConstraints.WEST;
+		gbc_lblNome.fill = GridBagConstraints.VERTICAL;
+		gbc_lblNome.insets = new Insets(0, 0, 5, 0);
+		gbc_lblNome.gridx = 0;
+		gbc_lblNome.gridy = 0;
+		panel_1.add(lblNome, gbc_lblNome);
 
-		JLabel lblNewLabel_1 = new JLabel("CPF:");
-		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
-		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-		gbc_lblNewLabel_1.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_1.fill = GridBagConstraints.VERTICAL;
-		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_1.gridx = 0;
-		gbc_lblNewLabel_1.gridy = 1;
-		panel_1.add(lblNewLabel_1, gbc_lblNewLabel_1);
+		JLabel lblCPF = new JLabel("CPF:");
+		lblCPF.setHorizontalAlignment(SwingConstants.LEFT);
+		GridBagConstraints gbc_lblCPF = new GridBagConstraints();
+		gbc_lblCPF.anchor = GridBagConstraints.WEST;
+		gbc_lblCPF.fill = GridBagConstraints.VERTICAL;
+		gbc_lblCPF.insets = new Insets(0, 0, 5, 0);
+		gbc_lblCPF.gridx = 0;
+		gbc_lblCPF.gridy = 1;
+		panel_1.add(lblCPF, gbc_lblCPF);
 
-		JLabel lblNewLabel_2 = new JLabel("Telefone:");
-		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-		gbc_lblNewLabel_2.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 0);
-		gbc_lblNewLabel_2.gridx = 0;
-		gbc_lblNewLabel_2.gridy = 2;
-		panel_1.add(lblNewLabel_2, gbc_lblNewLabel_2);
+		JLabel lblTelefone = new JLabel("Telefone:");
+		GridBagConstraints gbc_lblTelefone = new GridBagConstraints();
+		gbc_lblTelefone.anchor = GridBagConstraints.WEST;
+		gbc_lblTelefone.insets = new Insets(0, 0, 5, 0);
+		gbc_lblTelefone.gridx = 0;
+		gbc_lblTelefone.gridy = 2;
+		panel_1.add(lblTelefone, gbc_lblTelefone);
 
-		JLabel lblNewLabel_3 = new JLabel("Email:");
-		lblNewLabel_3.setHorizontalAlignment(SwingConstants.CENTER);
-		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
-		gbc_lblNewLabel_3.anchor = GridBagConstraints.WEST;
-		gbc_lblNewLabel_3.gridx = 0;
-		gbc_lblNewLabel_3.gridy = 3;
-		panel_1.add(lblNewLabel_3, gbc_lblNewLabel_3);
+		JLabel lblEmail = new JLabel("Email:");
+		lblEmail.setHorizontalAlignment(SwingConstants.CENTER);
+		GridBagConstraints gbc_lblEmail = new GridBagConstraints();
+		gbc_lblEmail.anchor = GridBagConstraints.WEST;
+		gbc_lblEmail.gridx = 0;
+		gbc_lblEmail.gridy = 3;
+		panel_1.add(lblEmail, gbc_lblEmail);
 
 		JPanel panel_2 = new JPanel();
 		contentPane.add(panel_2, BorderLayout.CENTER);
@@ -110,15 +114,15 @@ public class CadastroClienteView extends JDialog {
 		gbl_panel_2.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0 };
 		panel_2.setLayout(gbl_panel_2);
 
-		txtNome = new JTextField();
-		txtNome.setToolTipText("Insira o nome do hospede.");
-		GridBagConstraints gbc_txtNome = new GridBagConstraints();
-		gbc_txtNome.fill = GridBagConstraints.HORIZONTAL;
-		gbc_txtNome.insets = new Insets(0, 0, 5, 0);
-		gbc_txtNome.gridx = 0;
-		gbc_txtNome.gridy = 0;
-		panel_2.add(txtNome, gbc_txtNome);
-		txtNome.setColumns(10);
+		textNome = new JTextField();
+		textNome.setToolTipText("Insira o nome do hospede.");
+		GridBagConstraints gbc_textNome = new GridBagConstraints();
+		gbc_textNome.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textNome.insets = new Insets(0, 0, 5, 0);
+		gbc_textNome.gridx = 0;
+		gbc_textNome.gridy = 0;
+		panel_2.add(textNome, gbc_textNome);
+		textNome.setColumns(10);
 
 		textCpf = new JTextField();
 		textCpf.setToolTipText("Insira o CPF do hospede");
@@ -151,13 +155,15 @@ public class CadastroClienteView extends JDialog {
 
 		JPanel panel_4 = new JPanel();
 		contentPane.add(panel_4, BorderLayout.SOUTH);
-
-		JButton btnCadastrar = new JButton("Cadastrar");
-		btnCadastrar.addActionListener(new ActionListener() {
+		
+		btnACConfirmar = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ConfirmarCadastro();
 			}
-		});
+		};
+		btnCadastrar = new JButton("Cadastrar");
+		btnCadastrar.addActionListener(btnACConfirmar);
+		
 		btnCadastrar.setBackground(new Color(187, 255, 187));
 		btnCadastrar.setToolTipText("Confirmar cadastro do hospede.");
 		panel_4.add(btnCadastrar);
@@ -174,14 +180,19 @@ public class CadastroClienteView extends JDialog {
 		getRootPane().setDefaultButton(btnCadastrar);
 		
 		setModal(true);
+		
+		if (cpf > 0) {
+			editTela(cpf);
+		}
+		setVisible(true);
 	}
 
 	private void ConfirmarCadastro() {
 		try {
 			ClienteController controller = MainController.getClienteContoller();
-			String nome = txtNome.getText();
-			Long cpf = Long.parseLong(textCpf.getText());
-			Long telefone = Long.parseLong(textTelefone.getText());
+			String nome = textNome.getText();
+			long cpf = Long.parseLong(textCpf.getText());
+			long telefone = Long.parseLong(textTelefone.getText());
 			String email = textEmail.getText();
 			controller.cadastrarCliente(nome, cpf, telefone, email);
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
@@ -196,5 +207,42 @@ public class CadastroClienteView extends JDialog {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 
+	}
+	
+	private void actionConfirmarEdit() {
+		try {
+			ClienteController controller = MainController.getClienteContoller();
+			String nome = textNome.getText();
+			long cpf = Long.parseLong(textCpf.getText());
+			long telefone = Long.parseLong(textTelefone.getText());
+			String email = textEmail.getText();
+			controller.editCliente(nome, cpf, email, telefone);
+			JOptionPane.showMessageDialog(null, "Edição feita!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
+			dispose();
+			} catch (NumberFormatException e) {
+				JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
+						JOptionPane.ERROR_MESSAGE);
+			} catch (Exception e) {
+				JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			}
+		
+	}
+	
+	private void editTela(long cpf) {
+		ClienteController controller = MainController.getClienteContoller();
+		IHospede cliente = controller.getHospede(cpf);
+		lblTitulo.setText("Modifique os dados do hospede");
+		textNome.setText(cliente.getNome());
+		textCpf.setText(Long.toString(cpf));
+		textCpf.setEditable(false);
+		textEmail.setText(cliente.getEmail());
+		textTelefone.setText(Long.toString(cliente.getTelefone()));
+		btnCadastrar.setToolTipText("Confirmar edição do cliente.");
+		btnCadastrar.removeActionListener(btnACConfirmar);
+		btnCadastrar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				actionConfirmarEdit();
+			}
+		});
 	}
 }

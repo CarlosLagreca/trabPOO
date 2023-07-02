@@ -93,5 +93,9 @@ public class ClienteView extends JFrame {
 		);
 		panel.setLayout(gl_panel);
 	}
+	
+	public void setTable() {
+		
+	}
 
 }

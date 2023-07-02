@@ -33,6 +33,11 @@ public class CriarAptView extends JFrame {
 	private JTextField textOcupacaomax;
 	private JComboBox<String> comboBox;
 	private JLabel lblInfos;
+	private JLabel lblTitulo;
+	private JButton btnCriar;
+	private JButton btnCriarTipo;
+	private JLabel lblEstado;
+	private ActionListener btnACCriar;
 	String[][] tiposAcomodacao;
 
 	/**
@@ -58,7 +63,7 @@ public class CriarAptView extends JFrame {
 		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
 		contentPane.setLayout(gbl_contentPane);
 		
-		JLabel lblTitulo = new JLabel("Cadastrar nova Acomodação");
+		lblTitulo = new JLabel("Cadastrar nova Acomodação");
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 14));
 		GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
 		gbc_lblTitulo.anchor = GridBagConstraints.EAST;
@@ -132,7 +137,7 @@ public class CriarAptView extends JFrame {
 		gbc_comboBox.gridy = 4;
 		contentPane.add(comboBox, gbc_comboBox);
 		
-		JButton btnCriarTipo = new JButton("Criar novo");
+		btnCriarTipo = new JButton("Criar novo");
 		btnCriarTipo.setToolTipText("Criar novo tipo de acomodação.");
 		btnCriarTipo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -148,7 +153,7 @@ public class CriarAptView extends JFrame {
 		gbc_btnCriarTipo.gridy = 4;
 		contentPane.add(btnCriarTipo, gbc_btnCriarTipo);
 		
-		JLabel lblEstado = new JLabel("");
+		lblEstado = new JLabel("");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.EAST;
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
@@ -169,13 +174,13 @@ public class CriarAptView extends JFrame {
 		    }
 		});
 		
-		ActionListener btnACCriar = new ActionListener() {
+		btnACCriar = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ActionCriar();
 			}
 		};
 		
-		JButton btnCriar = new JButton("Criar");
+		btnCriar = new JButton("Criar");
 		btnCriar.addActionListener(btnACCriar);
 		GridBagConstraints gbc_btnCriar = new GridBagConstraints();
 		gbc_btnCriar.anchor = GridBagConstraints.EAST;
@@ -187,40 +192,8 @@ public class CriarAptView extends JFrame {
 		
 		// Formatando janela para Edição
 		if(numeroAptVisu > 0) {
-			AptController controller = MainController.getAptController();
-			lblTitulo.setText("Acomodação");
-			Acomodacao apartamento = controller.getApartamento(numeroAptVisu);
-			if(apartamento == null) {
-				JOptionPane.showMessageDialog(null, "Apartamento não cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-				dispose();
-				return;
-			}
-			textNumero.setText((String.format("%d", apartamento.getNumero())));
-			textNumero.setEnabled(false);
-			
-			textOcupacaomax.setText((String.format("%d", apartamento.getOcupacaoMax())));
-			textOcupacaomax.setEnabled(false);
-			
-			comboBox.setSelectedItem(apartamento.getTipo());
-			
-			btnCriarTipo.setEnabled(false);
-			btnCriarTipo.setVisible(false);
-			
-			comboBox.setEnabled(false);
-			
-			lblEstado.setText("Estado: " + apartamento.getEstadoOcupacao().toString());
-			
-			btnCriar.setText("Excluir");
-			btnCriar.removeActionListener(btnACCriar);
-			btnCriar.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					ActionExcluir(apartamento.getNumero(), controller);
-				}
-			});
-			
-			
+			editView(numeroAptVisu);
 		}
-		
 		setVisible(true);
 	}
 	
@@ -292,6 +265,39 @@ public class CriarAptView extends JFrame {
 			JOptionPane.showMessageDialog(null, "Apartamento não cadastrado.", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 		
+	}
+	
+	private void editView(int numeroAptVisu) {
+		AptController controller = MainController.getAptController();
+		lblTitulo.setText("Acomodação");
+		Acomodacao apartamento = controller.getApartamento(numeroAptVisu);
+		if(apartamento == null) {
+			JOptionPane.showMessageDialog(null, "Apartamento não cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			dispose();
+			return;
+		}
+		textNumero.setText((String.format("%d", apartamento.getNumero())));
+		textNumero.setEnabled(false);
+		
+		textOcupacaomax.setText((String.format("%d", apartamento.getOcupacaoMax())));
+		textOcupacaomax.setEnabled(false);
+		
+		comboBox.setSelectedItem(apartamento.getTipo());
+		
+		btnCriarTipo.setEnabled(false);
+		btnCriarTipo.setVisible(false);
+		
+		comboBox.setEnabled(false);
+		
+		lblEstado.setText("Estado: " + apartamento.getEstadoOcupacao().toString());
+		
+		btnCriar.setText("Excluir");
+		btnCriar.removeActionListener(btnACCriar);
+		btnCriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ActionExcluir(apartamento.getNumero(), controller);
+			}
+		});
 	}
 
 }
