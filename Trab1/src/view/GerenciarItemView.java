@@ -171,7 +171,6 @@ public class GerenciarItemView extends JFrame {
 	private void alterarPrecoAction() {
 		try {
 			ItemController controller = MainController.getItemController();
-			String categoria = (String) comboBox.getSelectedItem();
 			int index = table.getSelectedRow();
 			if(index < 0) {
 				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
@@ -181,14 +180,17 @@ public class GerenciarItemView extends JFrame {
 			
 			long codigo = Long.parseLong(tableModel.getValueAt(index, 0).toString());
 			double preco = Double.parseDouble(textField_1.getText().replace(',', '.'));
-			controller.editPreco(categoria, codigo, preco);
+			controller.editPreco(codigo, preco);
 			JOptionPane.showMessageDialog(null, "Preço alterado!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			listarAction();
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
+		} catch (IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "Preço não pode ser alterado.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

@@ -4,20 +4,14 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-import exceptions.OperationNotAllowedException;
+import exceptions.CannotCreateModelException;
 
 public class Conta implements IConta, Serializable{
 	private static final long serialVersionUID = -2382567513224317717L;
 	private ArrayList<ItemConta> itens = new ArrayList<ItemConta>();
 
 	@Override
-	public void addItem(Item item, int qtde) throws OperationNotAllowedException {
-		if(item == null) {
-			throw new NullPointerException("Erro ao acessar item.");
-		}
-		if(qtde < 0) {
-			throw new OperationNotAllowedException("Quantidade inválida.");
-		}
+	public void addItem(Item item, int qtde) throws CannotCreateModelException {
 		ItemConta newItem = new ItemConta(item, qtde);
 		this.itens.add(newItem);
 	}

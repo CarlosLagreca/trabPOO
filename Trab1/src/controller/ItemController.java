@@ -12,7 +12,6 @@ import model.Categoria;
 public class ItemController implements Serializable {
 	private static final long serialVersionUID = 8263992833356022496L;
 
-	// TODO: Fazer relação de itens e categoria da mesma forma que apt e tipo.
 	private Map<String, Categoria> categorias;
 	private Map<Long, Item> itens;
 
@@ -21,52 +20,33 @@ public class ItemController implements Serializable {
 		itens = new TreeMap<>();
 	}
 
-	public void addCategoria(String nome) {
+	public void addCategoria(String nome) throws Exception {
 		categorias.put(nome, new Categoria(nome));
 		MainController.save();
 	}
 
-	public int addItem(String nomeCategoria, long codigo, String descricao, double preco) {
-		
-		try {
+	public void addItem(String nomeCategoria, long codigo, String descricao, double preco) throws Exception {
 			Categoria categoria = categorias.get(nomeCategoria);
+			if(categoria == null)
+				throw new NullPointerException("Não foi possível acessar a categoria.");
 			Item item = new Item(codigo, descricao, preco);
 			itens.put(codigo, item);
 			categoria.addItem(item);
 			MainController.save();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
-		
-		return 0;
 	}
 	
-	public int removeItem(String nomeCategoria, long codigo) {
-		try {
+	// TODO: Verificar o que acontece se apagar um item utilizado por uma conta.
+	public void removeItem(String nomeCategoria, long codigo) {
 			Categoria categoria = categorias.get(nomeCategoria);
 			categoria.getItens().remove(codigo);
 			itens.remove(codigo);
 			MainController.save();
-		}catch(Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
-		
-		return 0;
 	}
 
-	public int editPreco(String nomeCategoria, long codItem, double preco) {
-		try {
+	public void editPreco(long codItem, double preco) {
 			Item item = itens.get(codItem);
 			item.setPreco(preco);
 			MainController.save();
-		} catch(Exception e) {
-			e.printStackTrace();
-			return 1;
-		}
-		
-		return 0;
 	}
 	
 	public String[] getCategorias() {

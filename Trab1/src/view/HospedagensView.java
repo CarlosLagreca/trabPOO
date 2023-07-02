@@ -12,7 +12,6 @@ import controller.MainController;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import javax.swing.JTabbedPane;
-import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;

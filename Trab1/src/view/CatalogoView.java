@@ -11,7 +11,7 @@ import javax.swing.table.DefaultTableModel;
 import controller.HospedagemController;
 import controller.ItemController;
 import controller.MainController;
-import exceptions.OperationNotAllowedException;
+import exceptions.CannotCreateModelException;
 
 import java.awt.GridLayout;
 import javax.swing.JButton;
@@ -186,7 +186,7 @@ public class CatalogoView extends JFrame {
 					JOptionPane.ERROR_MESSAGE);
 		} catch (NullPointerException e) {
 			JOptionPane.showMessageDialog(null, "Erro de acesso!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
-		} catch(OperationNotAllowedException e) {
+		} catch(CannotCreateModelException e) {
 			JOptionPane.showMessageDialog(null, "Não foi possível adicionar o item na conta!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();

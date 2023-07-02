@@ -34,7 +34,6 @@ public class MenuView extends JFrame {
 	 * ESPAÇO PARA TODOs gerais do projeto:
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 * TODO: Organizar arquivos.
-	 * TODO: Fazer tratamento de erros no model.
 	 * TODO: Não se esquecer de retirar TODOs.
 	 * TODO: Investigar getSelectedRow nas tabelas (InfoHospedagens).
 	 * TODO: Resolver remendicionamento da janela de gerenciamento (segunda tab) (deve ter um action listener no botao da tab)
@@ -222,7 +221,7 @@ public class MenuView extends JFrame {
 					JOptionPane.showMessageDialog(null, ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				} catch(Exception ex) {
 					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -239,6 +238,7 @@ public class MenuView extends JFrame {
 					new CadastroClienteView(cpf);
 				} catch (Exception exp) {
 					exp.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + exp.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -313,6 +313,7 @@ public class MenuView extends JFrame {
 					frame.setVisible(true);
 				} catch (Exception exp) {
 					exp.printStackTrace();
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + exp.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
@@ -334,7 +335,7 @@ public class MenuView extends JFrame {
 					JOptionPane.showMessageDialog(null, "Nenhuma hospedagem na acomodação informada.", "Atenção!", JOptionPane.WARNING_MESSAGE);
 				} catch(Exception ex) {
 					ex.printStackTrace();
-					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});

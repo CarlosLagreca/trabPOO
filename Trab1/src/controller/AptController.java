@@ -4,6 +4,8 @@ import java.io.Serializable;
 import java.util.Map;
 import java.util.TreeMap;
 
+import exceptions.OperationNotAllowedException;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -15,7 +17,6 @@ public class AptController implements Serializable {
 
 	private static final long serialVersionUID = 2252831249496233980L;
 
-	
 	private Map<Integer, Acomodacao> apartamentos;
 	private Map<String, TipoAcomodacao> tipos;
 
@@ -35,11 +36,11 @@ public class AptController implements Serializable {
 	public Acomodacao getApartamento(int numero) {
 		return apartamentos.get(numero);
 	}
-	
+
 	public String[] getApartamentosDisponiveis(String tipo) {
 		List<String> numerosApt = new ArrayList<String>();
-		for(Acomodacao acomodacao : apartamentos.values()) {
-			if(acomodacao.getTipo() == tipo && acomodacao.getEstadoOcupacao() == EEstadoOcupacao.DISPONIVEL) {
+		for (Acomodacao acomodacao : apartamentos.values()) {
+			if (acomodacao.getTipo() == tipo && acomodacao.getEstadoOcupacao() == EEstadoOcupacao.DISPONIVEL) {
 				numerosApt.add(Integer.toString(acomodacao.getNumero()));
 			}
 		}
@@ -52,47 +53,36 @@ public class AptController implements Serializable {
 		MainController.save();
 	}
 
-	public int deleteApartamento(int numero) {
+	public void deleteApartamento(int numero) throws Exception {
 		// Verificando estado para excluir apartamento
 		Acomodacao ac = apartamentos.get(numero);
 
-		try {
+		if (ac.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL)
+			throw new OperationNotAllowedException("Acomodação não está disponível.");
 
-			if (ac.getEstadoOcupacao() != EEstadoOcupacao.DISPONIVEL) {
-				return 2;
-			}
-
-			apartamentos.remove(numero);
-		} catch (NullPointerException e) {
-			return 3;
-		} catch (Exception e) {
-			return 1;
-		}
-		
+		apartamentos.remove(numero);
 		MainController.save();
-
-		return 0;
 	}
-	
-	public void addTipoAcomodacao(String nome, double tarifaDiaria, double adicionalAcompanhante) {
+
+	public void addTipoAcomodacao(String nome, double tarifaDiaria, double adicionalAcompanhante) throws Exception {
 		TipoAcomodacao novoTipo = new TipoAcomodacao(nome, tarifaDiaria, adicionalAcompanhante);
 		tipos.put(nome, novoTipo);
 		MainController.save();
 	}
-	
+
 	public String[][] getTipos() {
 		List<String[]> lista = new ArrayList<String[]>();
-		
+
 		List<String> nomes = new ArrayList<String>();
-		for(String nome : tipos.keySet()) {
+		for (String nome : tipos.keySet()) {
 			nomes.add(nome);
 		}
 		lista.add(nomes.toArray(new String[0]));
-		
-		for(String nome : tipos.keySet()) {
+
+		for (String nome : tipos.keySet()) {
 			double addAcomp = tipos.get(nome).getAdicionalAcompanhante();
 			double tarifaD = tipos.get(nome).getTarifaDiaria();
-			String[] infos = {Double.toString(tarifaD), Double.toString(addAcomp)};
+			String[] infos = { Double.toString(tarifaD), Double.toString(addAcomp) };
 			lista.add(infos);
 		}
 		return lista.toArray(new String[0][0]);

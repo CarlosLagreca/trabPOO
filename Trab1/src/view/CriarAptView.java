@@ -1,6 +1,7 @@
 package view;
 
 import controller.MainController;
+import exceptions.OperationNotAllowedException;
 import controller.AptController;
 import model.Acomodacao;
 
@@ -46,23 +47,23 @@ public class CriarAptView extends JFrame {
 	public CriarAptView(int numeroAptVisu) {
 		initialize(numeroAptVisu);
 	}
-	
+
 	private void initialize(int numeroAptVisu) {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CriarAptView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 390, 187);
-		setMinimumSize(new Dimension(350,200));
+		setMinimumSize(new Dimension(350, 200));
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 47, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{45, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0};
-		gbl_contentPane.rowWeights = new double[]{1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gbl_contentPane.columnWidths = new int[] { 0, 47, 0, 0 };
+		gbl_contentPane.rowHeights = new int[] { 45, 0, 0, 0, 0, 0, 0, 0, 0, 0 };
+		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 0.0, 0.0 };
+		gbl_contentPane.rowWeights = new double[] { 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		lblTitulo = new JLabel("Cadastrar nova Acomodação");
 		lblTitulo.setFont(new Font("Verdana", Font.BOLD, 14));
 		GridBagConstraints gbc_lblTitulo = new GridBagConstraints();
@@ -72,7 +73,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblTitulo.gridx = 0;
 		gbc_lblTitulo.gridy = 1;
 		contentPane.add(lblTitulo, gbc_lblTitulo);
-		
+
 		JLabel lblNewLabel_1 = new JLabel("Numero:");
 		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
 		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
@@ -80,7 +81,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblNewLabel_1.gridx = 0;
 		gbc_lblNewLabel_1.gridy = 2;
 		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+
 		textNumero = new JTextField();
 		GridBagConstraints gbc_textNumero = new GridBagConstraints();
 		gbc_textNumero.gridwidth = 2;
@@ -90,7 +91,7 @@ public class CriarAptView extends JFrame {
 		gbc_textNumero.gridy = 2;
 		contentPane.add(textNumero, gbc_textNumero);
 		textNumero.setColumns(10);
-		
+
 		JLabel lblNewLabel_2 = new JLabel("Ocupacão Máxima:");
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
 		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
@@ -98,7 +99,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblNewLabel_2.gridx = 0;
 		gbc_lblNewLabel_2.gridy = 3;
 		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
-		
+
 		textOcupacaomax = new JTextField();
 		GridBagConstraints gbc_textOcupacaomax = new GridBagConstraints();
 		gbc_textOcupacaomax.gridwidth = 2;
@@ -108,7 +109,7 @@ public class CriarAptView extends JFrame {
 		gbc_textOcupacaomax.gridy = 3;
 		contentPane.add(textOcupacaomax, gbc_textOcupacaomax);
 		textOcupacaomax.setColumns(10);
-		
+
 		JLabel lblNewLabel_3 = new JLabel("Tipo:");
 		GridBagConstraints gbc_lblNewLabel_3 = new GridBagConstraints();
 		gbc_lblNewLabel_3.anchor = GridBagConstraints.EAST;
@@ -116,27 +117,27 @@ public class CriarAptView extends JFrame {
 		gbc_lblNewLabel_3.gridx = 0;
 		gbc_lblNewLabel_3.gridy = 4;
 		contentPane.add(lblNewLabel_3, gbc_lblNewLabel_3);
-		
+
 		lblInfos = new JLabel("Selecione um tipo para ver as informações");
-		
+
 		comboBox = new JComboBox<>();
 		comboBox.setToolTipText("Selecione o tipo da acomodação. Informações do tipo mostradas abaixo.");
-		
+
 		try {
 			attCombobox();
 			comboBox.setSelectedIndex(0);
-		} catch(Exception e) {
+		} catch (Exception e) {
 			e.printStackTrace();
 			comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 		}
-		
+
 		GridBagConstraints gbc_comboBox = new GridBagConstraints();
 		gbc_comboBox.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 4;
 		contentPane.add(comboBox, gbc_comboBox);
-		
+
 		btnCriarTipo = new JButton("Criar novo");
 		btnCriarTipo.setToolTipText("Criar novo tipo de acomodação.");
 		btnCriarTipo.addActionListener(new ActionListener() {
@@ -152,7 +153,7 @@ public class CriarAptView extends JFrame {
 		gbc_btnCriarTipo.gridx = 2;
 		gbc_btnCriarTipo.gridy = 4;
 		contentPane.add(btnCriarTipo, gbc_btnCriarTipo);
-		
+
 		lblEstado = new JLabel("");
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.anchor = GridBagConstraints.EAST;
@@ -160,7 +161,7 @@ public class CriarAptView extends JFrame {
 		gbc_lblEstado.gridx = 0;
 		gbc_lblEstado.gridy = 5;
 		contentPane.add(lblEstado, gbc_lblEstado);
-		
+
 		lblInfos.setToolTipText("Informações do tipo selecionado.");
 		GridBagConstraints gbc_lblInfos = new GridBagConstraints();
 		gbc_lblInfos.insets = new Insets(0, 0, 5, 0);
@@ -168,18 +169,18 @@ public class CriarAptView extends JFrame {
 		gbc_lblInfos.gridx = 1;
 		gbc_lblInfos.gridy = 5;
 		contentPane.add(lblInfos, gbc_lblInfos);
-		comboBox.addActionListener (new ActionListener () {
-		    public void actionPerformed(ActionEvent e) {
-		    	attCombobox();
-		    }
+		comboBox.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				attCombobox();
+			}
 		});
-		
+
 		btnACCriar = new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ActionCriar();
 			}
 		};
-		
+
 		btnCriar = new JButton("Criar");
 		btnCriar.addActionListener(btnACCriar);
 		GridBagConstraints gbc_btnCriar = new GridBagConstraints();
@@ -188,43 +189,43 @@ public class CriarAptView extends JFrame {
 		gbc_btnCriar.gridx = 1;
 		gbc_btnCriar.gridy = 6;
 		contentPane.add(btnCriar, gbc_btnCriar);
-		
-		
+
 		// Formatando janela para Edição
-		if(numeroAptVisu > 0) {
+		if (numeroAptVisu > 0) {
 			editView(numeroAptVisu);
 		}
 		setVisible(true);
 	}
-	
-	
+
 	// TODO?: Atualizar atravez da janela de criar tipoAcomodacao
 	private void attCombobox() {
 		try {
 			AptController controller = MainController.getAptController();
 			String[][] content = controller.getTipos();
 			int index = comboBox.getSelectedIndex();
-			
-			if(index < 0)
+
+			if (index < 0)
 				index = 0;
-			
-	    	try {
+
+			try {
 				tiposAcomodacao = content;
 				comboBox.setModel(new DefaultComboBoxModel<>(tiposAcomodacao[0]));
-			} catch(Exception exp) {
+			} catch (Exception exp) {
 				exp.printStackTrace();
 				comboBox.setModel(new DefaultComboBoxModel<>(new String[] {}));
 			}
-	    	comboBox.setSelectedIndex(index);
-	    	String textLabel = "Tarifa Diária: " + content[index+1][0] + "   | Adicional acomp.: " + content[index+1][1];
-	    	lblInfos.setText(textLabel);
-			
-		} catch(Exception e) {
+			comboBox.setSelectedIndex(index);
+			String textLabel = "Tarifa Diária: " + content[index + 1][0] + "   | Adicional acomp.: "
+					+ content[index + 1][1];
+			lblInfos.setText(textLabel);
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado ao acessar categorias!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado ao acessar categorias!", "Erro!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void ActionCriar() {
 		try {
 			AptController controller = MainController.getAptController();
@@ -234,63 +235,62 @@ public class CriarAptView extends JFrame {
 			controller.addApartamento(numero, ocupacaomax, tipo);
 			JOptionPane.showMessageDialog(null, "Cadastro feito!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
-		} catch(Exception e) {
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
-	
+
 	private void ActionExcluir(int numero, AptController controller) {
-		
-		int input = JOptionPane.showConfirmDialog(null, "Apartamento será excluído.\nDeseja Continuar?");
-		
-		if(input > 0) {
-			return;
-		}
-		
-		int ret = controller.deleteApartamento(numero);
-		
-		if(ret == 0) {
+		try {
+			int input = JOptionPane.showConfirmDialog(null, "Apartamento será excluído.\nDeseja Continuar?");
+			if (input > 0) {
+				return;
+			}
+			controller.deleteApartamento(numero);
 			JOptionPane.showMessageDialog(null, "Acomodação removida!", "Sucesso", JOptionPane.INFORMATION_MESSAGE);
 			dispose();
+
+		} catch (OperationNotAllowedException e) {
+			JOptionPane.showMessageDialog(null, "Apartamento não pode ser removido.\n" + e.getMessage(), "Erro!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (NullPointerException e) {
+			JOptionPane.showMessageDialog(null, "Apartamento não encontrado no sistema.", "Erro!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!",
+					JOptionPane.ERROR_MESSAGE);
 		}
-		else if(ret == 1) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-		}
-		else if(ret == 2) {
-			JOptionPane.showMessageDialog(null, "Apartamento não está disponível!", "Erro!", JOptionPane.ERROR_MESSAGE);
-		}
-		else if(ret == 3) {
-			JOptionPane.showMessageDialog(null, "Apartamento não cadastrado.", "Erro!", JOptionPane.ERROR_MESSAGE);
-		}
-		
+
 	}
-	
+
 	private void editView(int numeroAptVisu) {
 		AptController controller = MainController.getAptController();
 		lblTitulo.setText("Acomodação");
 		Acomodacao apartamento = controller.getApartamento(numeroAptVisu);
-		if(apartamento == null) {
+		if (apartamento == null) {
 			JOptionPane.showMessageDialog(null, "Apartamento não cadastrado!", "Erro!", JOptionPane.ERROR_MESSAGE);
 			dispose();
 			return;
 		}
 		textNumero.setText((String.format("%d", apartamento.getNumero())));
 		textNumero.setEnabled(false);
-		
+
 		textOcupacaomax.setText((String.format("%d", apartamento.getOcupacaoMax())));
 		textOcupacaomax.setEnabled(false);
-		
+
 		comboBox.setSelectedItem(apartamento.getTipo());
-		
+
 		btnCriarTipo.setEnabled(false);
 		btnCriarTipo.setVisible(false);
-		
+
 		comboBox.setEnabled(false);
-		
+
 		lblEstado.setText("Estado: " + apartamento.getEstadoOcupacao().toString());
-		
+
 		btnCriar.setText("Excluir");
 		btnCriar.removeActionListener(btnACCriar);
 		btnCriar.addActionListener(new ActionListener() {

@@ -6,6 +6,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.AptController;
 import controller.MainController;
+import exceptions.CannotCreateModelException;
 
 import java.awt.GridBagLayout;
 import java.awt.Toolkit;
@@ -22,7 +23,7 @@ import javax.swing.JDialog;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 
-public class TipoAcomodacaoView extends JDialog{
+public class TipoAcomodacaoView extends JDialog {
 
 	private static final long serialVersionUID = -541841408239843211L;
 	private JPanel contentPane;
@@ -36,7 +37,7 @@ public class TipoAcomodacaoView extends JDialog{
 	public TipoAcomodacaoView() {
 		initialize();
 	}
-	
+
 	private void initialize() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(TipoAcomodacaoView.class.getResource("/view/icone.png")));
 		setTitle("Tipo Acomodação");
@@ -46,7 +47,6 @@ public class TipoAcomodacaoView extends JDialog{
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setMinimumSize(new Dimension(320, 150));
 
-
 		setContentPane(contentPane);
 		GridBagLayout gbl_contentPane = new GridBagLayout();
 		gbl_contentPane.columnWidths = new int[] { 0, 81, 0, 78, 0, 0 };
@@ -54,7 +54,7 @@ public class TipoAcomodacaoView extends JDialog{
 		gbl_contentPane.columnWeights = new double[] { 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE };
 		gbl_contentPane.rowWeights = new double[] { 1.0, 1.0, 1.0, 1.0, Double.MIN_VALUE };
 		contentPane.setLayout(gbl_contentPane);
-		
+
 		JLabel lblNewLabel = new JLabel("Nome:");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.anchor = GridBagConstraints.EAST;
@@ -73,14 +73,14 @@ public class TipoAcomodacaoView extends JDialog{
 		gbc_textNome.gridy = 0;
 		contentPane.add(textNome, gbc_textNome);
 		textNome.setColumns(10);
-		
-				JLabel lblNewLabel_1 = new JLabel("Tarifa Diária:");
-				GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
-				gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
-				gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_1.gridx = 0;
-				gbc_lblNewLabel_1.gridy = 1;
-				contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
+
+		JLabel lblNewLabel_1 = new JLabel("Tarifa Diária:");
+		GridBagConstraints gbc_lblNewLabel_1 = new GridBagConstraints();
+		gbc_lblNewLabel_1.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_1.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_1.gridx = 0;
+		gbc_lblNewLabel_1.gridy = 1;
+		contentPane.add(lblNewLabel_1, gbc_lblNewLabel_1);
 
 		textTarifaD = new JTextField();
 		textTarifaD.setToolTipText("Tarifa diária cobrada pelas acomodações deste tipo.");
@@ -92,14 +92,14 @@ public class TipoAcomodacaoView extends JDialog{
 		gbc_textTarifaD.gridy = 1;
 		contentPane.add(textTarifaD, gbc_textTarifaD);
 		textTarifaD.setColumns(10);
-		
-				JLabel lblNewLabel_2 = new JLabel("Adicional acompanhante:");
-				GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
-				gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
-				gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
-				gbc_lblNewLabel_2.gridx = 0;
-				gbc_lblNewLabel_2.gridy = 2;
-				contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
+
+		JLabel lblNewLabel_2 = new JLabel("Adicional acompanhante:");
+		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
+		gbc_lblNewLabel_2.anchor = GridBagConstraints.EAST;
+		gbc_lblNewLabel_2.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNewLabel_2.gridx = 0;
+		gbc_lblNewLabel_2.gridy = 2;
+		contentPane.add(lblNewLabel_2, gbc_lblNewLabel_2);
 
 		textAdicionalAcmp = new JTextField();
 		textAdicionalAcmp.setToolTipText("Valor adicional por acompanhante adicional.");
@@ -121,18 +121,18 @@ public class TipoAcomodacaoView extends JDialog{
 		gbc_btnExcluir.gridx = 1;
 		gbc_btnExcluir.gridy = 3;
 		contentPane.add(btnExcluir, gbc_btnExcluir);
-				JButton btnCriar = new JButton("Criar");
-				btnCriar.addActionListener(new ActionListener() {
-					public void actionPerformed(ActionEvent e) {
-						criarAction();
-					}
-				});
-				GridBagConstraints gbc_btnCriar = new GridBagConstraints();
-				gbc_btnCriar.fill = GridBagConstraints.HORIZONTAL;
-				gbc_btnCriar.insets = new Insets(0, 0, 0, 5);
-				gbc_btnCriar.gridx = 3;
-				gbc_btnCriar.gridy = 3;
-				contentPane.add(btnCriar, gbc_btnCriar);
+		JButton btnCriar = new JButton("Criar");
+		btnCriar.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				criarAction();
+			}
+		});
+		GridBagConstraints gbc_btnCriar = new GridBagConstraints();
+		gbc_btnCriar.fill = GridBagConstraints.HORIZONTAL;
+		gbc_btnCriar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnCriar.gridx = 3;
+		gbc_btnCriar.gridy = 3;
+		contentPane.add(btnCriar, gbc_btnCriar);
 	}
 
 	private void criarAction() {
@@ -146,9 +146,11 @@ public class TipoAcomodacaoView extends JDialog{
 		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
+		} catch (CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Tipo não pode ser criado.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 

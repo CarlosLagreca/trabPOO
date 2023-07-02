@@ -5,6 +5,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import controller.MainController;
+import exceptions.CannotCreateModelException;
 import controller.ItemController;
 
 import java.awt.GridLayout;
@@ -190,8 +191,11 @@ public class ItemView extends JFrame {
 			dispose();
 		} catch(NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Item não pode ser criado.\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 	
@@ -204,8 +208,11 @@ public class ItemView extends JFrame {
 			}
 			controller.addCategoria(input);
 			attComboBox();
-		}catch(Exception e) {
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível criar a categoria!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
+		} catch(Exception e) {
+			e.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 		}
 	}
 }
