@@ -13,6 +13,7 @@ import model.Hospede;
 import model.IHospede;
 import model.Item;
 import model.Pagamento.ETipoPagamento;
+import util.Time;
 
 public class HospedagemController implements Serializable{
 	
@@ -88,7 +89,7 @@ public class HospedagemController implements Serializable{
 	public String[][] getHospedagensAtuais(){
 		List<String[]> table = new ArrayList<String[]>();
 		for(Hospedagem hospedagem : hospedagens.values()) {
-			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome()};
+			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome(), Time.formatTime(hospedagem.getCheckin())};
 			table.add(linha);
 		}
 		
@@ -98,7 +99,7 @@ public class HospedagemController implements Serializable{
 	public String[][] getHospedagensAntigas(){
 		List<String[]> table = new ArrayList<String[]>();
 		for(Hospedagem hospedagem : oldHospedagens.values()) {
-			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome()};
+			String[] linha = {Integer.toString(hospedagem.getAcomodacao().getNumero()), hospedagem.getId(), hospedagem.getHospede().getNome(), Time.formatTime(hospedagem.getCheckin()), Time.formatTime(hospedagem.getCheckout())};
 			table.add(linha);
 		}
 		

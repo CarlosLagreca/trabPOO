@@ -1,13 +1,13 @@
 package model;
 
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDateTime;
 
 import exceptions.CannotCreateModelException;
 
 public class ItemConta implements Serializable{
 	private static final long serialVersionUID = 7491698926789829640L;
-	private final Date dataHora;
+	private final LocalDateTime dataHora;
 	private final double preco;
 	private final int qtde;
 	private final Item item;
@@ -17,13 +17,13 @@ public class ItemConta implements Serializable{
 			throw new CannotCreateModelException("Erro ao acessar item");
 		if(qtde < 1)
 			throw new CannotCreateModelException("Quantidade inválida");
-		this.dataHora = new Date();
+		this.dataHora = LocalDateTime.now();
 		this.preco = item.getPreco();
 		this.qtde = qtde;
 		this.item = item;
 	}
 
-	public Date getDataHora() {
+	public LocalDateTime getDataHora() {
 		return dataHora;
 	}
 

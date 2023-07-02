@@ -17,6 +17,8 @@ public class Hospedagem implements Serializable {
 	private static final long serialVersionUID = 7345409444938260273L;
 	private int inicioCheckin = 13;
 	private int limiteCheckout = 12;
+	//variavel troco de bala foi criada para resolver problemas de arredondamento, então é permitido 
+	private final double trocodebala = 0.01;
 	private final String id = UUID.randomUUID().toString().replace("-", "");
 	private LocalDateTime checkin;
 	private IConta conta;
@@ -32,7 +34,7 @@ public class Hospedagem implements Serializable {
 	}
 
 	public void addPagamento(ETipoPagamento tipo, double valor) throws OperationNotAllowedException {
-		if(getTotalPago() + valor > getValorTotal())
+		if(getTotalPago() + trocodebala + valor > getValorTotal())
 			throw new OperationNotAllowedException("Valor maior do que a dívida.");
 		Pagamento pagar = new Pagamento(tipo, valor);
 		pagamento.add(pagar);
@@ -175,7 +177,7 @@ public class Hospedagem implements Serializable {
 	
 	public void realizarCheckout() throws OperationNotAllowedException {
 
-		if(getValorTotal() >= getTotalPago()) {
+		if(getValorTotal() >= getTotalPago() + trocodebala) {
 			throw new OperationNotAllowedException("Pagamento pendente.");
 		}
 		

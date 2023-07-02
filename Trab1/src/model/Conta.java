@@ -3,6 +3,7 @@ package model;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
+import util.Time;
 
 import exceptions.CannotCreateModelException;
 
@@ -35,7 +36,7 @@ public class Conta implements IConta, Serializable{
 	public String[][] getItens() {
 		List<String[]> table = new ArrayList<String[]>();
 		for(ItemConta item : itens) {
-			String[] linha = {item.getDescricao(), Double.toString(item.getPreco()), Integer.toString(item.getQtde())};
+			String[] linha = {item.getDescricao(), Double.toString(item.getPreco()), Integer.toString(item.getQtde()), Time.formatTime(item.getDataHora())};
 			table.add(linha);
 		}
 		return table.toArray(new String[0][0]);

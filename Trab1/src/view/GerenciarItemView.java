@@ -58,6 +58,11 @@ public class GerenciarItemView extends JFrame {
 		JLabel lblNewLabel = new JLabel("Seleciona uma categoria");
 
 		comboBox = new JComboBox<>();
+		comboBox.addActionListener(new ActionListener() {
+		public void actionPerformed(ActionEvent e) {
+			listarAction();
+		}
+		});
 		comboBox.setEditable(true);
 		comboBox.setModel(new DefaultComboBoxModel<>(contentCombobox()));
 
@@ -66,13 +71,6 @@ public class GerenciarItemView extends JFrame {
 		buildTable(comboBox.getSelectedItem().toString());
 		tableModel.fireTableDataChanged();
 		barraRolagem = new JScrollPane(table);
-
-		JButton Listar = new JButton("Listar");
-		Listar.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				listarAction();
-			}
-		});
 
 		JButton btnNewButton = new JButton("Alterar preço");
 		btnNewButton.addActionListener(new ActionListener() {
@@ -101,13 +99,12 @@ public class GerenciarItemView extends JFrame {
 							.addContainerGap()
 							.addComponent(lblNewLabel)
 							.addPreferredGap(ComponentPlacement.RELATED)
-							.addComponent(comboBox, 0, 189, Short.MAX_VALUE))
+							.addComponent(comboBox, 0, 177, Short.MAX_VALUE))
 						.addGroup(gl_panel.createSequentialGroup()
 							.addGap(8)
-							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 311, Short.MAX_VALUE)))
+							.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 299, Short.MAX_VALUE)))
 					.addGap(18)
 					.addGroup(gl_panel.createParallelGroup(Alignment.TRAILING, false)
-						.addComponent(Listar, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(btnNewButton, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
 						.addComponent(textField_1)
 						.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, 125, Short.MAX_VALUE)
@@ -120,8 +117,7 @@ public class GerenciarItemView extends JFrame {
 					.addGap(24)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
-						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-						.addComponent(Listar))
+						.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addGroup(gl_panel.createParallelGroup(Alignment.BASELINE)
 						.addComponent(barraRolagem, GroupLayout.DEFAULT_SIZE, 252, Short.MAX_VALUE)
@@ -131,7 +127,7 @@ public class GerenciarItemView extends JFrame {
 							.addComponent(textField_1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
 							.addGap(8)
 							.addComponent(btnNewButton)
-							.addPreferredGap(ComponentPlacement.RELATED, 159, Short.MAX_VALUE)
+							.addPreferredGap(ComponentPlacement.RELATED, 163, Short.MAX_VALUE)
 							.addComponent(btnNewButton_1)
 							.addPreferredGap(ComponentPlacement.RELATED)))
 					.addGap(7))

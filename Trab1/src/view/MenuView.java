@@ -35,12 +35,9 @@ public class MenuView extends JFrame {
 	 * TODO: Fazer busca geral de erros ao terminar o projeto.
 	 * TODO: Organizar arquivos.
 	 * TODO: Não se esquecer de retirar TODOs.
-	 * TODO: Investigar getSelectedRow nas tabelas (InfoHospedagens).
-	 * TODO: Resolver remendicionamento da janela de gerenciamento (segunda tab) (deve ter um action listener no botao da tab)
-	 * TODO: Implementar edição do cliente. (excluir clientes também)
 	 * TODO: Colocar um ícone decente.
 	 */
-	
+		
 
 	/**
 	 * Create the frame.

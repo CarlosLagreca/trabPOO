@@ -65,8 +65,11 @@ public class HospedagensView extends JFrame {
 		
 		tableNew = new JTable();
 		tableNew.setModel(tableModelCurrent);
+		tableOld = new JTable();
+		tableOld.setModel(tableModelOld);
 		
 		barraRolagem1 = new JScrollPane(tableNew);
+		barraRolagem2 = new JScrollPane(tableOld);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
 		gl_panel_1.setHorizontalGroup(
 			gl_panel_1.createParallelGroup(Alignment.TRAILING)
@@ -102,9 +105,8 @@ public class HospedagensView extends JFrame {
 			}
 		});
 		
-		tableOld = new JTable();
-		tableOld.setModel(tableModelOld);
-		barraRolagem2 = new JScrollPane(tableOld);
+		
+		
 		GroupLayout gl_panel_1_1 = new GroupLayout(panel_1_1);
 		gl_panel_1_1.setHorizontalGroup(
 			gl_panel_1_1.createParallelGroup(Alignment.TRAILING)
@@ -129,19 +131,6 @@ public class HospedagensView extends JFrame {
 	}
 	
 	private void vizualizarOldAction() {
-//		try {
-//			String input = JOptionPane.showInputDialog("Insira a Acomodação");
-//			if (input == null || (input != null && ("".equals(input)))) {
-//				return;
-//			}
-//			GerenciarHospedagemView janela = new GerenciarHospedagemView(input.toString());
-//			janela.setVisible(true);
-//		} catch(ArrayIndexOutOfBoundsException e) {
-//			JOptionPane.showMessageDialog(null, "Selecione uma linha para visualizar", "Atenção", JOptionPane.WARNING_MESSAGE);
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//			JOptionPane.showMessageDialog(null, "Orroceu um erro inesperado!", "Erro!", JOptionPane.ERROR_MESSAGE);
-//		}
 		try {
 			int index = tableNew.getSelectedRow();
 			System.out.println(index);
@@ -189,6 +178,7 @@ public class HospedagensView extends JFrame {
 		tableModelCurrent.addColumn("Numero Apt.");
 		tableModelCurrent.addColumn("ID");
 		tableModelCurrent.addColumn("Nome Hospede");
+		tableModelCurrent.addColumn("Data de Ckeckin");
 		
 		String[][] linhas = controller.getHospedagensAtuais();
 		
@@ -207,6 +197,8 @@ public class HospedagensView extends JFrame {
 		tableModelOld.addColumn("Numero Apt.");
 		tableModelOld.addColumn("ID");
 		tableModelOld.addColumn("Nome Hospede");
+		tableModelOld.addColumn("Data de Ckeckin");
+		tableModelOld.addColumn("Data de Checkout");
 		
 		String[][] linhas = controller.getHospedagensAntigas();
 		

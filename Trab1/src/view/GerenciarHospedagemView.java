@@ -39,7 +39,6 @@ public class GerenciarHospedagemView extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	//TODO arrumar a responsividade na parte de nome dos clientes, um nome grande não vai aparecer. (window builder quebrado)
 	public GerenciarHospedagemView(int numeroAcomodacao, boolean janelaCheckout) {
 		initialize(janelaCheckout);
 		buildInfos(numeroAcomodacao);
@@ -182,6 +181,7 @@ public class GerenciarHospedagemView extends JFrame {
 		modelItens.addColumn("Descrição");
 		modelItens.addColumn("Preço");
 		modelItens.addColumn("Quantidade");
+		modelItens.addColumn("Data");
 		String[][] itens = controller.getItensHospedagem(numApt);
 		for(String[] linha : itens) {
 			modelItens.addRow(linha);
@@ -216,6 +216,7 @@ public class GerenciarHospedagemView extends JFrame {
 		modelItens.addColumn("Descrição");
 		modelItens.addColumn("Preço");
 		modelItens.addColumn("Quantidade");
+		modelItens.addColumn("Data");
 		String[][] itens = controller.getItensHospedagem(id);
 		for(String[] linha : itens) {
 			modelItens.addRow(linha);

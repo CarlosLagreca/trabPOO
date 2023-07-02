@@ -196,8 +196,7 @@ public class CriarAptView extends JFrame {
 		}
 		setVisible(true);
 	}
-
-	// TODO?: Atualizar atravez da janela de criar tipoAcomodacao
+	
 	private void attCombobox() {
 		try {
 			AptController controller = MainController.getAptController();
