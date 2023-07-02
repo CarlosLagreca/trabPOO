@@ -6,6 +6,7 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
+import java.lang.Math;
 
 import exceptions.CannotCreateModelException;
 import exceptions.OperationNotAllowedException;
@@ -34,7 +35,7 @@ public class Hospedagem implements Serializable {
 	}
 
 	public void addPagamento(ETipoPagamento tipo, double valor) throws OperationNotAllowedException {
-		if(getTotalPago() + trocodebala + valor > getValorTotal())
+		if(Math.abs((getTotalPago() + valor) - getValorTotal()) > trocodebala)
 			throw new OperationNotAllowedException("Valor maior do que a dívida.");
 		Pagamento pagar = new Pagamento(tipo, valor);
 		pagamento.add(pagar);
@@ -177,7 +178,7 @@ public class Hospedagem implements Serializable {
 	
 	public void realizarCheckout() throws OperationNotAllowedException {
 
-		if(getValorTotal() >= getTotalPago() + trocodebala) {
+		if(Math.abs(getValorTotal() - getTotalPago()) > trocodebala) {
 			throw new OperationNotAllowedException("Pagamento pendente.");
 		}
 		
