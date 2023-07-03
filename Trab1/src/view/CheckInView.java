@@ -9,6 +9,7 @@ import controller.AptController;
 import controller.ClienteController;
 import controller.HospedagemController;
 import controller.MainController;
+import exceptions.CannotCreateModelException;
 import model.Acomodacao;
 import model.Hospede;
 
@@ -43,6 +44,7 @@ public class CheckInView extends JFrame {
 	private JTextField textCpfAcompanhante;
 	private JScrollPane barraRolagem;
 	private JComboBox<String> comboBox_numeros;
+	private JComboBox<String> comboBox_tipos;
 	private JButton btnConfirmar;
 	private JLabel lblApt;
 	private DefaultTableModel tableModel = new DefaultTableModel();
@@ -52,7 +54,8 @@ public class CheckInView extends JFrame {
 	private JButton btnConfCliente;
 	private JLabel lblNewLabel_2;
 	private JLabel lblOcupacaoMax;
-	
+	private int ocupacaoMax = 0;
+
 	/*
 	 * TODO: Melhorar tratamento de erros;
 	 */
@@ -60,7 +63,7 @@ public class CheckInView extends JFrame {
 	public CheckInView() {
 		initialize();
 	}
-	
+
 	private void initialize() {
 		setIconImage(Toolkit.getDefaultToolkit().getImage(CheckInView.class.getResource("/view/icone.png")));
 		setTitle("CheckIn");
@@ -80,12 +83,12 @@ public class CheckInView extends JFrame {
 		tableModel.addColumn("Email");
 		tableModel.addColumn("Telefone");
 		GridBagLayout gbl_panel = new GridBagLayout();
-		gbl_panel.columnWidths = new int[]{37, 133, 135, 0, 101, 22, 0};
-		gbl_panel.rowHeights = new int[]{44, 14, 22, 27, 14, 20, 0, 0, 0, 38, 0};
-		gbl_panel.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_panel.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_panel.columnWidths = new int[] { 37, 133, 135, 0, 101, 22, 0 };
+		gbl_panel.rowHeights = new int[] { 44, 14, 22, 27, 14, 20, 0, 0, 0, 38, 0 };
+		gbl_panel.columnWeights = new double[] { 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
+		gbl_panel.rowWeights = new double[] { 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, Double.MIN_VALUE };
 		panel.setLayout(gbl_panel);
-				
+
 		JLabel lblNewLabel = new JLabel("Selecione a Acomodação");
 		GridBagConstraints gbc_lblNewLabel = new GridBagConstraints();
 		gbc_lblNewLabel.fill = GridBagConstraints.HORIZONTAL;
@@ -103,15 +106,15 @@ public class CheckInView extends JFrame {
 		gbc_lblApt.gridx = 2;
 		gbc_lblApt.gridy = 1;
 		panel.add(lblApt, gbc_lblApt);
-						
-		JComboBox<String> comboBox = new JComboBox<>();
-		comboBox.setModel(new DefaultComboBoxModel<>(contentCombobox()));
-		comboBox.addActionListener(new ActionListener() {
-		public void actionPerformed(ActionEvent e) {
-				buildComboboxApt(comboBox.getSelectedItem().toString());
+
+		comboBox_tipos = new JComboBox<>();
+		comboBox_tipos.setModel(new DefaultComboBoxModel<>(contentCombobox()));
+		comboBox_tipos.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				buildComboboxApt(comboBox_tipos.getSelectedItem().toString());
 			}
 		});
-	
+
 		lblNewLabel_2 = new JLabel("Digite o CPF do acompanhante");
 		lblNewLabel_2.setEnabled(false);
 		GridBagConstraints gbc_lblNewLabel_2 = new GridBagConstraints();
@@ -127,7 +130,7 @@ public class CheckInView extends JFrame {
 		gbc_comboBox.insets = new Insets(0, 0, 5, 5);
 		gbc_comboBox.gridx = 1;
 		gbc_comboBox.gridy = 2;
-		panel.add(comboBox, gbc_comboBox);
+		panel.add(comboBox_tipos, gbc_comboBox);
 
 		comboBox_numeros = new JComboBox<>();
 		comboBox_numeros.setEnabled(false);
@@ -138,7 +141,7 @@ public class CheckInView extends JFrame {
 				verificarOcupacaoMax();
 			}
 		});
-		
+
 		GridBagConstraints gbc_comboBox_numeros = new GridBagConstraints();
 		gbc_comboBox_numeros.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBox_numeros.anchor = GridBagConstraints.NORTH;
@@ -156,7 +159,7 @@ public class CheckInView extends JFrame {
 				selectWindowAction();
 			}
 		});
-		
+
 		textCpfAcompanhante = new JTextField();
 		textCpfAcompanhante.setColumns(10);
 		textCpfAcompanhante.setEnabled(false);
@@ -181,7 +184,7 @@ public class CheckInView extends JFrame {
 				addAcompanhante();
 			}
 		});
-		
+
 		lblOcupacaoMax = new JLabel("");
 		lblOcupacaoMax.setHorizontalAlignment(SwingConstants.CENTER);
 		GridBagConstraints gbc_lblOcupacaoMax = new GridBagConstraints();
@@ -219,7 +222,7 @@ public class CheckInView extends JFrame {
 		gbc_lblNewLabel_1.gridx = 4;
 		gbc_lblNewLabel_1.gridy = 4;
 		panel.add(lblNewLabel_1, gbc_lblNewLabel_1);
-		
+
 		textCpfCliente = new JTextField();
 		textCpfCliente.setColumns(10);
 		GridBagConstraints gbc_textCpfCliente = new GridBagConstraints();
@@ -229,7 +232,7 @@ public class CheckInView extends JFrame {
 		gbc_textCpfCliente.gridx = 4;
 		gbc_textCpfCliente.gridy = 5;
 		panel.add(textCpfCliente, gbc_textCpfCliente);
-		
+
 		btnConfCliente = new JButton("Confirmar Cliente");
 		btnConfCliente.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -242,7 +245,7 @@ public class CheckInView extends JFrame {
 		gbc_btnConfCliente.gridx = 4;
 		gbc_btnConfCliente.gridy = 6;
 		panel.add(btnConfCliente, gbc_btnConfCliente);
-		
+
 		btnConfirmar = new JButton("Confirmar hospedagem");
 		btnConfirmar.setToolTipText("Precisa selecionar uma acomodação!");
 		btnConfirmar.setEnabled(false);
@@ -259,7 +262,7 @@ public class CheckInView extends JFrame {
 		gbc_btnConfirmar.gridx = 4;
 		gbc_btnConfirmar.gridy = 8;
 		panel.add(btnConfirmar, gbc_btnConfirmar);
-		
+
 		tableModel.addRow(new String[4]);
 	}
 
@@ -271,17 +274,23 @@ public class CheckInView extends JFrame {
 			String[] cpfAcompanhantes = acompanhantes.toArray(new String[0]);
 
 			controller.criarHospedagem(numeroAcomodacao, cpfHospede, cpfAcompanhantes);
-			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Hospedagem criada com sucesso!", "Sucesso!",
+					JOptionPane.INFORMATION_MESSAGE);
 			dispose();
-		} catch(NumberFormatException e) {
-			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente.", "ERRO!", JOptionPane.ERROR_MESSAGE);
+		} catch (CannotCreateModelException e) {
+			JOptionPane.showMessageDialog(null, "Não foi possível realizar o CheckIn.\n" + e.getMessage(), "ERRO!",
+					JOptionPane.ERROR_MESSAGE);
+		} catch (NumberFormatException e) {
+			JOptionPane.showMessageDialog(null, "Informações inseridas incorretamente.", "ERRO!",
+					JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "ERRO!", JOptionPane.ERROR_MESSAGE);
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "ERRO!",
+					JOptionPane.ERROR_MESSAGE);
 		}
 
 	}
-	
+
 	private void confirmarHospede() {
 		try {
 			ClienteController controller = MainController.getClienteContoller();
@@ -292,45 +301,55 @@ public class CheckInView extends JFrame {
 			linhaPrincipal[1] = Long.toString(hospede.getCpf());
 			linhaPrincipal[2] = hospede.getEmail();
 			linhaPrincipal[3] = Long.toString(hospede.getTelefone());
-			tableModel.insertRow(0, linhaPrincipal);;
+			tableModel.insertRow(0, linhaPrincipal);
+			;
 			tableModel.removeRow(1);
 			tableModel.fireTableDataChanged();
-			
+
 			btnConfCliente.setEnabled(false);
 			btnConfCliente.setVisible(false);
 			textCpfCliente.setEditable(false);
 			tglbtnAcompanhantes.setEnabled(true);
 			tglbtnAcompanhantes.setToolTipText("");
-			
-		} catch(NumberFormatException e) {
+
+		} catch (NumberFormatException e) {
 			JOptionPane.showMessageDialog(null, "Digite um CPF válido!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (NullPointerException e) {
 			int input = JOptionPane.showConfirmDialog(null, "CPF não encontrado, deseja realizar o cadastro?");
-			if(input == 0) {
+			if (input == 0) {
 				CadastroClienteView janela = new CadastroClienteView(0);
 				janela.setVisible(rootPaneCheckingEnabled);
 			}
 			return;
-			
-		} catch(Exception e) {
+
+		} catch (Exception e) {
 			e.printStackTrace();
-			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
-		} 
+			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado!\n" + e.getMessage(), "Erro!",
+					JOptionPane.ERROR_MESSAGE);
+		}
 	}
 
 	private void addAcompanhante() {
 		// Pegando dados do acompanhante no controller
 		try {
-			if(textCpfCliente.getText().length() < 11) {
-				JOptionPane.showMessageDialog(null, "Primeiro, insira um CPF válido para hóspede principal.", "Atenção", JOptionPane.WARNING_MESSAGE);
+			if ((acompanhantes.size() + 2) > ocupacaoMax) {
+				JOptionPane.showMessageDialog(null, "Ocupação máxima excedida.", "Atenção",
+						JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			if(textCpfAcompanhante.getText().equals(textCpfCliente.getText())) {
-				JOptionPane.showMessageDialog(null, "Hospede principal não pode ser acompanhante.", "Atenção", JOptionPane.WARNING_MESSAGE);
+			if (textCpfCliente.getText().length() < 11) {
+				JOptionPane.showMessageDialog(null, "Primeiro, insira um CPF válido para hóspede principal.", "Atenção",
+						JOptionPane.WARNING_MESSAGE);
 				return;
 			}
-			if(acompanhantes.contains(textCpfAcompanhante.getText())) {
-				JOptionPane.showMessageDialog(null, "Este acompanhante já foi adicionado!", "Atenção", JOptionPane.WARNING_MESSAGE);
+			if (textCpfAcompanhante.getText().equals(textCpfCliente.getText())) {
+				JOptionPane.showMessageDialog(null, "Hospede principal não pode ser acompanhante.", "Atenção",
+						JOptionPane.WARNING_MESSAGE);
+				return;
+			}
+			if (acompanhantes.contains(textCpfAcompanhante.getText())) {
+				JOptionPane.showMessageDialog(null, "Este acompanhante já foi adicionado!", "Atenção",
+						JOptionPane.WARNING_MESSAGE);
 				return;
 			}
 			ClienteController controller = MainController.getClienteContoller();
@@ -350,7 +369,7 @@ public class CheckInView extends JFrame {
 			JOptionPane.showMessageDialog(null, "Insira um CPF válido!", "Erro!", JOptionPane.ERROR_MESSAGE);
 		} catch (NullPointerException e) {
 			int input = JOptionPane.showConfirmDialog(null, "CPF não encontrado, deseja realizar o cadastro?");
-			if(input == 0) {
+			if (input == 0) {
 				CadastroClienteView janela = new CadastroClienteView(0);
 				janela.setVisible(rootPaneCheckingEnabled);
 			}
@@ -391,7 +410,7 @@ public class CheckInView extends JFrame {
 		btnConfirmar.setToolTipText("Confirmar hospedagem com os dados informados.");
 		verificarOcupacaoMax();
 	}
-	
+
 	private void selectWindowAction() {
 		if (tglbtnAcompanhantes.isSelected()) {
 			textCpfAcompanhante.setEnabled(true);
@@ -403,14 +422,18 @@ public class CheckInView extends JFrame {
 			lblNewLabel_2.setEnabled(false);
 		}
 	}
-	
+
 	private void verificarOcupacaoMax() {
 		AptController controller = MainController.getAptController();
-		
+
 		int numApt = Integer.parseInt(comboBox_numeros.getSelectedItem().toString());
 		Acomodacao apt = controller.getApartamento(numApt);
-		
+
+		int newOcupacaoMax = apt.getOcupacaoMax();
+
+		ocupacaoMax = newOcupacaoMax;
+
 		lblOcupacaoMax.setVisible(true);
-		lblOcupacaoMax.setText("Ocupação max: " + Integer.toString(apt.getOcupacaoMax()));
+		lblOcupacaoMax.setText("Ocupação max: " + Integer.toString(newOcupacaoMax));
 	}
 }

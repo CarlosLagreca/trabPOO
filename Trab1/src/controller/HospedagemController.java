@@ -39,9 +39,7 @@ public class HospedagemController implements Serializable{
 			listaAcompanhantes.add(acompanhante);
 		}
 		
-		Hospedagem hospedagem = new Hospedagem(acomodacao, hospede);
-		
-		hospedagem.addAcompanhantes(listaAcompanhantes);
+		Hospedagem hospedagem = new Hospedagem(acomodacao, hospede, listaAcompanhantes);
 		
 		hospedagens.put(acomodacao.getNumero(), hospedagem);
 		

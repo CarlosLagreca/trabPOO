@@ -41,7 +41,7 @@ public class Hospedagem implements Serializable {
 		pagamento.add(pagar);
 	}
 
-	public Hospedagem(Acomodacao acomodacao, Hospede hospede) throws CannotCreateModelException{
+	public Hospedagem(Acomodacao acomodacao, Hospede hospede, List<IHospede> acompanhantes) throws CannotCreateModelException{
 		// Verificando se acomodacao pode ser criada
 		if(acomodacao == null) {
 			throw new CannotCreateModelException("Acomodação não pode ser null");
@@ -52,10 +52,10 @@ public class Hospedagem implements Serializable {
 		if(hospede == null) {
 			throw new CannotCreateModelException("Hospede não pode ser null.");
 		}
-		
 		this.checkin = LocalDateTime.now();
 		this.conta = new Conta();
 		this.acomodacao = acomodacao;
+		addAcompanhantes(acompanhantes);
 		try {
 			acomodacao.setEstadoOcupacao(EEstadoOcupacao.OCUPADO);
 		} catch(OperationNotAllowedException e) {
@@ -102,10 +102,12 @@ public class Hospedagem implements Serializable {
 		return total;
 	}
 
-	public void addAcompanhantes(List<IHospede> list) {
+	public void addAcompanhantes(List<IHospede> list) throws CannotCreateModelException {
 		if(list.contains(null)){
 			throw new NullPointerException("Lista de acompanhantes contém null.");
 		}
+		if((list.size() + 1) > acomodacao.getOcupacaoMax())
+			throw new CannotCreateModelException("Excedendo ocupação máxima do apartamento");
 		acompanhantes.addAll(list);
 	}
 	
