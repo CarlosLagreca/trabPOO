@@ -151,21 +151,15 @@ public class MenuView extends JFrame {
 			}
 		});
 		
-		JButton btnAptVisualizar = new JButton("Visualizar");
+		JButton btnAptVisualizar = new JButton("Listar");
 		
 		btnAptVisualizar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					String input = JOptionPane.showInputDialog("Insira a Acomodação");
-					if (input == null || (input != null && ("".equals(input)))) {
-						return;
-					}
-					if(input.equals("0"))
-						input = "error";
-					int numero = Integer.parseInt(input);
-					new CriarAptView(numero);
-				} catch(NumberFormatException ex) {
-					JOptionPane.showMessageDialog(null, "Insira um numero válido", "Erro!", JOptionPane.ERROR_MESSAGE);
+					AptsView janela = new AptsView();
+					janela.setVisible(true);
+				} catch(Exception ex) {
+					JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado\n" + ex.getMessage(), "Erro!", JOptionPane.ERROR_MESSAGE);
 				}
 			}
 		});
