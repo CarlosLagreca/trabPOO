@@ -48,12 +48,12 @@ public class GerenciarItemView extends JFrame {
 	 * Create the frame.
 	 */
 	public GerenciarItemView() {
-		setTitle("Listagem Itens");
-		setIconImage(Toolkit.getDefaultToolkit().getImage(GerenciarItemView.class.getResource("/view/icone.png")));
 		initialize();
 	}
 
 	private void initialize() {
+		setTitle("Listagem Itens");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(GerenciarItemView.class.getResource("/view/icone.png")));
 		setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
 		setBounds(100, 100, 498, 366);
 		contentPane = new JPanel();
@@ -75,7 +75,12 @@ public class GerenciarItemView extends JFrame {
 		}
 		});
 		comboBox.setEditable(true);
-		comboBox.setModel(new DefaultComboBoxModel<>(contentCombobox()));
+		String[] content = contentCombobox();
+		if(content.length == 0) {
+			JOptionPane.showMessageDialog(null, "Não há categorias cadastradas.", "Erro!", JOptionPane.ERROR_MESSAGE);
+			return;
+		}
+		comboBox.setModel(new DefaultComboBoxModel<>(content));
 
 		table = new JTable();
 		table.setModel(tableModel);
