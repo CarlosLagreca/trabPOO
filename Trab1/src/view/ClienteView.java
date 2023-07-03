@@ -24,7 +24,6 @@ public class ClienteView extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private JScrollPane barraRolagem;
-	private ClienteController controller = MainController.getClienteContoller();
 
 	/**
 	 * Create the frame.
@@ -46,7 +45,7 @@ public class ClienteView extends JFrame {
 		
 		JPanel panel = new JPanel();
 		contentPane.add(panel);
-		
+		ClienteController controller = MainController.getClienteContoller();
 		// Montando tabela de clientes
 		String[] colunas = {"Nome", "Cpf", "Telefone", "Email"};
 		

@@ -219,8 +219,11 @@ public class CriarAptView extends JDialog {
 			String textLabel = "Tarifa Diária: " + content[index + 1][0] + "   | Adicional acomp.: "
 					+ content[index + 1][1];
 			lblInfos.setText(textLabel);
-
+		} catch(IllegalArgumentException e) {
+			JOptionPane.showMessageDialog(null, "Ainda não existe uma categoria!\nCertifique-se de criar uma.", "Erro!",
+					JOptionPane.ERROR_MESSAGE);
 		} catch (Exception e) {
+			e.printStackTrace();
 			JOptionPane.showMessageDialog(null, "Ocorreu um erro inesperado ao acessar categorias!", "Erro!",
 					JOptionPane.ERROR_MESSAGE);
 		}
