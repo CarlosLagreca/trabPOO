@@ -94,8 +94,7 @@ public class MenuView extends JFrame {
 		JButton btnAptCriar = new JButton("Criar novo");
 		btnAptCriar.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CriarAptView novajanela = new CriarAptView(0);
-				novajanela.setVisible(true);
+				new CriarAptView(0);
 			}
 		});
 		
@@ -290,8 +289,7 @@ public class MenuView extends JFrame {
 		JButton btnCheckin = new JButton("CheckIn");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				CheckInView janela = new CheckInView();
-				janela.setVisible(true);
+			 new CheckInView();
 			}
 		});
 		GridBagConstraints gbc_btnCheckin = new GridBagConstraints();
