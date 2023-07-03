@@ -22,12 +22,13 @@ import java.awt.Insets;
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.DefaultComboBoxModel;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import java.awt.Toolkit;
 
-public class CriarAptView extends JFrame {
+public class CriarAptView extends JDialog {
 
 	private static final long serialVersionUID = -8004342113527068985L;
 	private JPanel contentPane;
@@ -189,7 +190,7 @@ public class CriarAptView extends JFrame {
 		gbc_btnCriar.gridx = 1;
 		gbc_btnCriar.gridy = 6;
 		contentPane.add(btnCriar, gbc_btnCriar);
-
+		setModal(true);
 		// Formatando janela para Edição
 		if (numeroAptVisu != 0) {
 			editView(numeroAptVisu);

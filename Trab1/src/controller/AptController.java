@@ -92,4 +92,17 @@ public class AptController implements Serializable {
 		}
 		return lista.toArray(new String[0][0]);
 	}
+	
+	public String[][] getApts() {
+		
+		List<String[]> apts = new ArrayList<String[]>();
+		
+		for (Acomodacao apartamento : apartamentos.values()) {
+			String[] linha = {Integer.toString(apartamento.getNumero()), apartamento.getTipo(), apartamento.getEstadoOcupacao().toString()};
+			apts.add(linha);
+		}
+		
+		
+		return apts.toArray(new String[0][0]);
+	}
 }
