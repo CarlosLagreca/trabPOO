@@ -64,7 +64,6 @@ public class HospedagemController implements Serializable{
 	public void realizarPagamento(ETipoPagamento tipo, double valor, int numApt) throws Exception{
 		Hospedagem hospedagem = hospedagens.get(numApt);
 		hospedagem.addPagamento(tipo, valor);
-		System.out.println("pagamento feito!");
 		MainController.save();
 
 	}

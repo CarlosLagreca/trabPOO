@@ -56,9 +56,6 @@ public class CheckInView extends JFrame {
 	private JLabel lblOcupacaoMax;
 	private int ocupacaoMax = 0;
 
-	/*
-	 * TODO: Melhorar tratamento de erros;
-	 */
 
 	public CheckInView() {
 		initialize();

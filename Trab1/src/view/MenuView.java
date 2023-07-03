@@ -29,14 +29,6 @@ import java.awt.Toolkit;
 public class MenuView extends JFrame {
 	private static final long serialVersionUID = -4786237314541903229L;
 	private JTabbedPane tabbedPane;
-	
-	/**
-	 * ESPAÇO PARA TODOs gerais do projeto:
-	 * TODO: Fazer busca geral de erros ao terminar o projeto.
-	 * TODO: Organizar arquivos.
-	 * TODO: Não se esquecer de retirar TODOs.
-	 * TODO: Colocar um ícone decente.
-	 */
 		
 
 	/**
@@ -289,7 +281,8 @@ public class MenuView extends JFrame {
 		JButton btnCheckin = new JButton("CheckIn");
 		btnCheckin.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-			 new CheckInView();
+			 CheckInView janela = new CheckInView();
+			 janela.setVisible(true);
 			}
 		});
 		GridBagConstraints gbc_btnCheckin = new GridBagConstraints();

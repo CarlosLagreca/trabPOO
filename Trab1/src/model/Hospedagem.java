@@ -73,7 +73,7 @@ public class Hospedagem implements Serializable {
 	}
 
 	public double getValorDiarias() {
-		long dias = ChronoUnit.DAYS.between(LocalDateTime.now(), checkin);
+		long dias = ChronoUnit.DAYS.between(checkin, LocalDateTime.now());
 		if (LocalDateTime.now().getHour() > limiteCheckout && checkin.getHour() < inicioCheckin)
 			return (dias + 2) * acomodacao.getTarifaDiaria();
 		else if(LocalDateTime.now().getHour() > limiteCheckout)
@@ -115,7 +115,7 @@ public class Hospedagem implements Serializable {
 		List<String> lista = new ArrayList<String>();
 		lista.add(Integer.toString(acomodacao.getNumero()));
 		lista.add(hospede.getNome());
-		long dias = ChronoUnit.DAYS.between(LocalDateTime.now(), checkin);
+		long dias = ChronoUnit.DAYS.between(checkin, LocalDateTime.now());
 		if(dias == 0)
 			dias = 1;
 		lista.add(Long.toString(dias));
@@ -128,6 +128,7 @@ public class Hospedagem implements Serializable {
 		lista.add(Double.toString(getValorTotal()));
 		lista.add(Double.toString(getValorPago()));
 		lista.add(Time.formatTime(checkin));
+		lista.add(id);
 		if(checkout == null) {}
 		else lista.add(Time.formatTime(checkout));
 		return lista.toArray(new String[0]);

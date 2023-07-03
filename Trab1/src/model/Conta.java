@@ -17,7 +17,6 @@ public class Conta implements IConta, Serializable{
 		this.itens.add(newItem);
 	}
 	
-	// TODO: Precisamos de um removeItem?
 	@Override
 	public void removeItem(int index) {
 		itens.remove(index);

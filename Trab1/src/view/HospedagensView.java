@@ -20,6 +20,7 @@ import javax.swing.JTable;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import java.awt.Toolkit;
 
 public class HospedagensView extends JFrame {
 	private static final long serialVersionUID = 5052628961516283573L;
@@ -35,6 +36,8 @@ public class HospedagensView extends JFrame {
 	 * Create the frame.
 	 */
 	public HospedagensView() {
+		setTitle("Hospedagens");
+		setIconImage(Toolkit.getDefaultToolkit().getImage(HospedagensView.class.getResource("/view/icone.png")));
 		initialize();
 		tableOld();
 		tableCurrent();

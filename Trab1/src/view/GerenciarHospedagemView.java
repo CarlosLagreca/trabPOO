@@ -229,9 +229,9 @@ public class GerenciarHospedagemView extends JFrame {
 		HospedagemController controller = MainController.getHospedagemController();
 		infos = controller.getDadosHospedagem(numApt);
 
-		lblIdHosp.setText(infos[0]);
+		lblIdHosp.setText(infos[12]);
 		lblNomeCliente.setText(infos[1]);
-		lblNumeroAcm.setText(infos[5]);
+		lblNumeroAcm.setText(infos[0]);
 		lblPreco.setText(infos[9]);
 
 		// Preenchendo table de itens da conta da hospedagem
@@ -282,9 +282,9 @@ public class GerenciarHospedagemView extends JFrame {
 		HospedagemController controller = MainController.getHospedagemController();
 		infos = controller.getDadosHospedagem(id);
 
-		lblIdHosp.setText(infos[0]);
+		lblIdHosp.setText(infos[12]);
 		lblNomeCliente.setText(infos[1]);
-		lblNumeroAcm.setText(infos[5]);
+		lblNumeroAcm.setText(infos[0]);
 		lblPreco.setText(infos[9]);
 
 		// Preenchendo table de itens da conta da hospedagem

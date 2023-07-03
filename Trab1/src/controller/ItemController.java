@@ -39,7 +39,6 @@ public class ItemController implements Serializable {
 			MainController.save();
 	}
 	
-	// TODO: Verificar o que acontece se apagar um item utilizado por uma conta.
 	public void removeItem(String nomeCategoria, long codigo) {
 			Categoria categoria = categorias.get(nomeCategoria);
 			categoria.getItens().remove(codigo);
