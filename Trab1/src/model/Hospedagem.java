@@ -186,5 +186,10 @@ public class Hospedagem implements Serializable {
 		acomodacao.setEstadoOcupacao(EEstadoOcupacao.MANUTENCAO);	
 	}
 	
+	public void removerItemConta(int item) {
+		conta.removeItem(item);
+		
+	}
+	
 	
 }

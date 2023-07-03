@@ -67,7 +67,6 @@ public class HospedagensView extends JFrame {
 		tableNew.setModel(tableModelCurrent);
 		tableOld = new JTable();
 		tableOld.setModel(tableModelOld);
-		
 		barraRolagem1 = new JScrollPane(tableNew);
 		barraRolagem2 = new JScrollPane(tableOld);
 		GroupLayout gl_panel_1 = new GroupLayout(panel_1);
@@ -132,8 +131,7 @@ public class HospedagensView extends JFrame {
 	
 	private void vizualizarOldAction() {
 		try {
-			int index = tableNew.getSelectedRow();
-			System.out.println(index);
+			int index = tableOld.getSelectedRow();
 			if(index <0) {
 				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
 						JOptionPane.WARNING_MESSAGE);
@@ -153,7 +151,6 @@ public class HospedagensView extends JFrame {
 
 		try {
 			int index = tableNew.getSelectedRow();
-			System.out.println(index);
 			if(index <0) {
 				JOptionPane.showMessageDialog(null, "Selecione um produto na tabela!", "Atenção!",
 						JOptionPane.WARNING_MESSAGE);
