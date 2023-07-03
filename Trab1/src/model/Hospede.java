@@ -4,6 +4,7 @@ import java.io.Serializable;
 
 import exceptions.CannotCreateModelException;
 import util.Cpf;
+import util.Telefone;
 
 public class Hospede implements IHospede, Serializable {
 	private static final long serialVersionUID = 3193785960528259305L;
@@ -17,6 +18,8 @@ public class Hospede implements IHospede, Serializable {
 			throw new CannotCreateModelException("Cpf inválido.");
 		if(nome.length() < 1)
 			throw new CannotCreateModelException("Nome inválido.");
+		if(!Telefone.isTelefone(telefone))
+			throw new CannotCreateModelException("Telefone inválido.");
 		this.cpf = cpf;
 		this.nome = nome;
 		this.email = email;

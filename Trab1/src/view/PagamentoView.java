@@ -157,6 +157,7 @@ public class PagamentoView extends JDialog {
 		gbc_btnNewButton.gridy = 5;
 		panel.add(btnNewButton, gbc_btnNewButton);
 		setModal(true);
+		getRootPane().setDefaultButton(btnNewButton);
 	}
 	
 	private void ConfirmarAction() {
